@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo - Sistema de Abas/Filtros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff5f8 0%, #f0f8ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff69b4;
+            margin-bottom: 30px;
+        }
+
+        /* ========== SISTEMA DE ABAS ========== */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            border: none;
+            background: #e0e0e0;
+            color: #555;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tab-btn:hover {
+            background: #d0d0d0;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #ff69b4 0%, #ff85c1 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        /* Aba específica para meninos */
+        .tab-btn[data-category="menino"].active {
+            background: linear-gradient(135deg, #4a90d9 0%, #87CEEB 100%);
+            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.4);
+        }
+
+        /* ========== GRID DE PRODUTOS ========== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== CARD DO PRODUTO ========== */
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Produto escondido */
+        .product-card.hidden {
+            display: none;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            margin-bottom: 15px;
+        }
+
+        .main-price {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff69b4;
+        }
+
+        .installments {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Botão WhatsApp */
+        .buy-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 15px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 3px solid #25D366;
+            border-radius: 50px;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .buy-button:hover {
+            background: linear-gradient(135deg, #25D366 0%, #E36D88 100%);
+            border-color: #E36D88;
+            transform: translateY(-3px);
+        }
+
+        /* ========== BADGE DE CATEGORIA ========== */
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-badge.menina {
+            background: #ff69b4;
+            color: white;
+        }
+
+        .category-badge.menino {
+            background: #4a90d9;
+            color: white;
+        }
+
+        .category-badge.pronta-entrega {
+            background: #25D366;
+            color: white;
+        }
+
+        .category-badge.sob-encomenda {
+            background: #FFD700;
+            color: #333;
+        }
+
+        .image-wrapper {
+            position: relative;
+        }
+
+        /* ========== EXPLICAÇÃO ========== */
+        .explanation {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .explanation h2 {
+            color: #ff69b4;
+            margin-bottom: 15px;
+        }
+
+        .explanation code {
+            background: #f5f5f5;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .explanation ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .explanation li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎀 Sistema de Abas/Filtros - Exemplo</h1>
+
+        <!-- EXPLICAÇÃO -->
+        <div class="explanation">
+            <h2>📋 Como funciona:</h2>
+            <ul>
+                <li>Cada produto tem um atributo <code>data-category</code> que define sua categoria</li>
+                <li>Os botões de aba têm <code>data-category</code> correspondente</li>
+                <li>Ao clicar em uma aba, o JavaScript mostra/esconde os produtos</li>
+                <li>"TODOS" mostra todos os produtos</li>
+            </ul>
+        </div>
+
+        <!-- ABAS DE FILTRO -->
+        <div class="tabs-container">
+            <button class="tab-btn active" data-category="todos">Todos</button>
+            <button class="tab-btn" data-category="pronta-entrega">Pronta Entrega</button>
+            <button class="tab-btn" data-category="sob-encomenda">Sob Encomenda</button>
+            <button class="tab-btn" data-category="menina">Meninas 👧</button>
+            <button class="tab-btn" data-category="menino">Meninos 👦</button>
+        </div>
+
+        <!-- GRID DE PRODUTOS -->
+        <div class="product-grid">
+            
+            <!-- PRODUTO 1: Nuvem Azul Fofo (Menino, Pronta Entrega) -->
+            <div class="product-card" data-category="menino pronta-entrega">
+                <div class="image-wrapper">
+                    <img src="produto-nuvem-azul.png" alt="Nuvem Azul Fofo" class="product-image">
+                    <span class="category-badge menino">Menino</span>
+                </div>
+                <div class="product-info">
+                    <h3>LINHA ENCANTO - Nuvem Azul Fofo 👦☁️</h3>
+                    <div class="price">
+                        <span class="main-price">R$ 1.190,00</span>
+                        <span class="installments">12x de R$ 99,17 sem juros</span>
+                    </div>
+                    <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20no%20bebê%20Nuvem%20Azul%20Fofo." target="_blank" class="buy-button">
+                        <i class="fab fa-whatsapp"></i> WHATSAPP
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUTO 2: Docinho (Menina, Pronta Entrega) -->
+            <div class="product-card" data-category="menina pronta-entrega">
+                <div class="image-wrapper">
+                    <img src="produto-docinho.jpg" alt="Docinho" class="product-image">
+                    <span class="category-badge menina">Menina</span>
+                </div>
+                <div class="product-info">
+                    <h3>LINHA ENCANTO - Docinho 🍬</h3>
+                    <div class="price">
+                        <span class="main-price">R$ 1.391,00</span>
+                        <span class="installments">12x de R$ 115,91 sem juros</span>
+                    </div>
+                    <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Docinho." target="_blank" class="buy-button">
+                        <i class="fab fa-whatsapp"></i> WHATSAPP
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUTO 3: Luninha (Menina, Sob Encomenda) -->
+            <div class="product-card" data-category="menina sob-encomenda">
+                <div class="image-wrapper">
+                    <img src="produto-luninha.jpg" alt="Luninha" class="product-image">
+                    <span class="category-badge sob-encomenda">Sob Encomenda</span>
+                </div>
+                <div class="product-info">
+                    <h3>LINHA ENCANTO - Luninha 🌙</h3>
+                    <div class="price">
+                        <span class="main-price">R$ 991,00</span>
+                        <span class="installments">12x de R$ 82,58 sem juros</span>
+                    </div>
+                    <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Luninha." target="_blank" class="buy-button">
+                        <i class="fab fa-whatsapp"></i> WHATSAPP
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUTO 4: Sorrisinha (Menina, Pronta Entrega) -->
+            <div class="product-card" data-category="menina pronta-entrega">
+                <div class="image-wrapper">
+                    <img src="produto-sorrisinha.jpg" alt="Sorrisinha" class="product-image">
+                    <span class="category-badge pronta-entrega">Pronta Entrega</span>
+                </div>
+                <div class="product-info">
+                    <h3>Sorrisinha Magnética 🧲😊</h3>
+                    <div class="price">
+                        <span class="main-price">R$ 991,00</span>
+                        <span class="installments">12x de R$ 82,58 sem juros</span>
+                    </div>
+                    <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Sorrisinha." target="_blank" class="buy-button">
+                        <i class="fab fa-whatsapp"></i> WHATSAPP
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT DO SISTEMA DE ABAS -->
+    <script>
+        // Seleciona todos os botões de aba e produtos
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        // Adiciona evento de clique em cada botão
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove classe 'active' de todos os botões
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Adiciona classe 'active' no botão clicado
+                button.classList.add('active');
+
+                // Pega a categoria selecionada
+                const selectedCategory = button.getAttribute('data-category');
+
+                // Filtra os produtos
+                productCards.forEach(card => {
+                    const cardCategories = card.getAttribute('data-category');
+
+                    if (selectedCategory === 'todos') {
+                        // Mostra todos
+                        card.classList.remove('hidden');
+                    } else if (cardCategories.includes(selectedCategory)) {
+                        // Mostra se a categoria do produto inclui a selecionada
+                        card.classList.remove('hidden');
+                    } else {
+                        // Esconde se não corresponde
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

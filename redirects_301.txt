@@ -1,0 +1,24 @@
+### INSTRUÇÕES PARA O PROGRAMADOR - REDIRECIONAMENTO 301 ###
+
+# Este arquivo contém as regras de redirecionamento 301 para serem configuradas no servidor do site antigo (omundodabebereborn.com.br).
+# O objetivo é redirecionar todo o tráfego e autoridade de SEO do site antigo para o novo.
+
+# Exemplo de regra para o arquivo .htaccess (servidores Apache/LiteSpeed):
+# Redirect 301 /pagina-antiga.html https://www.seunovosite.com.br/pagina-nova
+
+# --- MAPA DE REDIRECIONAMENTO ---
+
+# Redirecionar a página inicial
+Redirect 301 / https://www.seunovosite.com.br/
+
+# Redirecionar páginas de produtos (exemplo)
+# Redirect 301 /produto/nome-do-produto-antigo /produto/nome-do-produto-novo
+
+# Redirecionar páginas de categorias (exemplo)
+# Redirect 301 /categoria/nome-da-categoria-antiga /categoria/nome-da-categoria-nova
+
+# Redirecionar outras páginas
+# Redirect 301 /contato.html /contato
+# Redirect 301 /sobre-nos.html /sobre
+
+# --- FIM DO MAPA ---

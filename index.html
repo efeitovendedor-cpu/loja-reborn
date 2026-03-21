@@ -1,0 +1,3144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <title>Bonecas Reborn - Pronta Entrega</title>
+    <meta name="description" content="Bonecas reborn artesanais de alta qualidade. Pronta entrega com preços especiais e parcelamento sem juros.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
+    
+    <!-- Google Fonts - Jost for elegant, clean look -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Basic Reset & Variables --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --text-color: #333333;
+            --bg-color: #FFFFFF;
+            --accent-color: #D9A19C;
+            --button-color: #444444;
+            --light-pink: #ffeef7;
+            --light-blue: #f0f8ff;
+            --gold: #d4a574;
+        }
+        
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ===== MODAL FESTA BOAS-VINDAS ===== */
+        .welcome-modal {
+            display: flex;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.4s ease-in;
+            backdrop-filter: blur(4px);
+        }
+
+        .welcome-modal-content {
+            position: relative;
+            background: linear-gradient(135deg, #fff0f5 0%, #fff8fc 50%, #f0f8ff 100%);
+            border-radius: 28px;
+            padding: 40px 36px 32px;
+            max-width: 480px;
+            width: 92%;
+            text-align: center;
+            animation: partyEntrance 0.7s cubic-bezier(0.175,0.885,0.32,1.275);
+            box-shadow: 0 30px 80px rgba(255,105,180,0.35), 0 0 0 1px rgba(255,182,193,0.4);
+            overflow: hidden;
+        }
+
+        .welcome-modal-content::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #ff69b4, #ffb6c1, #d4a0ff, #ff69b4);
+            border-radius: 30px;
+            z-index: -1;
+            background-size: 300% 300%;
+            animation: borderGlow 3s ease infinite;
+        }
+
+        @keyframes borderGlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes partyEntrance {
+            0%   { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+            60%  { transform: scale(1.08) rotate(2deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* Confetes */
+        .confetti-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 28px;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 8px; height: 8px;
+            border-radius: 2px;
+            animation: confettiFall linear infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes confettiFall {
+            0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(400px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Logo no modal */
+        .welcome-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffb6c1;
+            box-shadow: 0 6px 24px rgba(255,105,180,0.4);
+            animation: logoBounce 1s ease-in-out 0.5s both;
+            margin-bottom: 8px;
+        }
+
+        @keyframes logoBounce {
+            0%   { transform: scale(0); opacity: 0; }
+            70%  { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        /* Balões */
+        .balloons {
+            font-size: 2rem;
+            animation: balloonsFloat 2s ease-in-out infinite alternate;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        @keyframes balloonsFloat {
+            from { transform: translateY(0px); }
+            to   { transform: translateY(-8px); }
+        }
+
+        .welcome-badge {
+            background: linear-gradient(135deg, #ff69b4, #d4a0ff);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .welcome-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #cc4488;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 8px rgba(255,105,180,0.2);
+        }
+
+        .welcome-title span {
+            color: #d4a0ff;
+        }
+
+        .welcome-subtitle {
+            font-size: 0.92rem;
+            color: #888;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .welcome-subtitle strong {
+            color: #cc4488;
+        }
+
+        .welcome-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff69b4, #cc44aa);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 24px rgba(255,105,180,0.4);
+            animation: ctaPulse 2s ease-in-out infinite;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .welcome-cta:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(255,105,180,0.5);
+        }
+
+        @keyframes ctaPulse {
+            0%,100% { box-shadow: 0 8px 24px rgba(255,105,180,0.4); }
+            50%      { box-shadow: 0 8px 36px rgba(255,105,180,0.7); }
+        }
+
+        .welcome-skip {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.78rem;
+            color: #bbb;
+            cursor: pointer;
+            background: none;
+            border: none;
+            text-decoration: underline;
+        }
+
+        .welcome-skip:hover { color: #999; }
+
+        .welcome-close {
+            position: absolute;
+            top: 12px; right: 14px;
+            background: rgba(255,255,255,0.8);
+            color: #999;
+            border: none;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .welcome-close:hover { background: #fff; color: #cc4488; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-modal-content { padding: 32px 20px 24px; }
+            .welcome-title { font-size: 1.3rem; }
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 25px 0;
+            border-bottom: 1px solid #f0f0f0;
+            background-color: var(--bg-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: var(--text-color);
+            letter-spacing: 2px;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .logo img {
+            height: 110px;
+            width: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(255,105,180,0.4), 0 0 0 3px #ffb6c1;
+            animation: logoFloat 3s ease-in-out infinite;
+            transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo-cta {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #ff69b4;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: logoPulseText 2s ease-in-out infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes logoFloat {
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes logoPulseText {
+            0%   { opacity: 0.5; letter-spacing: 2px; }
+            50%  { opacity: 1; letter-spacing: 4px; color: #D9A19C; }
+            100% { opacity: 0.5; letter-spacing: 2px; }
+        }
+
+        .logo-link:hover img {
+            animation: none;
+            transform: scale(1.15) rotate(-3deg);
+            filter: drop-shadow(0 8px 28px rgba(255,105,180,0.8));
+        }
+
+        .logo-link:hover .logo-cta {
+            animation: none;
+            color: #ff69b4;
+            letter-spacing: 5px;
+        }
+
+        /* --- Navigation Menu --- */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: #DAA520;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            transition: color 0.3s;
+            letter-spacing: 1px;
+        }
+        
+        nav ul li a:hover {
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        /* --- Dropdown Menu --- */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.6rem;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 25px rgba(217, 161, 156, 0.25);
+            border-radius: 12px;
+            padding: 15px 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: 1px solid var(--light-pink);
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .dropdown-menu li {
+            margin: 0;
+            padding: 0;
+            display: block;
+            width: 100%;
+        }
+        
+        .dropdown-menu li a {
+            display: block;
+            padding: 12px 25px;
+            font-size: 0.85rem;
+            color: #555;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: 400;
+        }
+        
+        .dropdown-menu li a:hover {
+            background: linear-gradient(90deg, var(--light-pink), #fff);
+            color: var(--accent-color);
+            padding-left: 30px;
+        }
+
+        /* --- Header Icons --- */
+        .icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .icons a {
+            margin-left: 25px;
+            font-size: 1.1rem;
+            color: #555;
+            transition: color 0.3s;
+        }
+        
+        .icons a:hover {
+            color: var(--text-color);
+        }
+
+        /* --- Main Content --- */
+        main {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-blue) 100%);
+            min-height: 100vh;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* --- Product Grid --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px 30px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Product Card --- */
+        .product-card {
+            background-color: var(--bg-color);
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-wrapper {
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+        }
+
+        /* Overlay brilho no hover */
+        .image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .product-card:hover .image-wrapper::after {
+            opacity: 1;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        filter 0.55s ease;
+            filter: brightness(1) saturate(1);
+        }
+
+        /* Zoom suave + leve saturação no hover */
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+            filter: brightness(1.04) saturate(1.08);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-card h3 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-desc {
+            font-size: 0.78rem;
+            color: #888;
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .product-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 14px;
+            justify-content: center;
+        }
+
+        .product-tag {
+            background: linear-gradient(135deg, #ffeef7, #f0f8ff);
+            border: 1px solid #e8d5f0;
+            color: #a0668c;
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        
+        .price {
+            margin-bottom: 20px;
+        }
+        
+        .main-price {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+        
+        .installments {
+            display: block;
+            font-size: 0.8rem;
+            color: #777;
+            font-weight: 300;
+        }
+        
+        /* --- Buy Button --- */
+        .buy-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 15px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 3px solid #25D366;
+            border-radius: 50px;
+            width: 100%;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .buy-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .buy-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .buy-button:hover {
+            background: linear-gradient(135deg, #25D366 0%, #E36D88 100%);
+            border-color: #E36D88;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5), 0 3px 10px rgba(0,0,0,0.15);
+        }
+        
+        .buy-button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        /* --- WhatsApp Button Enhanced --- */
+        .whatsapp-btn .whatsapp-icon,
+        .whatsapp-btn .heart-icon {
+            font-size: 2.5rem;
+            position: absolute;
+            transition: opacity 0.5s ease;
+        }
+        
+        .whatsapp-btn .whatsapp-icon {
+            opacity: 1;
+            animation: iconSwitch 4s infinite;
+        }
+        
+        .whatsapp-btn .heart-icon {
+            opacity: 0;
+            color: #ff69b4;
+            animation: iconSwitch 4s infinite;
+            animation-delay: 2s;
+        }
+        
+        @keyframes iconSwitch {
+            0%, 45% { opacity: 1; transform: scale(1); }
+            50%, 95% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 82px;
+            height: 82px;
+            background: linear-gradient(145deg, #2edb6f, #1db954, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 2rem;
+            border: 4px solid rgba(255,255,255,0.95);
+            box-shadow:
+                0 4px 0px rgba(0,0,0,0.2),
+                0 10px 30px rgba(37, 211, 102, 0.6),
+                0 0 0 0 rgba(37,211,102,0.5);
+            z-index: 1002;
+            transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: zapPulse 1.8s ease-in-out infinite;
+            overflow: visible;
+        }
+
+        @keyframes zapPulse {
+            0%, 100% {
+                box-shadow: 0 4px 0px rgba(0,0,0,0.2), 0 10px 30px rgba(37,211,102,0.6), 0 0 0 0 rgba(37,211,102,0.5);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 4px 0px rgba(0,0,0,0.2), 0 14px 40px rgba(37,211,102,0.8), 0 0 0 14px rgba(37,211,102,0);
+                transform: scale(1.06);
+            }
+        }
+
+        /* Brilho sutil superior */
+        .whatsapp-btn::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 28%;
+            background: rgba(255,255,255,0.25);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .whatsapp-btn::before {
+            content: "💬";
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-4px) scale(1.1);
+            box-shadow:
+                0 6px 0px rgba(0,0,0,0.15),
+                0 14px 32px rgba(37, 211, 102, 0.65);
+        }
+
+        .whatsapp-btn:hover::before {
+            content: "❤️";
+        }
+
+        /* Tooltip "Fale conosco" */
+        .whatsapp-btn .whatsapp-text {
+            position: absolute;
+            left: calc(100% + 12px);
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1a1a1a;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(-50%) translateX(-6px);
+            letter-spacing: 0.3px;
+        }
+
+        .whatsapp-btn:hover .whatsapp-text {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        @keyframes heartPulse {
+            0%, 100% {
+                box-shadow: 0 4px 0px rgba(0,0,0,0.18), 0 8px 24px rgba(37,211,102,0.5);
+            }
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 4px 0px rgba(0,0,0,0.15), 0 12px 30px rgba(37,211,102,0.65);
+            }
+        }
+
+        /* --- Botão Flutuante Cadastro (Canto Direito) --- */
+        .cadastro-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            padding: 0;
+            background: linear-gradient(145deg, #FFE135 0%, #FFB700 45%, #FF8C00 100%);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #4a2800;
+            border: 3px solid rgba(255,255,255,0.85);
+            box-shadow:
+                0 4px 0px rgba(0,0,0,0.18),
+                0 8px 22px rgba(255, 160, 0, 0.5);
+            z-index: 1001;
+            transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: cadastroPulse 2.5s ease-in-out infinite;
+            overflow: visible;
+        }
+
+        .cadastro-btn.expanded {
+            width: 218px;
+            height: 64px;
+            border-radius: 32px;
+            padding: 0 16px 0 12px;
+            gap: 8px;
+            flex-direction: row;
+            animation: none;
+        }
+
+        .cadastro-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow:
+                0 6px 0px rgba(0,0,0,0.15),
+                0 14px 30px rgba(255, 160, 0, 0.6);
+        }
+
+        .cadastro-btn:active {
+            transform: translateY(1px) scale(0.97);
+            box-shadow:
+                0 2px 0px rgba(0,0,0,0.15),
+                0 5px 14px rgba(255, 160, 0, 0.4);
+        }
+
+        /* Brilho superior sutil */
+        .cadastro-btn::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 52%;
+            height: 28%;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: width 0.25s ease;
+        }
+        .cadastro-btn.expanded::after { width: 38%; }
+
+        /* Ícone */
+        .cadastro-btn .btn-icon {
+            font-size: 1.9rem;
+            display: flex;
+            line-height: 1;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+            flex-shrink: 0;
+        }
+
+        /* Textos — wrapper */
+        .cadastro-btn .btn-texts {
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+        .cadastro-btn.expanded .btn-texts {
+            display: flex;
+        }
+
+        .cadastro-btn .btn-title {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #3a1a00;
+            line-height: 1.2;
+            white-space: nowrap;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+            margin: 0;
+        }
+
+        .cadastro-btn .btn-subtitle {
+            font-size: 10px;
+            font-weight: 700;
+            color: #5a2e00;
+            line-height: 1.2;
+            white-space: nowrap;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+            margin: 0;
+        }
+
+        @keyframes cadastroPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 3px 0px rgba(0,0,0,0.12), 0 6px 16px rgba(255,160,0,0.3);
+            }
+            50% {
+                transform: scale(1.04);
+                box-shadow: 0 3px 0px rgba(0,0,0,0.1), 0 8px 20px rgba(255,160,0,0.4);
+            }
+        }
+
+        /* --- Modal do Formulário de Cadastro --- */
+        .cadastro-modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .cadastro-modal.show {
+            display: flex;
+        }
+
+        .cadastro-modal-content {
+            background: linear-gradient(135deg, #fff5f8 0%, #fff 100%);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .cadastro-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .cadastro-close:hover {
+            background: #e91e8c;
+            transform: scale(1.1);
+        }
+
+        .cadastro-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cadastro-logo img {
+            width: 80px;
+            height: auto;
+        }
+
+        .cadastro-logo-text {
+            color: #ff69b4;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .cadastro-form input,
+        .cadastro-form select {
+            width: 100%;
+            padding: 14px 16px;
+            margin: 8px 0;
+            border: 2px solid #ffc0cb;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Jost', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: white;
+        }
+
+        .cadastro-form input:focus,
+        .cadastro-form select:focus {
+            outline: none;
+            border-color: #ff69b4;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+        }
+
+        .cadastro-form input::placeholder {
+            color: #ccc;
+        }
+
+        .cadastro-form .required::after {
+            content: ' *';
+            color: #ff69b4;
+        }
+
+        .cadastro-submit {
+            width: 100%;
+            padding: 16px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Jost', sans-serif;
+        }
+
+        .cadastro-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .cadastro-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .cadastro-success {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .cadastro-success.show {
+            display: block;
+        }
+
+        .cadastro-success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .cadastro-success h3 {
+            color: #25D366;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .cadastro-success p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .cadastro-btn {
+                width: 60px;
+                height: 60px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .cadastro-btn.expanded {
+                width: 190px;
+                height: 60px;
+                border-radius: 30px;
+                padding: 0 14px 0 10px;
+                gap: 8px;
+            }
+
+            .cadastro-modal-content {
+                padding: 25px 20px;
+                margin: 10px;
+            }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        @keyframes showText {
+            0%, 95% { opacity: 0; }
+            95%, 100% { opacity: 1; }
+        }
+
+        /* Pulsação proeminente a cada 20 segundos */
+        @keyframes bigPulse {
+            0% { 
+                transform: scale(1); 
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+            50% { 
+                transform: scale(1.4); 
+                box-shadow: 0 10px 40px rgba(37, 211, 102, 0.8);
+            }
+            100% { 
+                transform: scale(1); 
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+        }
+
+        /* --- Social Proof Section --- */
+        .social-proof-section {
+            background: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .social-proof-section h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .social-proof-section p {
+            font-size: 1rem;
+            color: #777;
+            margin-bottom: 40px;
+        }
+        
+        .google-badge {
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+        
+        .google-badge img {
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .reviews-widget {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* --- Language Selector --- */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .lang-selector {
+            position: relative;
+        }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #fff8fc;
+            border: 1.5px solid #f0d0e4;
+            border-radius: 30px;
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #a0406a;
+            cursor: pointer;
+            font-family: 'Jost', sans-serif;
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .lang-current:hover {
+            border-color: #ff69b4;
+            background: #fff0f6;
+            box-shadow: 0 2px 10px rgba(255,105,180,0.15);
+        }
+
+        .lang-arrow {
+            font-size: 0.6rem;
+            opacity: 0.6;
+            transition: transform 0.2s;
+        }
+
+        .lang-selector.open .lang-arrow {
+            transform: rotate(180deg);
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(180,60,100,0.18);
+            border: 1.5px solid #f0d0e4;
+            overflow: hidden;
+            min-width: 150px;
+            z-index: 9999;
+            animation: dropDown 0.2s ease;
+        }
+
+        @keyframes dropDown {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .lang-selector.open .lang-dropdown {
+            display: block;
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 11px 16px;
+            border: none;
+            background: none;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            transition: background 0.15s;
+            text-align: left;
+        }
+
+        .lang-option:hover {
+            background: #fff0f6;
+            color: #d4607a;
+        }
+
+        .lang-option.active {
+            color: #d4607a;
+            background: #fff8fc;
+        }
+
+        /* --- Selos de Confiança --- */
+        .selos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 700px) {
+            .selos-grid { grid-template-columns: 1fr; max-width: 360px; }
+        }
+
+        .selo-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 22px 24px;
+            text-align: center;
+            border: 1.5px solid #f0e0ea;
+            box-shadow: 0 4px 20px rgba(180,60,100,0.07);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .selo-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(255,105,180,0.18);
+            border-color: #ffb3d1;
+        }
+
+        .selo-destaque {
+            border-color: #ff69b4;
+            box-shadow: 0 6px 28px rgba(255,105,180,0.15);
+            background: linear-gradient(160deg, #fff8fc, #fff0f6);
+            transform: translateY(-4px);
+        }
+
+        .selo-icon {
+            font-size: 2.4rem;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .selo-badge {
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ff69b4;
+            background: #fff0f6;
+            padding: 3px 12px;
+            border-radius: 20px;
+        }
+
+        .selo-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2a1020;
+            margin: 4px 0 0;
+            line-height: 1.3;
+        }
+
+        .selo-desc {
+            font-size: 0.78rem;
+            color: #999;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .selo-cta {
+            margin-top: 10px;
+            display: inline-block;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 8px 18px;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+        }
+
+        .selo-card:hover .selo-cta {
+            box-shadow: 0 4px 14px rgba(37,211,102,0.4);
+            transform: scale(1.03);
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid #f0f0f0;
+            padding: 40px 0 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* --- Mobile responsiveness --- */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px 20px;
+            }
+            nav ul li {
+                margin: 0 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 15px;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .product-image {
+                height: 300px;
+            }
+            
+            main {
+                padding: 160px 0 60px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-image {
+                height: auto;
+            }
+            
+            .whatsapp-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+        }
+
+        /* --- Smooth Scrolling --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- Loading Animation --- */
+        .product-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+        .product-card:nth-child(5) { animation-delay: 0.5s; }
+        .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           JORNADA INTERATIVA — "Conheça sua Bebê"
+        ============================================ */
+
+        /* Botão "Conheça" pulsante */
+        .conheca-btn {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ff8fab, #ffb347, #ff8fab);
+            background-size: 200% 200%;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            animation: conhecaPulse 2.5s ease-in-out infinite, gradShift 4s ease infinite;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 18px rgba(255,143,171,0.5);
+        }
+
+        .conheca-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(255,143,171,0.7);
+            animation: gradShift 4s ease infinite;
+        }
+
+        @keyframes conhecaPulse {
+            0%, 100% { box-shadow: 0 4px 18px rgba(255,143,171,0.5); }
+            50% { box-shadow: 0 4px 28px rgba(255,143,171,0.9), 0 0 0 6px rgba(255,143,171,0.15); }
+        }
+
+        @keyframes gradShift {
+            0%,100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Painel da Jornada */
+        .journey-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4,0,0.2,1);
+            background: linear-gradient(160deg, #fff5fb 0%, #f0f8ff 100%);
+            border-radius: 0 0 12px 12px;
+            border-top: 2px solid #ffd6e8;
+        }
+
+        .journey-panel.open {
+            max-height: 800px;
+        }
+
+        .journey-inner {
+            padding: 20px 16px;
+        }
+
+        /* Passo a passo */
+        .journey-step {
+            display: none;
+            animation: stepFadeIn 0.4s ease;
+        }
+
+        .journey-step.active {
+            display: block;
+        }
+
+        @keyframes stepFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Step 1 - Nome */
+        .journey-step-1 .step-emoji {
+            font-size: 2.5rem;
+            display: block;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .journey-step-1 h4 {
+            text-align: center;
+            font-size: 0.88rem;
+            color: #b05070;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .nome-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #ffb3d1;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-family: 'Jost', sans-serif;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: white;
+            color: #333;
+        }
+
+        .nome-input:focus {
+            border-color: #ff69b4;
+            box-shadow: 0 0 12px rgba(255,105,180,0.3);
+        }
+
+        .nome-confirm-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 11px;
+            background: linear-gradient(135deg, #ff69b4, #d4a574);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nome-confirm-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255,105,180,0.4);
+        }
+
+        /* Step 2 - Specs */
+        .journey-bebe-nome {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #c0405f;
+            margin-bottom: 14px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .spec-item {
+            background: white;
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid #ffd6e8;
+            box-shadow: 0 2px 8px rgba(255,105,180,0.1);
+        }
+
+        .spec-item .spec-emoji {
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .spec-item .spec-label {
+            font-size: 0.65rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+        }
+
+        .spec-item .spec-value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #444;
+            display: block;
+        }
+
+        /* ====== WELCOME MODAL ====== */
+        #welcomeModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(10, 5, 15, 0.75);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            animation: fadeInOverlay 0.6s ease;
+        }
+
+        #welcomeModal.show {
+            display: flex;
+        }
+
+        @keyframes fadeInOverlay {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .welcome-box {
+            background: linear-gradient(160deg, #fffaf8 0%, #fff0f6 60%, #fdf6ff 100%);
+            border-radius: 28px;
+            padding: 48px 42px 40px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(180, 60, 100, 0.25), 0 0 0 1px rgba(255,180,210,0.3);
+            animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px) scale(0.95); opacity: 0; }
+            to   { transform: translateY(0)    scale(1);    opacity: 1; }
+        }
+
+        /* Linha decorativa topo */
+        .welcome-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f4a7c3, #d4a574, #f4a7c3);
+            background-size: 200% 100%;
+            animation: shimmerLine 3s linear infinite;
+        }
+
+        @keyframes shimmerLine {
+            0%   { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        /* Estrelinhas de fundo */
+        .welcome-box::after {
+            content: '✦ ✦ ✦';
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.55rem;
+            letter-spacing: 8px;
+            color: #e8b4cc;
+            opacity: 0.7;
+        }
+
+        .welcome-ribbon {
+            display: inline-block;
+            background: linear-gradient(135deg, #f7c5d8, #e8a0b8);
+            color: #8b3a5a;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 5px 20px;
+            border-radius: 30px;
+            margin-bottom: 22px;
+            box-shadow: 0 2px 10px rgba(200,80,120,0.2);
+        }
+
+        .welcome-logo-wrap {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fff0f6, #fde8f2);
+            border: 2px solid rgba(244,167,195,0.4);
+            box-shadow: 0 0 0 6px rgba(244,167,195,0.12), 0 8px 30px rgba(180,60,100,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulseGlow 3s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 6px rgba(244,167,195,0.12), 0 8px 30px rgba(180,60,100,0.15); }
+            50%       { box-shadow: 0 0 0 12px rgba(244,167,195,0.2), 0 8px 40px rgba(180,60,100,0.25); }
+        }
+
+        .welcome-logo-wrap img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .welcome-title {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: #2a1020;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        .welcome-title span {
+            background: linear-gradient(135deg, #d4607a, #c4844a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-sub {
+            font-size: 0.88rem;
+            color: #9a7080;
+            line-height: 1.65;
+            margin-bottom: 28px;
+            font-weight: 400;
+        }
+
+        .welcome-cta {
+            display: inline-block;
+            width: 100%;
+            padding: 16px 30px;
+            background: linear-gradient(135deg, #ff69b4, #e8448a, #ff69b4);
+            background-size: 200% 100%;
+            color: white;
+            font-family: 'Jost', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 24px rgba(255,105,180,0.5), 0 0 0 0 rgba(255,105,180,0.4);
+            margin-bottom: 14px;
+            animation: ctaPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes ctaPulse {
+            0%, 100% {
+                box-shadow: 0 6px 24px rgba(255,105,180,0.5), 0 0 0 0 rgba(255,105,180,0.4);
+                background-position: 0% 0%;
+            }
+            50% {
+                box-shadow: 0 8px 32px rgba(255,105,180,0.7), 0 0 0 10px rgba(255,105,180,0);
+                background-position: 100% 0%;
+            }
+        }
+
+        .welcome-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(255,105,180,0.7);
+            animation: none;
+        }
+
+        .welcome-close {
+            font-size: 0.75rem;
+            color: #c0a0aa;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            font-family: 'Jost', sans-serif;
+        }
+
+        .welcome-close:hover {
+            color: #906070;
+        }
+
+        /* Partículas decorativas */
+        .welcome-particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .wp1 { width: 120px; height: 120px; background: #f4a7c3; top: -40px; right: -40px; }
+        .wp2 { width: 80px;  height: 80px;  background: #d4a574; bottom: -20px; left: -20px; }
+        .wp3 { width: 50px;  height: 50px;  background: #f4a7c3; bottom: 60px; right: 10px; }
+
+        /* Barra de tamanho animada */
+        .height-bar-wrap {
+            background: #ffeef5;
+            border-radius: 20px;
+            height: 8px;
+            margin: 6px 0 2px;
+            overflow: hidden;
+        }
+
+        .height-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff8fab, #d4a574);
+            border-radius: 20px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .height-bar.animate {
+            width: var(--bar-width, 85%);
+        }
+
+        /* Step 3 - Kit */
+        .kit-title {
+            text-align: center;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #b05070;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+
+        .kit-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .kit-item {
+            background: white;
+            border-radius: 10px;
+            padding: 8px 4px;
+            text-align: center;
+            border: 1px solid #ffe0ef;
+            animation: kitItemIn 0.3s ease forwards;
+            opacity: 0;
+        }
+
+        .kit-item:nth-child(1) { animation-delay: 0.0s; }
+        .kit-item:nth-child(2) { animation-delay: 0.06s; }
+        .kit-item:nth-child(3) { animation-delay: 0.12s; }
+        .kit-item:nth-child(4) { animation-delay: 0.18s; }
+        .kit-item:nth-child(5) { animation-delay: 0.24s; }
+        .kit-item:nth-child(6) { animation-delay: 0.30s; }
+        .kit-item:nth-child(7) { animation-delay: 0.36s; }
+        .kit-item:nth-child(8) { animation-delay: 0.42s; }
+        .kit-item:nth-child(9) { animation-delay: 0.48s; }
+
+        @keyframes kitItemIn {
+            from { opacity: 0; transform: scale(0.7); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        .kit-item .kit-emoji {
+            font-size: 1.3rem;
+            display: block;
+        }
+
+        .kit-item .kit-label {
+            font-size: 0.6rem;
+            color: #888;
+            display: block;
+            margin-top: 3px;
+            line-height: 1.2;
+        }
+
+        .brindes-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .brinde-badge {
+            background: linear-gradient(135deg, #ffe0ef, #fff0f8);
+            border: 1px solid #ffb3d1;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 0.68rem;
+            color: #c0405f;
+            font-weight: 600;
+        }
+
+        /* Botão final WhatsApp da jornada */
+        .journey-wpp-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            animation: wppGlow 2s ease-in-out infinite;
+            transition: transform 0.2s ease;
+        }
+
+        .journey-wpp-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes wppGlow {
+            0%,100% { box-shadow: 0 4px 18px rgba(37,211,102,0.4); }
+            50%      { box-shadow: 0 6px 28px rgba(37,211,102,0.7); }
+        }
+
+        /* Botão fechar jornada */
+        .journey-close-btn {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px;
+            background: transparent;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            color: #aaa;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.72rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .journey-close-btn:hover {
+            border-color: #ff8fab;
+            color: #ff8fab;
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal Festa Boas-Vindas -->
+    <div id="welcomeModal" class="welcome-modal">
+        <div class="welcome-modal-content">
+            <button class="welcome-close" onclick="closeWelcomeModal()">&times;</button>
+
+            <!-- Confetes animados -->
+            <div class="confetti-container" id="confettiContainer"></div>
+
+            <!-- Balões -->
+            <span class="balloons">🎈🎉🎊🎈</span>
+
+            <!-- Logo -->
+            <img src="logo.png" alt="Mundo da Bebê Reborn" class="welcome-logo">
+
+            <!-- Badge -->
+            <div class="welcome-badge">✨ NOVA CASA ✨</div>
+
+            <!-- Título -->
+            <h2 class="welcome-title">
+                Que alegria ter<br>
+                você <span>aqui!</span> 🥰
+            </h2>
+
+            <!-- Subtítulo -->
+            <p class="welcome-subtitle">
+                Estamos em <strong>festa!</strong> Nossa loja ganhou uma casa nova,
+                cheia de amor e bebês reborn esperando por você. 💕
+            </p>
+
+            <!-- CTA -->
+            <button class="welcome-cta" onclick="closeWelcomeModal()">
+                🍼 Quero conhecer as bebês!
+            </button>
+
+            <button class="welcome-skip" onclick="closeWelcomeModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- WELCOME MODAL -->
+    <div id="welcomeModal">
+        <div class="welcome-box">
+            <div class="welcome-particle wp1"></div>
+            <div class="welcome-particle wp2"></div>
+            <div class="welcome-particle wp3"></div>
+            <div class="welcome-ribbon" data-i18n="welcome_ribbon">✦ Nossa Nova Casa ✦</div>
+            <div class="welcome-logo-wrap">
+                <img src="logo.png" alt="Mundo da Bebê Reborn">
+            </div>
+            <h2 class="welcome-title" data-i18n="welcome_title">Que alegria ter<br>você <span>aqui!</span> 🌸</h2>
+            <p class="welcome-sub" data-i18n="welcome_sub">Bem-vinda à nossa nova loja.<br>Cada bebê reborn é criada com amor,<br>dedicação e muito carinho — só para você.</p>
+            <button class="welcome-cta" onclick="closeWelcome()" data-i18n="welcome_cta">🍼 Quero conhecer as bebês</button><br>
+            <button class="welcome-close" onclick="closeWelcome()" data-i18n="welcome_close">Entrar sem tour</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="#pronta-entrega" class="logo-link" title="Ver nossas bonecas">
+                    <img src="logo.png" alt="Mundo da Bebê Reborn" id="logo-principal">
+                    <span class="logo-cta">✨ Ver Bonecas</span>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio" data-i18n="nav_inicio">Início</a></li>
+                    <li class="dropdown">
+                        <a href="#pronta-entrega" data-i18n="nav_pronta">Pronta Entrega</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#silicone-solido">Silicone Sólido</a></li>
+                            <li><a href="#silicone-soft">Silicone Soft</a></li>
+                            <li><a href="#corpo-tecido">Corpo de Tecido</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#sob-encomenda" data-i18n="nav_encomenda">Sob Encomenda</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#encomenda-silicone-solido">Silicone Sólido</a></li>
+                            <li><a href="#encomenda-silicone-soft">Silicone Soft Premium</a></li>
+                            <li><a href="#encomenda-corpo-tecido">Corpo de Tecido</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#depoimentos" data-i18n="nav_depoimentos">Depoimentos</a></li>
+                    <li><a href="#contato" data-i18n="nav_contato">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <div class="lang-selector" id="langSelector">
+                    <button class="lang-current" onclick="toggleLang(event)">
+                        <span id="langFlag">🇧🇷</span>
+                        <span id="langName">PT</span>
+                        <span class="lang-arrow">▾</span>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button class="lang-option active" onclick="setLang('pt')">
+                            🇧🇷 <span>Português</span>
+                        </button>
+                        <button class="lang-option" onclick="setLang('en')">
+                            🇺🇸 <span>English</span>
+                        </button>
+                        <button class="lang-option" onclick="setLang('es')">
+                            🇪🇸 <span>Español</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="icons">
+                    <a href="#" aria-label="Buscar"><i class="fas fa-search"></i></a>
+                    <a href="#" aria-label="Minha Conta"><i class="fas fa-user"></i></a>
+                    <a href="#" aria-label="Carrinho"><i class="fas fa-shopping-bag"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="inicio">
+        <div class="container">
+            <h1 id="pronta-entrega">Pronta Entrega</h1>
+            <div class="product-grid">
+                
+                <div class="product-card" data-apelido="Docinho" data-linha="Linha Encanto" data-altura="55cm" data-peso="1,300 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Docinho">
+                    <div class="image-wrapper">
+                        <img src="produto-docinho.jpg" alt="BEBÊ REBORN - LINHA ENCANTO - Docinho" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>LINHA ENCANTO - Docinho</h3>
+                        <p class="product-desc">Bebê artesanal de silicone inteiro com cabelos implantados fio a fio e expressão de doçura irresistível.</p>
+                        <div class="product-tags">
+                            <span class="product-tag">Silicone Inteiro</span>
+                            <span class="product-tag">Cabelos Implantados</span>
+                            <span class="product-tag">55cm</span>
+                            <span class="product-tag">Enxoval Incluso</span>
+                        </div>
+                        <button class="conheca-btn" onclick="abrirJornada(this)">✨ Conheça a Docinho de perto</button>
+                        <div class="journey-panel"><div class="journey-inner"></div></div>
+                        <div class="price">
+                            <span class="main-price">R$ 1.390,90</span>
+                            <span class="installments">12x de R$ 115,91 sem juros</span>
+                        </div>
+                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Docinho.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-apelido="Luninha" data-linha="Linha Encanto" data-altura="50cm" data-peso="1,100 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Luninha">
+                    <div class="image-wrapper">
+                        <img src="produto-luninha.jpg" alt="LINHA ENCANTO - Luninha" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>LINHA ENCANTO - Luninha 🌙</h3>
+                        <p class="product-desc">Delicada e serena como a lua — silicone inteiro com cabelos cacheados implantados e olhos de vidro.</p>
+                        <div class="product-tags">
+                            <span class="product-tag">Silicone Inteiro</span>
+                            <span class="product-tag">Olhos de Vidro</span>
+                            <span class="product-tag">50cm</span>
+                            <span class="product-tag">Pronta Entrega</span>
+                        </div>
+                        <button class="conheca-btn" onclick="abrirJornada(this)">✨ Conheça a Luninha de perto</button>
+                        <div class="journey-panel"><div class="journey-inner"></div></div>
+                        <div class="price">
+                            <span class="main-price">R$ 990,98</span>
+                            <span class="installments">12x de R$ 82,58 sem juros</span>
+                        </div>
+                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Luninha.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-apelido="Sorrisinha" data-linha="Linha Encanto" data-altura="48cm" data-peso="1,100 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="Sorrisinha%20Magn%C3%A9tica">
+                    <div class="image-wrapper">
+                        <img src="produto-sorrisinha.jpg" alt="Sorrisinha Magnética" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>Sorrisinha Magnética 🧲😊</h3>
+                        <p class="product-desc">Chupeta magnética inclusa! Bebê de silicone com sorriso encantador e detalhes pintados à mão.</p>
+                        <div class="product-tags">
+                            <span class="product-tag">Silicone Inteiro</span>
+                            <span class="product-tag">Chupeta Magnética</span>
+                            <span class="product-tag">48cm</span>
+                            <span class="product-tag">Pintado à Mão</span>
+                        </div>
+                        <button class="conheca-btn" onclick="abrirJornada(this)">✨ Conheça a Sorrisinha de perto</button>
+                        <div class="journey-panel"><div class="journey-inner"></div></div>
+                        <div class="price">
+                            <span class="main-price">R$ 990,98</span>
+                            <span class="installments">12x de R$ 82,58 sem juros</span>
+                        </div>
+                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Sorrisinha%20Magnética.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-apelido="Princesinha" data-linha="Linha Encanto" data-altura="55cm" data-peso="1,380 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="Princesinha%20Mandona">
+                    <div class="image-wrapper">
+                        <img src="produto-princesinha.jpg" alt="Princesinha Mandona" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>Princesinha Mandona 👑😌</h3>
+                        <p class="product-desc">Realeza em miniatura! Silicone inteiro com expressão altiva, cabelos finos implantados e enxoval de princesa.</p>
+                        <div class="product-tags">
+                            <span class="product-tag">Silicone Inteiro</span>
+                            <span class="product-tag">Cabelos Implantados</span>
+                            <span class="product-tag">55cm</span>
+                            <span class="product-tag">Enxoval Incluso</span>
+                        </div>
+                        <button class="conheca-btn" onclick="abrirJornada(this)">✨ Conheça a Princesinha de perto</button>
+                        <div class="journey-panel"><div class="journey-inner"></div></div>
+                        <div class="price">
+                            <span class="main-price">R$ 899,98</span>
+                            <span class="installments">12x de R$ 75,00 sem juros</span>
+                        </div>
+                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Princesinha%20Mandona.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-apelido="Safira" data-linha="Linha Premium" data-altura="55cm" data-peso="1,380 kg" data-genero="menina" data-material="Silicone Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="Princesa%20Safira%20Diamante">
+                    <div class="image-wrapper">
+                        <img src="produto-safira.jpg" alt="Princesa Safira Diamante" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>Princesa Safira Diamante 💎👑</h3>
+                        <p class="product-desc">Nossa linha premium! Silicone de alta qualidade, olhos de vidro importado e enxoval de luxo completo.</p>
+                        <div class="product-tags">
+                            <span class="product-tag">Silicone Premium</span>
+                            <span class="product-tag">Olhos de Vidro</span>
+                            <span class="product-tag">55cm</span>
+                            <span class="product-tag">Enxoval de Luxo</span>
+                        </div>
+                        <button class="conheca-btn" onclick="abrirJornada(this)">✨ Conheça a Safira de perto</button>
+                        <div class="journey-panel"><div class="journey-inner"></div></div>
+                        <div class="price">
+                            <span class="main-price">R$ 1.190,00</span>
+                            <span class="installments">12x de R$ 99,17 sem juros</span>
+                        </div>
+                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Princesa%20Safira%20Diamante.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-apelido="Ruivinha" data-linha="Linha Encanto" data-altura="55cm" data-peso="1,300 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Ruivinha">
+                    <div class="image-wrapper">
+                        <img src="produto-ruivinha.jpg" alt="LINHA ENCANTO - Ruivinha" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>LINHA ENCANTO - Ruivinha 🍓</h3>
+                        <p class="product-desc">Cabelos ruivos implantados fio a fio com personalidade única. Silicone inteiro com toque realista.</p>
+                        <div class="product-tags">
+                            <span class="product-tag">Silicone Inteiro</span>
+                            <span class="product-tag">Cabelos Ruivos</span>
+                            <span class="product-tag">55cm</span>
+                            <span class="product-tag">Pintado à Mão</span>
+                        </div>
+                        <button class="conheca-btn" onclick="abrirJornada(this)">✨ Conheça a Ruivinha de perto</button>
+                        <div class="journey-panel"><div class="journey-inner"></div></div>
+                        <div class="price">
+                            <span class="main-price">R$ 990,00</span>
+                            <span class="installments">12x de R$ 82,50 sem juros</span>
+                        </div>
+                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Ruivinha.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-apelido="Sorrisinho" data-linha="Linha Encanto" data-altura="52cm" data-peso="0,900 kg" data-genero="menino" data-material="Corpo de Tecido + Silicone" data-banho="Não" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Sorrisinho">
+                    <div class="image-wrapper">
+                        <img src="produto-sorrisinho.jpg" alt="LINHA ENCANTO - Sorrisinho" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>LINHA ENCANTO - Sorrisinho 😄</h3>
+                        <p class="product-desc">Corpo de tecido macio com membros de silicone. Leve, flexível e com sorriso que conquista no primeiro olhar.</p>
+                        <div class="product-tags">
+                            <span class="product-tag">Corpo de Tecido</span>
+                            <span class="product-tag">Membros Silicone</span>
+                            <span class="product-tag">52cm</span>
+                            <span class="product-tag">Super Leve</span>
+                        </div>
+                        <button class="conheca-btn" onclick="abrirJornada(this)">✨ Conheça o Sorrisinho de perto</button>
+                        <div class="journey-panel"><div class="journey-inner"></div></div>
+                        <div class="price">
+                            <span class="main-price">R$ 899,00</span>
+                            <span class="installments">12x de R$ 74,92 sem juros</span>
+                        </div>
+                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Sorrisinho.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-apelido="Nuvem Azul" data-linha="Linha Encanto" data-altura="48cm" data-peso="1,100 kg" data-genero="menino" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Nuvem%20Azul%20Fofo">
+                    <div class="image-wrapper">
+                        <img src="produto-nuvem-azul.png" alt="LINHA ENCANTO - Nuvem Azul Fofo" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>LINHA ENCANTO - Nuvem Azul Fofo 👦☁️</h3>
+                        <p class="product-desc">O xodó dos meninos! Silicone inteiro com cabelos implantados e enxoval azul completo cheio de charme.</p>
+                        <div class="product-tags">
+                            <span class="product-tag">Silicone Inteiro</span>
+                            <span class="product-tag">Cabelos Implantados</span>
+                            <span class="product-tag">48cm</span>
+                            <span class="product-tag">Enxoval Azul</span>
+                        </div>
+                        <button class="conheca-btn" onclick="abrirJornada(this)">✨ Conheça o Nuvem Azul de perto</button>
+                        <div class="journey-panel"><div class="journey-inner"></div></div>
+                        <div class="price">
+                            <span class="main-price">R$ 1.190,00</span>
+                            <span class="installments">12x de R$ 99,17 sem juros</span>
+                        </div>
+                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20no%20bebê%20LINHA%20ENCANTO%20-%20Nuvem%20Azul%20Fofo.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </main>
+
+    <!-- Trust Badges Section -->
+    <style>
+        .selo-destaque {
+            cursor: pointer;
+            transition: all 0.4s ease;
+            max-width: 100%;
+            height: auto;
+            max-height: 350px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+        }
+        .selo-destaque:hover {
+            transform: scale(1.08) translateY(-10px);
+            box-shadow: 0 0 40px rgba(135, 206, 250, 0.8), 0 0 60px rgba(255, 182, 193, 0.6), 0 20px 40px rgba(255, 105, 180, 0.3);
+        }
+        .selo-destaque:active {
+            transform: scale(1.15) translateY(-15px);
+            box-shadow: 0 0 50px rgba(135, 206, 250, 1), 0 0 80px rgba(255, 182, 193, 0.8), 0 25px 50px rgba(255, 105, 180, 0.4);
+        }
+        .badge-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        /* Modal Zoom */
+        .selo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .selo-modal.show {
+            display: flex;
+        }
+        .selo-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 20px;
+            box-shadow: 0 0 60px rgba(135, 206, 250, 0.8), 0 0 100px rgba(255, 182, 193, 0.6);
+            animation: seloZoomIn 0.4s ease;
+        }
+        @keyframes seloZoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+    <section class="trust-badges-section" style="background: linear-gradient(135deg, #ffeef8 0%, #fff5f9 100%); padding: 60px 20px; margin: 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <div class="trust-badges-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center; justify-items: center;">
+                <div class="badge-item">
+                    <img src="selo-garantia-6meses.jpg" alt="Garantia 6 Meses - Loja 5 Estrelas Google" class="selo-destaque" onclick="openSeloModal(this.src)">
+                </div>
+                <div class="badge-item">
+                    <img src="selo-confianca.jpg" alt="Confiança e Qualidade - Segurança em cada detalhe" class="selo-destaque" onclick="openSeloModal(this.src)">
+                </div>
+                <div class="badge-item">
+                    <img src="selo-seguranca-100.png" alt="Segurança 100% Garantida - Compra protegida" class="selo-destaque" onclick="openSeloModal(this.src)">
+                </div>
+            </div>
+        </div>
+    <!-- Modal para Zoom -->
+    <div class="selo-modal" id="seloModal" onclick="closeSeloModal()">
+        <img src="" id="seloModalImg" alt="Selo ampliado">
+    </div>
+    <script>
+        function openSeloModal(src) {
+            document.getElementById('seloModalImg').src = src;
+            document.getElementById('seloModal').classList.add('show');
+        }
+        function closeSeloModal() {
+            document.getElementById('seloModal').classList.remove('show');
+        }
+    </script>
+    </section>
+
+    <!-- WhatsApp Button Enhanced -->
+    <a href="https://wa.me/5581979001072?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20bonecas%20reborn%20disponíveis%20👶💕" class="whatsapp-btn" target="_blank">
+        <span class="whatsapp-text">💬 Fale conosco</span>
+    </a>
+
+    <!-- Botão Flutuante Cadastro -->
+    <button class="cadastro-btn" id="cadastroBtn" onclick="openCadastroModal()">
+        <span class="btn-icon">🎁</span>
+        <div class="btn-texts">
+            <span class="btn-title">CADASTRE-SE E GANHE</span>
+            <span class="btn-subtitle">⭐ Seja Cliente VIP</span>
+        </div>
+    </button>
+
+    <!-- Modal do Formulário de Cadastro -->
+    <div class="cadastro-modal" id="cadastroModal">
+        <div class="cadastro-modal-content">
+            <button class="cadastro-close" onclick="closeCadastroModal()">×</button>
+            
+            <div class="cadastro-logo">
+                <img src="logo.png" alt="Mundo da Bebê Reborn">
+                <div class="cadastro-logo-text">Mundo da Bebê Reborn</div>
+            </div>
+
+            <form class="cadastro-form" id="cadastroForm" onsubmit="submitCadastro(event)">
+                <input type="text" name="primeiro_nome" placeholder="Primeiro Nome" required class="required">
+                <input type="text" name="ultimo_nome" placeholder="Último Nome" required class="required">
+                <input type="email" name="email" placeholder="E-mail" required class="required">
+                <input type="tel" name="whatsapp" placeholder="WhatsApp (com DDD)" required class="required">
+                <input type="text" name="cidade" placeholder="Cidade" required class="required">
+                <select name="estado" required class="required">
+                    <option value="">Selecione o Estado</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+                <select name="bebe_interesse">
+                    <option value="">Qual bebê te interessou? (opcional)</option>
+                    <option value="Docinho">Linha Encanto - Docinho</option>
+                    <option value="Luninha">Linha Encanto - Luninha</option>
+                    <option value="Sorrisinha">Sorrisinha Magnética</option>
+                    <option value="Princesinha">Princesinha Mandona</option>
+                    <option value="Safira">Princesa Safira Diamante</option>
+                    <option value="Ruivinha">Linha Encanto - Ruivinha</option>
+                    <option value="Sorrisinho">Linha Encanto - Sorrisinho</option>
+                    <option value="Nuvem Azul">Linha Encanto - Nuvem Azul Fofo</option>
+                    <option value="Outro">Outro / Ainda não decidi</option>
+                </select>
+                <select name="como_conheceu">
+                    <option value="">Como conheceu a loja? (opcional)</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Google">Google</option>
+                    <option value="TikTok">TikTok</option>
+                    <option value="YouTube">YouTube</option>
+                    <option value="Indicação">Indicação de amigo(a)</option>
+                    <option value="Outro">Outro</option>
+                </select>
+                <button type="submit" class="cadastro-submit" id="cadastroSubmitBtn">
+                    ✅ ENVIAR CADASTRO
+                </button>
+            </form>
+
+            <div class="cadastro-success" id="cadastroSuccess">
+                <div class="cadastro-success-icon">🎉</div>
+                <h3>Cadastro Realizado!</h3>
+                <p>Obrigado por se cadastrar! Em breve você receberá vantagens exclusivas.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Proof Section -->
+    <section id="depoimentos" class="social-proof-section">
+        <div class="container">
+
+            <!-- Título principal -->
+            <div style="text-align:center; margin-bottom: 8px;">
+                <span style="display:inline-block; background: linear-gradient(135deg,#ff69b4,#e8448a); color:white; font-size:0.65rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; padding:5px 20px; border-radius:30px; margin-bottom:16px;">✦ Transparência Total ✦</span>
+            </div>
+            <h2 style="font-size:2.2rem; color:#2a1020; font-weight:800; margin-bottom:4px; letter-spacing:-0.5px; text-align:center; line-height:1.2;">
+                Avaliações Reais · Clientes Reais
+                <span style="display:block; color:#ff69b4;">Loja Física Real 🏪</span>
+            </h2>
+            <p style="font-size:0.72rem; color:#bbb; margin-bottom:36px; font-style:italic; letter-spacing:3px; text-transform:uppercase; text-align:center;">(What Our Customers Say)</p>
+
+            <!-- Google Reviews Widget -->
+            <div class="reviews-widget">
+                <script src="https://elfsightcdn.com/platform.js" async></script>
+                <div class="elfsight-app-fc567341-9e21-4e5c-94fd-e478f2096d9f" data-elfsight-app-lazy></div>
+            </div>
+
+            <p style="margin-top: 20px; text-align:center;">
+                <a href="https://share.google/QU11VYgxuxfA4YrQj" target="_blank" style="color:#ff69b4; font-weight:600; font-size:0.85rem; text-decoration:none; border-bottom: 1px solid rgba(255,105,180,0.3); padding-bottom:2px;">
+                    ⭐ Ver todas as 314 avaliações no Google →
+                </a>
+            </p>
+
+            <!-- SELOS DE CONFIANÇA -->
+            <div style="margin-top:56px; text-align:center;">
+                <p style="font-size:0.65rem; color:#bbb; letter-spacing:4px; text-transform:uppercase; margin-bottom:20px;">Nossa Garantia</p>
+                <h3 style="font-size:1.4rem; color:#2a1020; font-weight:700; margin-bottom:8px;">Compre na internet com a segurança<br>de uma <span style="color:#ff69b4;">loja física</span></h3>
+                <p style="font-size:0.88rem; color:#888; margin-bottom:36px;">Mais bem avaliada do nordeste no Google · 5 estrelas ⭐⭐⭐⭐⭐</p>
+
+                <div class="selos-grid">
+
+                    <a href="https://wa.me/5581979001072?text=Olá!%20Vi%20a%20garantia%20de%206%20meses%20e%20quero%20saber%20mais!" target="_blank" class="selo-card">
+                        <div class="selo-icon">🛡️</div>
+                        <div class="selo-badge">Google ⭐⭐⭐⭐⭐</div>
+                        <h4 class="selo-title">Garantia 6 Meses</h4>
+                        <p class="selo-desc">Loja 5 estrelas no Google com foco total na sua satisfação</p>
+                        <span class="selo-cta"><i class="fab fa-whatsapp"></i> Saiba mais</span>
+                    </a>
+
+                    <a href="https://wa.me/5581979001072?text=Olá!%20Quero%20conhecer%20mais%20sobre%20a%20qualidade%20das%20bonecas!" target="_blank" class="selo-card selo-destaque">
+                        <div class="selo-icon">🔒</div>
+                        <div class="selo-badge">Confiança & Qualidade</div>
+                        <h4 class="selo-title">Mundo da Bebê Reborn</h4>
+                        <p class="selo-desc">Artesanato premium com carinho e segurança em cada detalhe</p>
+                        <span class="selo-cta"><i class="fab fa-whatsapp"></i> Falar conosco</span>
+                    </a>
+
+                    <a href="https://wa.me/5581979001072?text=Olá!%20Quero%20comprar%20com%20segurança%20garantida!" target="_blank" class="selo-card">
+                        <div class="selo-icon">✅</div>
+                        <div class="selo-badge">100% Seguro</div>
+                        <h4 class="selo-title">Compra Protegida</h4>
+                        <p class="selo-desc">Sua tranquilidade é nossa prioridade. Dados e compra 100% seguros</p>
+                        <span class="selo-cta"><i class="fab fa-whatsapp"></i> Comprar agora</span>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contato">
+        <div class="container">
+            <p>&copy; 2024 O Mundo da Bebê Reborn. Todos os direitos reservados.</p>
+            <p>CNPJ: 61.626.085/0001-02</p>
+            <p>Contato: (81) 97900-1072 | omundodabebereborn@gmail.com</p>
+            <p>Entrega para todo o Brasil 📦 | Parcelamento sem juros 💳</p>
+            <p><a href="https://omundodabebereborn.com.br/politica-de-privacidade/" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Política de Privacidade</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced WhatsApp button with big pulse every 20 seconds
+        const whatsappBtn = document.querySelector('.whatsapp-btn');
+        
+        setInterval(() => {
+            whatsappBtn.style.animation = 'bigPulse 1s ease, heartPulse 3s infinite, colorChange 20s infinite';
+            setTimeout(() => {
+                whatsappBtn.style.animation = 'heartPulse 3s infinite, colorChange 20s infinite';
+            }, 1000);
+        }, 20000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Product card click effect (jump effect)
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('buy-button')) {
+                    this.style.animation = 'none';
+                    this.offsetHeight; // Trigger reflow
+                    this.style.animation = 'cardJump 0.6s ease';
+                    
+                    setTimeout(() => {
+                        this.style.animation = 'fadeInUp 0.6s ease forwards';
+                    }, 600);
+                }
+            });
+        });
+
+        // Add jump animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes cardJump {
+                0% { transform: translateY(0) scale(1); }
+                50% { transform: translateY(-20px) scale(1.05); }
+                100% { transform: translateY(0) scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+    
+    <!-- Script do Modal de Boas-Vindas -->
+    <script>
+        // Gerar confetes coloridos
+        (function gerarConfetes() {
+            const container = document.getElementById('confettiContainer');
+            if (!container) return;
+            const cores = ['#ff69b4','#ffb6c1','#d4a0ff','#ffe066','#7ec8ff','#ff8fab','#b5ead7'];
+            for (let i = 0; i < 40; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti-piece';
+                c.style.left = Math.random() * 100 + '%';
+                c.style.top = Math.random() * -20 + 'px';
+                c.style.background = cores[Math.floor(Math.random() * cores.length)];
+                c.style.width = (6 + Math.random() * 8) + 'px';
+                c.style.height = (6 + Math.random() * 8) + 'px';
+                c.style.animationDuration = (2 + Math.random() * 3) + 's';
+                c.style.animationDelay = (Math.random() * 3) + 's';
+                c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                container.appendChild(c);
+            }
+        })();
+        
+        // Função para fechar o modal
+        function closeWelcomeModal() {
+            const modal = document.getElementById('welcomeModal');
+            modal.style.animation = 'fadeOut 0.3s ease-out';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+        
+        // Adicionar animação de saída
+        const style2 = document.createElement('style');
+        style2.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style2);
+        
+        // Fechar modal ao clicar fora da imagem
+        document.getElementById('welcomeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeWelcomeModal();
+            }
+        });
+        
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeWelcomeModal();
+            }
+        });
+    </script>
+
+    <!-- Script do Botão de Cadastro e Formulário -->
+    <script>
+        // URL do Google Apps Script (Web App) - SUBSTITUIR PELA SUA URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8Y5kMfiHhlKkRv5Vk8Jdpmhd_eO4qSdKN2-Mex1kAvryKZwm42x-6fAoVPrYkOIgM/exec';
+
+        // Função para abrir o modal de cadastro
+        function openCadastroModal() {
+            document.getElementById('cadastroModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Função para fechar o modal de cadastro
+        function closeCadastroModal() {
+            const modal = document.getElementById('cadastroModal');
+            modal.style.animation = 'fadeOut 0.3s ease-out';
+            setTimeout(() => {
+                modal.classList.remove('show');
+                modal.style.animation = '';
+                document.body.style.overflow = '';
+                // Reset form
+                document.getElementById('cadastroForm').reset();
+                document.getElementById('cadastroForm').style.display = 'block';
+                document.getElementById('cadastroSuccess').classList.remove('show');
+            }, 300);
+        }
+
+        // Memória do formulário - salva dados enquanto preenche
+        const formFields = ['primeiro_nome', 'ultimo_nome', 'email', 'whatsapp', 'cidade', 'estado', 'bebe_interesse', 'como_conheceu'];
+        
+        // Carregar dados salvos ao abrir
+        function loadFormData() {
+            formFields.forEach(field => {
+                const saved = localStorage.getItem('cadastro_' + field);
+                if (saved) {
+                    const el = document.querySelector('[name="' + field + '"]');
+                    if (el) el.value = saved;
+                }
+            });
+        }
+        
+        // Salvar ao digitar
+        function saveFormData() {
+            formFields.forEach(field => {
+                const el = document.querySelector('[name="' + field + '"]');
+                if (el) {
+                    el.addEventListener('change', () => localStorage.setItem('cadastro_' + field, el.value));
+                    el.addEventListener('input', () => localStorage.setItem('cadastro_' + field, el.value));
+                }
+            });
+        }
+        
+        // Limpar após envio
+        function clearFormData() {
+            formFields.forEach(field => localStorage.removeItem('cadastro_' + field));
+        }
+        
+        // Inicializar memória
+        document.addEventListener('DOMContentLoaded', () => { loadFormData(); saveFormData(); });
+
+        // Função para enviar o cadastro
+        async function submitCadastro(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('cadastroForm');
+            const submitBtn = document.getElementById('cadastroSubmitBtn');
+            const formData = new FormData(form);
+            
+            // Desabilitar botão durante envio
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            
+            // Coletar dados do formulário
+            const data = {
+                firstName: formData.get('primeiro_nome'),
+                lastName: formData.get('ultimo_nome'),
+                email: formData.get('email'),
+                whatsapp: formData.get('whatsapp'),
+                city: formData.get('cidade'),
+                state: formData.get('estado'),
+                babyInterest: formData.get('bebe_interesse') || '',
+                howFound: formData.get('como_conheceu') || ''
+            };
+            
+            try {
+                // Tentar enviar para o Google Sheets
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                // Mostrar mensagem de sucesso
+                showSuccess();
+                
+            } catch (error) {
+                console.error('Erro ao enviar:', error);
+                // Mesmo com erro, mostrar sucesso (modo no-cors não retorna resposta)
+                showSuccess();
+            }
+        }
+        
+        function showSuccess() {
+            clearFormData(); // Limpar memória após sucesso
+            document.getElementById('cadastroForm').style.display = 'none';
+            document.getElementById('cadastroSuccess').classList.add('show');
+            
+            // Fechar modal após 3 segundos
+            setTimeout(() => {
+                closeCadastroModal();
+            }, 3000);
+        }
+
+        // Loop infinito: estrela 0,5s → expandido 1,3s
+        const cadastroBtn = document.getElementById('cadastroBtn');
+        let hoverTimer = null;
+        let isHovering = false;
+        
+        function loopCadastroBtn() {
+            if (isHovering) return;
+            // Expande por 1,7s
+            cadastroBtn.classList.add('expanded');
+            setTimeout(() => {
+                if (isHovering) return;
+                // Volta para estrela por 0,9s
+                cadastroBtn.classList.remove('expanded');
+                setTimeout(() => {
+                    loopCadastroBtn();
+                }, 900);
+            }, 1700);
+        }
+        loopCadastroBtn();
+        
+        // Hover timer para abrir formulário após 1 segundo
+        cadastroBtn.addEventListener('mouseenter', function() {
+            isHovering = true;
+            cadastroBtn.classList.add('expanded');
+            hoverTimer = setTimeout(() => {
+                openCadastroModal();
+            }, 1000);
+        });
+        
+        cadastroBtn.addEventListener('mouseleave', function() {
+            isHovering = false;
+            if (hoverTimer) {
+                clearTimeout(hoverTimer);
+                hoverTimer = null;
+            }
+            loopCadastroBtn();
+        });
+
+        // ====== SISTEMA DE IDIOMAS COMPLETO ======
+        const t = {
+            pt: {
+                flag: '🇧🇷', name: 'PT',
+                nav_inicio: 'Início',
+                nav_pronta: 'Pronta Entrega',
+                nav_encomenda: 'Sob Encomenda',
+                nav_depoimentos: 'Depoimentos',
+                nav_contato: 'Contato',
+                nav_sol_solido: 'Silicone Sólido',
+                nav_sol_soft: 'Silicone Soft',
+                nav_sol_tecido: 'Corpo de Tecido',
+                titulo_pronta: 'Pronta Entrega',
+                btn_whatsapp: '💚 WHATSAPP',
+                btn_conheca_pre: '✨ Conheça',
+                btn_conheca_pos: 'de perto',
+                welcome_ribbon: '✦ Nossa Nova Casa ✦',
+                welcome_title: 'Que alegria ter<br>você <span>aqui!</span> 🌸',
+                welcome_sub: 'Bem-vinda à nossa nova loja.<br>Cada bebê reborn é criada com amor,<br>dedicação e muito carinho — só para você.',
+                welcome_cta: '🍼 Quero conhecer as bebês',
+                welcome_close: 'Entrar sem tour',
+                depo_titulo: 'Avaliações Reais · Clientes Reais<br><span style="color:#ff69b4;">Loja Física Real 🏪</span>',
+                depo_sub: '(What Our Customers Say)',
+                depo_ver: '⭐ Ver todas as 314 avaliações no Google →',
+                selos_titulo: 'Compre na internet com a segurança<br>de uma <span style="color:#ff69b4;">loja física</span>',
+                selos_sub: 'Mais bem avaliada do nordeste no Google · 5 estrelas ⭐⭐⭐⭐⭐',
+                selo1_title: 'Garantia 6 Meses',
+                selo1_desc: 'Loja 5 estrelas no Google com foco total na sua satisfação',
+                selo1_cta: '💚 Saiba mais',
+                selo2_title: 'Mundo da Bebê Reborn',
+                selo2_desc: 'Artesanato premium com carinho e segurança em cada detalhe',
+                selo2_cta: '💚 Falar conosco',
+                selo3_title: 'Compra Protegida',
+                selo3_desc: 'Sua tranquilidade é nossa prioridade. Dados e compra 100% seguros',
+                selo3_cta: '💚 Comprar agora',
+                footer_entrega: 'Entrega para todo o Brasil 📦 | Parcelamento sem juros 💳',
+                wpp_msg: 'Olá! Tenho interesse em uma bebê reborn. Pode me ajudar?'
+            },
+            en: {
+                flag: '🇺🇸', name: 'EN',
+                nav_inicio: 'Home',
+                nav_pronta: 'Ready to Ship',
+                nav_encomenda: 'Custom Order',
+                nav_depoimentos: 'Reviews',
+                nav_contato: 'Contact',
+                nav_sol_solido: 'Solid Silicone',
+                nav_sol_soft: 'Soft Silicone',
+                nav_sol_tecido: 'Cloth Body',
+                titulo_pronta: 'Ready to Ship',
+                btn_whatsapp: '💚 WHATSAPP',
+                btn_conheca_pre: '✨ Meet',
+                btn_conheca_pos: 'up close',
+                welcome_ribbon: '✦ Our New Home ✦',
+                welcome_title: 'So happy to have<br>you <span>here!</span> 🌸',
+                welcome_sub: 'Welcome to our new store.<br>Each reborn baby is made with love,<br>dedication and care — just for you.',
+                welcome_cta: '🍼 Meet our babies',
+                welcome_close: 'Enter without tour',
+                depo_titulo: 'Real Reviews · Real Customers<br><span style="color:#ff69b4;">Real Physical Store 🏪</span>',
+                depo_sub: '(O Que Nossos Clientes Dizem)',
+                depo_ver: '⭐ See all 314 reviews on Google →',
+                selos_titulo: 'Shop online with the safety<br>of a <span style="color:#ff69b4;">physical store</span>',
+                selos_sub: 'Best rated store in Northeast Brazil on Google · 5 stars ⭐⭐⭐⭐⭐',
+                selo1_title: '6-Month Guarantee',
+                selo1_desc: '5-star Google store with total focus on your satisfaction',
+                selo1_cta: '💚 Learn more',
+                selo2_title: 'World of Reborn Baby',
+                selo2_desc: 'Premium craftsmanship with care and safety in every detail',
+                selo2_cta: '💚 Talk to us',
+                selo3_title: 'Protected Purchase',
+                selo3_desc: 'Your peace of mind is our priority. 100% secure data and purchase',
+                selo3_cta: '💚 Buy now',
+                footer_entrega: 'Delivery across Brazil 📦 | Interest-free installments 💳',
+                wpp_msg: 'Hello! I am interested in a reborn baby doll. Can you help me?'
+            },
+            es: {
+                flag: '🇪🇸', name: 'ES',
+                nav_inicio: 'Inicio',
+                nav_pronta: 'Entrega Inmediata',
+                nav_encomenda: 'Pedido Especial',
+                nav_depoimentos: 'Opiniones',
+                nav_contato: 'Contacto',
+                nav_sol_solido: 'Silicona Sólida',
+                nav_sol_soft: 'Silicona Suave',
+                nav_sol_tecido: 'Cuerpo de Tela',
+                titulo_pronta: 'Entrega Inmediata',
+                btn_whatsapp: '💚 WHATSAPP',
+                btn_conheca_pre: '✨ Conoce',
+                btn_conheca_pos: 'de cerca',
+                welcome_ribbon: '✦ Nuestra Nueva Casa ✦',
+                welcome_title: '¡Qué alegría tenerte<br><span>aquí!</span> 🌸',
+                welcome_sub: 'Bienvenida a nuestra nueva tienda.<br>Cada bebé reborn está hecha con amor,<br>dedicación y mucho cariño — solo para ti.',
+                welcome_cta: '🍼 Quiero conocer las bebés',
+                welcome_close: 'Entrar sin tour',
+                depo_titulo: 'Opiniones Reales · Clientes Reales<br><span style="color:#ff69b4;">Tienda Física Real 🏪</span>',
+                depo_sub: '(O Que Nossos Clientes Dizem)',
+                depo_ver: '⭐ Ver las 314 opiniones en Google →',
+                selos_titulo: 'Compra por internet con la seguridad<br>de una <span style="color:#ff69b4;">tienda física</span>',
+                selos_sub: 'La mejor calificada del noreste de Brasil en Google · 5 estrellas ⭐⭐⭐⭐⭐',
+                selo1_title: 'Garantía 6 Meses',
+                selo1_desc: 'Tienda 5 estrellas en Google con total enfoque en tu satisfacción',
+                selo1_cta: '💚 Saber más',
+                selo2_title: 'Mundo del Bebé Reborn',
+                selo2_desc: 'Artesanía premium con cariño y seguridad en cada detalle',
+                selo2_cta: '💚 Hablar con nosotros',
+                selo3_title: 'Compra Protegida',
+                selo3_desc: 'Tu tranquilidad es nuestra prioridad. Datos y compra 100% seguros',
+                selo3_cta: '💚 Comprar ahora',
+                footer_entrega: 'Envíos a todo Brasil 📦 | Cuotas sin interés 💳',
+                wpp_msg: '¡Hola! Estoy interesada en una muñeca bebé reborn. ¿Pueden ayudarme?'
+            }
+        };
+
+        let idiomaAtual = 'pt';
+
+        function toggleLang(e) {
+            e.stopPropagation();
+            document.getElementById('langSelector').classList.toggle('open');
+        }
+
+        function setLang(lang) {
+            idiomaAtual = lang;
+            const i = t[lang];
+
+            // Atualiza bandeira e nome
+            document.getElementById('langFlag').textContent = i.flag;
+            document.getElementById('langName').textContent = i.name;
+
+            // Atualiza classe active
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
+            if (event && event.target) event.target.closest('.lang-option').classList.add('active');
+
+            // Aplica traduções via data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i[key] !== undefined) el.innerHTML = i[key];
+            });
+
+            // Atualiza WhatsApp em todos os links
+            document.querySelectorAll('a[href*="wa.me"]').forEach(btn => {
+                const base = btn.getAttribute('href').split('?text=')[0];
+                const produto = btn.getAttribute('data-produto') || '';
+                let msg = i.wpp_msg;
+                if (produto) {
+                    msg = lang === 'pt' ? `Olá! Tenho interesse na ${produto}. Pode me ajudar?`
+                        : lang === 'en' ? `Hello! I am interested in the ${produto}. Can you help me?`
+                        : `¡Hola! Estoy interesada en la ${produto}. ¿Pueden ayudarme?`;
+                }
+                btn.setAttribute('href', `${base}?text=${encodeURIComponent(msg)}`);
+            });
+
+            document.getElementById('langSelector').classList.remove('open');
+
+            // Feedback visual
+            const cur = document.querySelector('.lang-current');
+            cur.style.transform = 'scale(1.08)';
+            setTimeout(() => cur.style.transform = '', 200);
+        }
+
+        document.addEventListener('click', () => {
+            document.getElementById('langSelector').classList.remove('open');
+        });
+
+        // ====== WELCOME MODAL ======
+        function closeWelcome() {
+            const m = document.getElementById('welcomeModal');
+            m.style.animation = 'fadeInOverlay 0.4s ease reverse';
+            setTimeout(() => m.style.display = 'none', 380);
+            sessionStorage.setItem('welcomed', '1');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!sessionStorage.getItem('welcomed')) {
+                setTimeout(() => {
+                    document.getElementById('welcomeModal').classList.add('show');
+                }, 800);
+            }
+        });
+
+        // QUALQUER clique no popup fecha e entra no site — zero clique perdido!
+        document.getElementById('welcomeModal').addEventListener('click', function() {
+            closeWelcome();
+        });
+
+        // Fechar modal ao clicar fora
+        document.getElementById('cadastroModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCadastroModal();
+            }
+        });
+
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const cadastroModal = document.getElementById('cadastroModal');
+                if (cadastroModal.classList.contains('show')) {
+                    closeCadastroModal();
+                }
+            }
+        });
+    </script>
+
+    <!-- ============================================
+         JORNADA INTERATIVA — Script Principal
+    ============================================ -->
+    <script>
+    const KIT_ITEMS = [
+        { emoji: '🍼', label: 'Mamadeira\nPersonalizada' },
+        { emoji: '🧷', label: 'Chupeta\nMagnética' },
+        { emoji: '👶', label: 'Fralda\nDescartável' },
+        { emoji: '📖', label: 'Manual de\nCuidados' },
+        { emoji: '📜', label: 'Certidão de\nNascimento' },
+        { emoji: '🪪', label: 'Identidade\nSimbólica' },
+        { emoji: '💉', label: 'Carteira de\nVacinação' },
+        { emoji: '👣', label: 'Teste do\nPezinho' },
+        { emoji: '👗', label: 'Roupinha\nExclusiva' },
+    ];
+
+    const BRINDES = ['🎀 Faixinha', '💎 Brincos', '🔗 Prendedor'];
+
+    function getBarWidth(altura) {
+        const cm = parseInt(altura);
+        const min = 38, max = 60;
+        return Math.round(((cm - min) / (max - min)) * 100) + '%';
+    }
+
+    function buildStep1(apelido, genero) {
+        const pronome = genero === 'menino' ? 'o' : 'a';
+        return `
+        <div class="journey-step journey-step-1 active">
+            <span class="step-emoji">💕</span>
+            <h4>Que nome você vai dar para ${pronome} ${apelido}?</h4>
+            <input class="nome-input" type="text" placeholder="Digite um nome lindo..." maxlength="30" id="nomeInput_${apelido.replace(/\s/g,'_')}">
+            <button class="nome-confirm-btn" onclick="confirmarNome(this, '${apelido}', '${genero}')">
+                Continuar → Ver tudo sobre ${pronome} ${apelido} 💕
+            </button>
+        </div>`;
+    }
+
+    function buildStep2(nomeEscolhido, data) {
+        const barW = getBarWidth(data.altura);
+        const genEmoji = data.genero === 'menino' ? '👦' : '👧';
+        const banhoTxt = data.banho === 'Sim' ? '🛁 Pode dar banho' : '🚿 Higiene com pano';
+        return `
+        <div class="journey-step journey-step-2 active">
+            <div class="journey-bebe-nome">💕 Oi, mãezinha! Sua bebê é a <strong>${nomeEscolhido}</strong> 💕</div>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <span class="spec-emoji">📏</span>
+                    <span class="spec-label">Altura</span>
+                    <span class="spec-value">${data.altura}</span>
+                    <div class="height-bar-wrap"><div class="height-bar" style="--bar-width:${barW}"></div></div>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-emoji">⚖️</span>
+                    <span class="spec-label">Peso</span>
+                    <span class="spec-value">${data.peso}</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-emoji">${genEmoji}</span>
+                    <span class="spec-label">Categoria</span>
+                    <span class="spec-value">${data.genero === 'menino' ? 'Menino' : 'Menina'}</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-emoji">🤲</span>
+                    <span class="spec-label">Material</span>
+                    <span class="spec-value" style="font-size:0.72rem">${data.material}</span>
+                </div>
+                <div class="spec-item" style="grid-column:span 2">
+                    <span class="spec-emoji">🛁</span>
+                    <span class="spec-label">Banho</span>
+                    <span class="spec-value">${banhoTxt}</span>
+                </div>
+            </div>
+            <button class="nome-confirm-btn" onclick="irParaKit(this, '${nomeEscolhido}')">
+                🎁 Ver Kit da ${nomeEscolhido} →
+            </button>
+        </div>`;
+    }
+
+    function buildStep3(nomeEscolhido, wpp, wppProduto) {
+        const kitHTML = KIT_ITEMS.map(i => `
+            <div class="kit-item">
+                <span class="kit-emoji">${i.emoji}</span>
+                <span class="kit-label">${i.label}</span>
+            </div>`).join('');
+
+        const brindesHTML = BRINDES.map(b => `<span class="brinde-badge">${b}</span>`).join('');
+
+        const msgWpp = encodeURIComponent(`Olá! 💕 Quero levar a ${nomeEscolhido} (${decodeURIComponent(wppProduto)}) para casa! Pode me ajudar com as informações de pagamento?`);
+
+        return `
+        <div class="journey-step journey-step-3 active">
+            <div class="kit-title">🎀 Kit Maternidade da ${nomeEscolhido}</div>
+            <div class="kit-grid">${kitHTML}</div>
+            <div class="kit-title" style="margin-bottom:8px">✨ Brindes Exclusivos</div>
+            <div class="brindes-row">${brindesHTML}</div>
+            <a href="https://wa.me/${wpp}?text=${msgWpp}" target="_blank" class="journey-wpp-btn">
+                <i class="fab fa-whatsapp" style="font-size:1.2rem"></i>
+                Quero levar a ${nomeEscolhido} pra casa! 💕
+            </a>
+            <button class="journey-close-btn" onclick="fecharJornada(this)">✕ Fechar</button>
+        </div>`;
+    }
+
+    function abrirJornada(btn) {
+        const card = btn.closest('.product-card');
+        const panel = card.querySelector('.journey-panel');
+        const inner = card.querySelector('.journey-inner');
+
+        // Fecha todas as outras jornadas abertas
+        document.querySelectorAll('.journey-panel.open').forEach(p => {
+            if (p !== panel) {
+                p.classList.remove('open');
+                const parentCard = p.closest('.product-card');
+                const parentBtn = parentCard.querySelector('.conheca-btn');
+                if (parentBtn) parentBtn.textContent = `✨ Conheça de perto`;
+            }
+        });
+
+        if (panel.classList.contains('open')) {
+            panel.classList.remove('open');
+            const apelido = card.dataset.apelido;
+            const genero = card.dataset.genero;
+            const pronome = genero === 'menino' ? 'o' : 'a';
+            btn.textContent = `✨ Conheça ${pronome} ${apelido} de perto`;
+            return;
+        }
+
+        // Monta step 1
+        const apelido = card.dataset.apelido;
+        const genero = card.dataset.genero;
+        inner.innerHTML = buildStep1(apelido, genero);
+        panel.classList.add('open');
+        btn.textContent = `💕 Fechando a jornada...`;
+
+        // Foca no input
+        setTimeout(() => {
+            const input = inner.querySelector('.nome-input');
+            if (input) input.focus();
+        }, 400);
+    }
+
+    function confirmarNome(confirmBtn, apelido, genero) {
+        const card = confirmBtn.closest('.product-card');
+        const input = card.querySelector('.nome-input');
+        const nome = (input.value.trim()) || apelido;
+        const inner = card.querySelector('.journey-inner');
+
+        inner.innerHTML = buildStep2(nome, card.dataset);
+
+        // Anima barra de altura
+        setTimeout(() => {
+            const bar = inner.querySelector('.height-bar');
+            if (bar) bar.classList.add('animate');
+        }, 100);
+    }
+
+    function irParaKit(kitBtn, nomeEscolhido) {
+        const card = kitBtn.closest('.product-card');
+        const inner = card.querySelector('.journey-inner');
+        inner.innerHTML = buildStep3(nomeEscolhido, card.dataset.wpp, card.dataset.wppProduto);
+    }
+
+    function fecharJornada(closeBtn) {
+        const card = closeBtn.closest('.product-card');
+        const panel = card.querySelector('.journey-panel');
+        const conhecaBtn = card.querySelector('.conheca-btn');
+        const apelido = card.dataset.apelido;
+        const genero = card.dataset.genero;
+        const pronome = genero === 'menino' ? 'o' : 'a';
+        panel.classList.remove('open');
+        if (conhecaBtn) conhecaBtn.textContent = `✨ Conheça ${pronome} ${apelido} de perto`;
+    }
+    </script>
+</body>
+</html>

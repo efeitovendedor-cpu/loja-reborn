@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Formulário e Planilha</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f5f5f5; padding: 20px; }
+        h1 { text-align: center; color: #ff69b4; margin-bottom: 20px; }
+        .container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .box { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        /* BOTÃO */
+        .btn-cadastro {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333; padding: 20px 30px; border: none; border-radius: 50px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center;
+            box-shadow: 0 5px 20px rgba(255,215,0,0.5);
+        }
+        .btn-cadastro:hover { transform: scale(1.05); }
+        .btn-cadastro span { display: block; font-size: 0.8rem; margin-top: 5px; }
+
+        /* FORMULÁRIO */
+        .form-box { width: 350px; }
+        .logo { text-align: center; margin-bottom: 15px; }
+        .logo img { width: 80px; }
+        .logo-text { color: #ff69b4; font-weight: bold; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #ffc0cb; border-radius: 10px; }
+        .btn-enviar { background: #25D366; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px; }
+
+        /* PLANILHA */
+        .planilha-box { width: 500px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        th { background: #4285f4; color: white; padding: 8px; }
+        td { border: 1px solid #ddd; padding: 8px; }
+        tr:nth-child(even) { background: #f9f9f9; }
+
+        .label { background: #ff69b4; color: white; padding: 5px 10px; border-radius: 5px; margin-bottom: 10px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <h1>📋 Mockup - Visualização do Sistema</h1>
+    
+    <div class="container">
+        <!-- BOTÃO NO SITE -->
+        <div class="box" style="text-align:center;">
+            <span class="label">1️⃣ BOTÃO NO SITE</span>
+            <br><br>
+            <button class="btn-cadastro" onclick="document.getElementById('form').style.display='block'">
+                ⭐ CADASTRE-SE E GANHE<br>VANTAGENS EXCLUSIVAS!
+                <span>Torne-se Cliente 5 Estrelas ⭐</span>
+            </button>
+        </div>
+
+        <!-- FORMULÁRIO POPUP -->
+        <div class="box form-box" id="form">
+            <span class="label">2️⃣ FORMULÁRIO (POPUP)</span>
+            <div class="logo">
+                <div style="font-size:2rem;">👶</div>
+                <div class="logo-text">Mundo da Bebê Reborn</div>
+            </div>
+            <input type="text" placeholder="Primeiro Nome">
+            <input type="text" placeholder="Último Nome">
+            <input type="email" placeholder="E-mail">
+            <input type="tel" placeholder="WhatsApp (com DDD)">
+            <input type="text" placeholder="Cidade/Estado">
+            <select><option>Qual bebê te interessou?</option><option>Nuvem Azul Fofo</option><option>Docinho</option><option>Luninha</option></select>
+            <select><option>Como conheceu a loja?</option><option>Instagram</option><option>Facebook</option><option>Google</option><option>Indicação</option></select>
+            <button class="btn-enviar">✅ ENVIAR CADASTRO</button>
+        </div>
+
+        <!-- PLANILHA -->
+        <div class="box planilha-box">
+            <span class="label">3️⃣ PLANILHA GOOGLE SHEETS (você recebe)</span>
+            <br><br>
+            <table>
+                <tr>
+                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>WhatsApp</th>
+                    <th>Cidade</th>
+                    <th>Bebê</th>
+                    <th>Origem</th>
+                </tr>
+                <tr>
+                    <td>29/12/2025</td>
+                    <td>Maria Silva</td>
+                    <td>maria@email.com</td>
+                    <td>81999999999</td>
+                    <td>Recife/PE</td>
+                    <td>Nuvem Azul</td>
+                    <td>Instagram</td>
+                </tr>
+                <tr>
+                    <td>29/12/2025</td>
+                    <td>Ana Costa</td>
+                    <td>ana@email.com</td>
+                    <td>11988888888</td>
+                    <td>São Paulo/SP</td>
+                    <td>Docinho</td>
+                    <td>Google</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
