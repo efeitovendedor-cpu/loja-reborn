@@ -1,0 +1,9 @@
+node_modules/
+.env
+*.bat
+remove-bg.js
+INSTRUCOES*.md
+PROGRESSO.md
+exemplo-abas.html
+mockup-formulario.html
+redirects_301.txt
