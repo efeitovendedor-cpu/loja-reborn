@@ -16,7 +16,306 @@
     
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
+    <!-- SCHEMA MARKUP - GEO STEP 1 -->
+
+    <!-- 1. ORGANIZAÇÃO / LOJA LOCAL -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Mundo da Bebê Reborn",
+      "image": "https://mundodabebereborn.com.br/logo.png",
+      "url": "https://mundodabebereborn.com.br",
+      "telephone": "+5581979001072",
+      "email": "omundodabebereborn@gmail.com",
+      "description": "Loja especializada em bebês reborn artesanais de silicone premium. Pronta entrega com garantia de 6 meses. A mais bem avaliada do Nordeste no Google.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Santo Amaro",
+        "addressLocality": "Recife",
+        "addressRegion": "PE",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-8.0539",
+        "longitude": "-34.8811"
+      },
+      "hasMap": "https://maps.google.com/?q=Mundo+da+Bebe+Reborn+Santo+Amaro+Recife",
+      "amenityFeature": [
+        {"@type": "LocationFeatureSpecification", "name": "Estacionamento Privativo", "value": true},
+        {"@type": "LocationFeatureSpecification", "name": "Segurança", "value": true}
+      ],
+      "areaServed": {"@type": "Country", "name": "Brasil"},
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "314",
+        "bestRating": "5"
+      },
+      "priceRange": "R$899 - R$1.390",
+      "openingHours": "Mo-Sa 09:00-18:00",
+      "sameAs": [
+        "https://www.instagram.com/omundodabebereborn",
+        "https://wa.me/5581979001072"
+      ]
+    }
+    </script>
+
+    <!-- 2. WEBSITE -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Mundo da Bebê Reborn",
+      "url": "https://mundodabebereborn.com.br",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mundodabebereborn.com.br/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- 3. PRODUTO: Docinho -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebê Reborn Linha Encanto - Docinho",
+      "image": "https://mundodabebereborn.com.br/produto-docinho.jpg",
+      "description": "Bebê reborn artesanal de silicone inteiro com cabelos implantados fio a fio. 55cm, 1.3kg. Kit maternidade completo com certidão de nascimento, mamadeira, chupeta magnética e enxoval.",
+      "brand": {"@type": "Brand", "name": "Mundo da Bebê Reborn"},
+      "category": "Boneca Reborn Silicone Premium",
+      "material": "Silicone Premium",
+      "height": {"@type": "QuantitativeValue", "value": "55", "unitCode": "CMT"},
+      "weight": {"@type": "QuantitativeValue", "value": "1.3", "unitCode": "KGM"},
+      "offers": {
+        "@type": "Offer",
+        "url": "https://mundodabebereborn.com.br/#pronta-entrega",
+        "priceCurrency": "BRL",
+        "price": "1390.90",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {"@type": "Organization", "name": "Mundo da Bebê Reborn"},
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingDestination": {"@type": "DefinedRegion", "addressCountry": "BR"}
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "merchantReturnDays": "7",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "314",
+        "bestRating": "5"
+      }
+    }
+    </script>
+
+    <!-- 4. PRODUTO: Luninha -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebê Reborn Linha Encanto - Luninha",
+      "image": "https://mundodabebereborn.com.br/produto-luninha.jpg",
+      "description": "Bebê reborn delicada e serena. Silicone inteiro com cabelos cacheados implantados e olhos de vidro. 50cm. Kit maternidade completo.",
+      "brand": {"@type": "Brand", "name": "Mundo da Bebê Reborn"},
+      "material": "Silicone Premium",
+      "height": {"@type": "QuantitativeValue", "value": "50", "unitCode": "CMT"},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BRL",
+        "price": "990.98",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {"@type": "Organization", "name": "Mundo da Bebê Reborn"}
+      },
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "314"}
+    }
+    </script>
+
+    <!-- 5. PRODUTO: Sorrisinha Magnética -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebê Reborn Sorrisinha Magnética",
+      "image": "https://mundodabebereborn.com.br/produto-sorrisinha.jpg",
+      "description": "Bebê reborn com chupeta magnética inclusa. Silicone inteiro com sorriso encantador e detalhes pintados à mão. 48cm. Kit maternidade completo.",
+      "brand": {"@type": "Brand", "name": "Mundo da Bebê Reborn"},
+      "material": "Silicone Premium",
+      "height": {"@type": "QuantitativeValue", "value": "48", "unitCode": "CMT"},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BRL",
+        "price": "990.98",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {"@type": "Organization", "name": "Mundo da Bebê Reborn"}
+      },
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "314"}
+    }
+    </script>
+
+    <!-- 6. PRODUTO: Princesinha Mandona -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebê Reborn Princesinha Mandona",
+      "image": "https://mundodabebereborn.com.br/produto-princesinha.jpg",
+      "description": "Realeza em miniatura! Silicone inteiro com expressão altiva, cabelos finos implantados e enxoval de princesa. 52cm. Kit maternidade completo.",
+      "brand": {"@type": "Brand", "name": "Mundo da Bebê Reborn"},
+      "material": "Silicone Premium",
+      "height": {"@type": "QuantitativeValue", "value": "52", "unitCode": "CMT"},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BRL",
+        "price": "899.98",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {"@type": "Organization", "name": "Mundo da Bebê Reborn"}
+      },
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "314"}
+    }
+    </script>
+
+    <!-- 7. PRODUTO: Princesa Safira Diamante -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebê Reborn Princesa Safira Diamante",
+      "image": "https://mundodabebereborn.com.br/produto-safira.jpg",
+      "description": "Linha premium! Silicone de alta qualidade, olhos de vidro importado e enxoval de luxo completo. 55cm, 1.2kg. Kit maternidade premium.",
+      "brand": {"@type": "Brand", "name": "Mundo da Bebê Reborn"},
+      "material": "Silicone Premium",
+      "height": {"@type": "QuantitativeValue", "value": "55", "unitCode": "CMT"},
+      "weight": {"@type": "QuantitativeValue", "value": "1.2", "unitCode": "KGM"},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BRL",
+        "price": "1190.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {"@type": "Organization", "name": "Mundo da Bebê Reborn"}
+      },
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "314"}
+    }
+    </script>
+
+    <!-- 8. PRODUTO: Ruivinha -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebê Reborn Linha Encanto - Ruivinha",
+      "image": "https://mundodabebereborn.com.br/produto-ruivinha.jpg",
+      "description": "Cabelos ruivos implantados fio a fio com personalidade única. Silicone inteiro com toque realista. 55cm, 1.3kg. Pode dar banho. Kit maternidade completo.",
+      "brand": {"@type": "Brand", "name": "Mundo da Bebê Reborn"},
+      "material": "Silicone Premium",
+      "height": {"@type": "QuantitativeValue", "value": "55", "unitCode": "CMT"},
+      "weight": {"@type": "QuantitativeValue", "value": "1.3", "unitCode": "KGM"},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BRL",
+        "price": "990.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {"@type": "Organization", "name": "Mundo da Bebê Reborn"}
+      },
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "314"}
+    }
+    </script>
+
+    <!-- 9. PRODUTO: Sorrisinho -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebê Reborn Linha Encanto - Sorrisinho",
+      "image": "https://mundodabebereborn.com.br/produto-sorrisinho.jpg",
+      "description": "Corpo de tecido macio com membros de silicone. Leve, flexível e com sorriso que conquista. 52cm. Kit maternidade completo.",
+      "brand": {"@type": "Brand", "name": "Mundo da Bebê Reborn"},
+      "material": "Corpo de Tecido com Silicone",
+      "height": {"@type": "QuantitativeValue", "value": "52", "unitCode": "CMT"},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BRL",
+        "price": "899.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {"@type": "Organization", "name": "Mundo da Bebê Reborn"}
+      },
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "314"}
+    }
+    </script>
+
+    <!-- 10. PRODUTO: Nuvem Azul Fofo -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Bebê Reborn Linha Encanto - Nuvem Azul Fofo",
+      "image": "https://mundodabebereborn.com.br/produto-nuvem-azul.png",
+      "description": "O xodó dos meninos! Silicone inteiro com cabelos implantados e enxoval azul completo. 48cm. Kit maternidade completo com certidão de nascimento.",
+      "brand": {"@type": "Brand", "name": "Mundo da Bebê Reborn"},
+      "material": "Silicone Premium",
+      "height": {"@type": "QuantitativeValue", "value": "48", "unitCode": "CMT"},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BRL",
+        "price": "1190.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {"@type": "Organization", "name": "Mundo da Bebê Reborn"}
+      },
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "314"}
+    }
+    </script>
+
+    <!-- 11. FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "A bebê reborn pode tomar banho?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sim! Nossas bebês de silicone premium podem tomar banho, ir à piscina e ao mar, seguindo o Manual de Cuidados que acompanha o kit."}
+        },
+        {
+          "@type": "Question",
+          "name": "Qual a garantia da bebê reborn?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Oferecemos garantia de 6 meses contra defeitos de fabricação, seguindo rigorosamente o Manual de Cuidados."}
+        },
+        {
+          "@type": "Question",
+          "name": "A bebê reborn vem com acessórios?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sim! Kit maternidade completo: roupinha, fralda, mamadeira personalizada, chupeta magnética, certidão de nascimento, identidade simbólica, carteira de vacinação, teste do pezinho e brindes exclusivos."}
+        },
+        {
+          "@type": "Question",
+          "name": "Entregam para todo o Brasil?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sim! Entregamos para todo o Brasil com embalagem especial que protege sua bebê durante o transporte."}
+        },
+        {
+          "@type": "Question",
+          "name": "Posso parcelar sem juros?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sim! Parcelamos em até 12x sem juros no cartão de crédito."}
+        }
+      ]
+    }
+    </script>
+
     <style>
         /* --- Basic Reset & Variables --- */
         * {
@@ -1937,44 +2236,6 @@
     </style>
 </head>
 <body>
-    <!-- Modal Festa Boas-Vindas -->
-    <div id="welcomeModal" class="welcome-modal">
-        <div class="welcome-modal-content">
-            <button class="welcome-close" onclick="closeWelcomeModal()">&times;</button>
-
-            <!-- Confetes animados -->
-            <div class="confetti-container" id="confettiContainer"></div>
-
-            <!-- Balões -->
-            <span class="balloons">🎈🎉🎊🎈</span>
-
-            <!-- Logo -->
-            <img src="logo.png" alt="Mundo da Bebê Reborn" class="welcome-logo">
-
-            <!-- Badge -->
-            <div class="welcome-badge">✨ NOVA CASA ✨</div>
-
-            <!-- Título -->
-            <h2 class="welcome-title">
-                Que alegria ter<br>
-                você <span>aqui!</span> 🥰
-            </h2>
-
-            <!-- Subtítulo -->
-            <p class="welcome-subtitle">
-                Estamos em <strong>festa!</strong> Nossa loja ganhou uma casa nova,
-                cheia de amor e bebês reborn esperando por você. 💕
-            </p>
-
-            <!-- CTA -->
-            <button class="welcome-cta" onclick="closeWelcomeModal()">
-                🍼 Quero conhecer as bebês!
-            </button>
-
-            <button class="welcome-skip" onclick="closeWelcomeModal()">Fechar</button>
-        </div>
-    </div>
-
     <!-- WELCOME MODAL -->
     <div id="welcomeModal">
         <div class="welcome-box">
@@ -2455,13 +2716,13 @@
 
                 <div class="selos-grid">
 
-                    <a href="https://wa.me/5581979001072?text=Olá!%20Vi%20a%20garantia%20de%206%20meses%20e%20quero%20saber%20mais!" target="_blank" class="selo-card">
+                    <div class="selo-card" onclick="openGarantiaBlog()" style="cursor:pointer;">
                         <div class="selo-icon">🛡️</div>
                         <div class="selo-badge">Google ⭐⭐⭐⭐⭐</div>
                         <h4 class="selo-title">Garantia 6 Meses</h4>
                         <p class="selo-desc">Loja 5 estrelas no Google com foco total na sua satisfação</p>
-                        <span class="selo-cta"><i class="fab fa-whatsapp"></i> Saiba mais</span>
-                    </a>
+                        <span class="selo-cta">📖 Entenda sua Garantia</span>
+                    </div>
 
                     <a href="https://wa.me/5581979001072?text=Olá!%20Quero%20conhecer%20mais%20sobre%20a%20qualidade%20das%20bonecas!" target="_blank" class="selo-card selo-destaque">
                         <div class="selo-icon">🔒</div>
@@ -2471,13 +2732,13 @@
                         <span class="selo-cta"><i class="fab fa-whatsapp"></i> Falar conosco</span>
                     </a>
 
-                    <a href="https://wa.me/5581979001072?text=Olá!%20Quero%20comprar%20com%20segurança%20garantida!" target="_blank" class="selo-card">
+                    <div class="selo-card" onclick="openSegurancaBlog()" style="cursor:pointer;">
                         <div class="selo-icon">✅</div>
                         <div class="selo-badge">100% Seguro</div>
                         <h4 class="selo-title">Compra Protegida</h4>
                         <p class="selo-desc">Sua tranquilidade é nossa prioridade. Dados e compra 100% seguros</p>
-                        <span class="selo-cta"><i class="fab fa-whatsapp"></i> Comprar agora</span>
-                    </a>
+                        <span class="selo-cta">📖 Conheça nossa loja</span>
+                    </div>
 
                 </div>
             </div>
@@ -2494,6 +2755,144 @@
             <p><a href="https://omundodabebereborn.com.br/politica-de-privacidade/" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Política de Privacidade</a></p>
         </div>
     </footer>
+
+    <!-- MINI BLOG GARANTIA -->
+    <div id="garantiaBlog" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; overflow-y:auto; backdrop-filter:blur(4px);">
+        <div style="max-width:680px; margin:40px auto; background:#fff; border-radius:20px; overflow:hidden; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+
+            <!-- Header -->
+            <div style="background:linear-gradient(135deg,#ffeef7,#fff5f8); padding:40px 30px 30px; text-align:center; border-bottom:1px solid #f0e0ea;">
+                <div style="font-size:3rem; margin-bottom:10px;">🛡️</div>
+                <h2 style="font-size:1.6rem; color:#2a1020; font-weight:700; margin-bottom:8px;">Entenda sua Garantia</h2>
+                <p style="font-size:0.85rem; color:#999; font-style:italic;">Sua bebê protegida. Sua tranquilidade garantida.</p>
+            </div>
+
+            <!-- Conteúdo -->
+            <div style="padding:30px;">
+
+                <div style="margin-bottom:28px;">
+                    <h3 style="font-size:1.1rem; color:#d4738a; margin-bottom:10px;">🤝 O que é a Garantia de 6 Meses?</h3>
+                    <p style="font-size:0.88rem; color:#555; line-height:1.7;">Toda bebê reborn que sai da nossa loja vem acompanhada de uma garantia de <strong>6 meses</strong>, seguindo rigorosamente o Manual de Cuidados que acompanha o kit. Isso significa que se sua bebê apresentar qualquer defeito de fabricação, nós resolvemos sem custo.</p>
+                </div>
+
+                <div style="margin-bottom:28px;">
+                    <h3 style="font-size:1.1rem; color:#d4738a; margin-bottom:10px;">✅ O que está coberto?</h3>
+                    <ul style="font-size:0.85rem; color:#555; line-height:2; padding-left:20px;">
+                        <li>Defeitos no silicone (rachaduras, bolhas, deformações)</li>
+                        <li>Problemas nos cabelos implantados</li>
+                        <li>Olhos de vidro com defeito</li>
+                        <li>Articulações com problema de fábrica</li>
+                        <li>Chupeta magnética sem funcionar</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom:28px;">
+                    <h3 style="font-size:1.1rem; color:#d4738a; margin-bottom:10px;">📖 Como acionar?</h3>
+                    <p style="font-size:0.88rem; color:#555; line-height:1.7;">Simples: entre em contato pelo WhatsApp, envie fotos do problema e nossa equipe analisa em até <strong>24 horas</strong>. Se for defeito de fabricação, trocamos ou reparamos sem custo.</p>
+                </div>
+
+                <div style="margin-bottom:28px;">
+                    <h3 style="font-size:1.1rem; color:#d4738a; margin-bottom:10px;">⭐ Por que oferecemos isso?</h3>
+                    <p style="font-size:0.88rem; color:#555; line-height:1.7;">Somos a loja de bebê reborn <strong>mais bem avaliada do Nordeste no Google</strong> — 314 avaliações com nota 4.9. Garantia não é custo, é compromisso com quem confia na gente.</p>
+                </div>
+
+                <!-- CTA Final -->
+                <div style="background:linear-gradient(135deg,#ffeef7,#f0fff0); border-radius:16px; padding:28px; text-align:center; margin-top:10px;">
+                    <p style="font-size:1.05rem; color:#2a1020; font-weight:600; margin-bottom:6px;">Agora você está pronta para viver</p>
+                    <p style="font-size:1.2rem; color:#ff69b4; font-weight:700; margin-bottom:16px;">esse mundo de felicidade, garantia e segurança 💕</p>
+                    <a href="https://wa.me/5581979001072?text=Olá!%20Entendi%20a%20garantia%20e%20quero%20escolher%20minha%20bebê!" target="_blank" style="display:inline-block; background:#25D366; color:#fff; padding:14px 32px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.95rem; box-shadow:0 4px 15px rgba(37,211,102,0.4); transition:transform 0.2s;">
+                        <i class="fab fa-whatsapp"></i> Quero escolher minha bebê!
+                    </a>
+                </div>
+            </div>
+
+            <!-- Fechar -->
+            <button onclick="closeGarantiaBlog()" style="position:absolute; top:15px; right:20px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999; transition:color 0.2s;">✕</button>
+        </div>
+    </div>
+
+    <!-- MINI BLOG SEGURANÇA -->
+    <div id="segurancaBlog" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; overflow-y:auto; backdrop-filter:blur(4px);">
+        <div style="max-width:680px; margin:40px auto; background:#fff; border-radius:20px; overflow:hidden; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+
+            <!-- Header -->
+            <div style="background:linear-gradient(135deg,#e8f4ff,#ffeef7); padding:40px 30px 30px; text-align:center; border-bottom:1px solid #e0eaf0;">
+                <div style="font-size:3rem; margin-bottom:10px;">🔒</div>
+                <h2 style="font-size:1.6rem; color:#2a1020; font-weight:700; margin-bottom:8px;">Segurança 100% Garantida</h2>
+                <p style="font-size:0.85rem; color:#999; font-style:italic;">Compre online com a confiança de quem visita a loja pessoalmente.</p>
+            </div>
+
+            <!-- Conteúdo -->
+            <div style="padding:30px;">
+
+                <div style="margin-bottom:28px;">
+                    <h3 style="font-size:1.1rem; color:#4a90d4; margin-bottom:10px;">📍 Nossa Loja Física</h3>
+                    <p style="font-size:0.88rem; color:#555; line-height:1.7;">Estamos em uma das áreas mais seguras e conhecidas de <strong>Santo Amaro, Recife</strong>, bem pertinho da <strong>Rede Globo</strong> e do <strong>SBT</strong>. Temos <strong>estacionamento privativo</strong> e segurança para você e sua família escolherem a bebê reborn com total tranquilidade.</p>
+                </div>
+
+                <div style="margin-bottom:28px;">
+                    <h3 style="font-size:1.1rem; color:#4a90d4; margin-bottom:10px;">🛡️ Compra 100% Segura</h3>
+                    <ul style="font-size:0.85rem; color:#555; line-height:2; padding-left:20px;">
+                        <li>Loja física com CNPJ ativo: 61.626.085/0001-02</li>
+                        <li>314 avaliações reais no Google — nota 4.9 ⭐</li>
+                        <li>Dados protegidos e compra segura</li>
+                        <li>Garantia de 6 meses por escrito</li>
+                        <li>Entrega com embalagem especial para todo Brasil</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom:28px;">
+                    <h3 style="font-size:1.1rem; color:#4a90d4; margin-bottom:10px;">👥 Clientes Reais, Loja Real</h3>
+                    <p style="font-size:0.88rem; color:#555; line-height:1.7;">Não somos uma loja virtual qualquer. Somos uma família que vive e respira o universo reborn. Você pode visitar nossa loja física, tocar nas bebês, sentir o silicone e escolher pessoalmente. Ou comprar online com a mesma segurança.</p>
+                </div>
+
+                <!-- CTA Final -->
+                <div style="background:linear-gradient(135deg,#f0f8ff,#ffeef7); border-radius:16px; padding:28px; text-align:center; margin-top:10px;">
+                    <p style="font-size:1.05rem; color:#2a1020; font-weight:600; margin-bottom:6px;">Que Deus te guie até nós!</p>
+                    <p style="font-size:1.1rem; color:#ff69b4; font-weight:700; margin-bottom:16px;">Sua bebê está esperando por você 💕</p>
+                    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                        <a href="https://wa.me/5581979001072?text=Olá!%20Vi%20que%20vocês%20têm%20loja%20física%20em%20Santo%20Amaro.%20Quero%20saber%20mais!" target="_blank" style="display:inline-block; background:#25D366; color:#fff; padding:14px 28px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.9rem; box-shadow:0 4px 15px rgba(37,211,102,0.4);">
+                            <i class="fab fa-whatsapp"></i> Falar conosco
+                        </a>
+                        <a href="https://maps.google.com/?q=Mundo+da+Bebe+Reborn+Santo+Amaro+Recife" target="_blank" style="display:inline-block; background:#4285F4; color:#fff; padding:14px 28px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.9rem; box-shadow:0 4px 15px rgba(66,133,244,0.4);">
+                            <i class="fas fa-map-marker-alt"></i> Ver no mapa
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fechar -->
+            <button onclick="closeSegurancaBlog()" style="position:absolute; top:15px; right:20px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999;">✕</button>
+        </div>
+    </div>
+
+    <script>
+    function openSegurancaBlog() {
+        document.getElementById('segurancaBlog').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeSegurancaBlog() {
+        document.getElementById('segurancaBlog').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    document.getElementById('segurancaBlog').addEventListener('click', function(e) {
+        if (e.target === this) closeSegurancaBlog();
+    });
+    </script>
+
+    <script>
+    function openGarantiaBlog() {
+        document.getElementById('garantiaBlog').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeGarantiaBlog() {
+        document.getElementById('garantiaBlog').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    document.getElementById('garantiaBlog').addEventListener('click', function(e) {
+        if (e.target === this) closeGarantiaBlog();
+    });
+    </script>
 
     <script>
         // Enhanced WhatsApp button with big pulse every 20 seconds
@@ -2579,38 +2978,7 @@
             }
         })();
         
-        // Função para fechar o modal
-        function closeWelcomeModal() {
-            const modal = document.getElementById('welcomeModal');
-            modal.style.animation = 'fadeOut 0.3s ease-out';
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-        
-        // Adicionar animação de saída
-        const style2 = document.createElement('style');
-        style2.textContent = `
-            @keyframes fadeOut {
-                from { opacity: 1; }
-                to { opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style2);
-        
-        // Fechar modal ao clicar fora da imagem
-        document.getElementById('welcomeModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeWelcomeModal();
-            }
-        });
-        
-        // Fechar modal com tecla ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeWelcomeModal();
-            }
-        });
+        // Modal antigo removido — usar closeWelcome() do modal principal
     </script>
 
     <!-- Script do Botão de Cadastro e Formulário -->
