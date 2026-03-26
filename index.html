@@ -7,6 +7,7 @@
     <link rel="apple-touch-icon" href="logo.png">
     <title>Bonecas Reborn - Pronta Entrega</title>
     <meta name="description" content="Bonecas reborn artesanais de alta qualidade. Pronta entrega com preços especiais e parcelamento sem juros.">
+    <meta name="google-site-verification" content="saf9W2IFXNSk3Ix2eJPy2szaXk4UGCtMe5yFH5RuaOY" />
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
@@ -29,18 +30,19 @@
       "url": "https://mundodabebereborn.com.br",
       "telephone": "+5581979001072",
       "email": "omundodabebereborn@gmail.com",
-      "description": "Loja especializada em bebês reborn artesanais de silicone premium. Pronta entrega com garantia de 6 meses. A mais bem avaliada do Nordeste no Google.",
+      "description": "Mundo da Bebe Reborn: A loja numero 1 do Norte e Nordeste especializada em Bebes Reborn originais com garantia e Certificado de Autenticidade. Localizados na R. do Veiga, 227, Santo Amaro, Recife, PE, vizinhos a Rede Globo e SBT. Mais de 40 modelos em Silicone Solido, Silicone Soft Premium e Corpo de Tecido com Silicone. Pronta entrega com atendimento com hora marcada em sede propria. 4 anos de historia, mais de 3.000 clientes satisfeitos e 314 avaliacoes 5 estrelas no Google.",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Santo Amaro",
+        "streetAddress": "R. do Veiga, 227",
         "addressLocality": "Recife",
         "addressRegion": "PE",
+        "postalCode": "50040-110",
         "addressCountry": "BR"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "-8.0539",
-        "longitude": "-34.8811"
+        "latitude": "-8.0428",
+        "longitude": "-34.8813"
       },
       "hasMap": "https://maps.google.com/?q=Mundo+da+Bebe+Reborn+Santo+Amaro+Recife",
       "amenityFeature": [
@@ -50,14 +52,15 @@
       "areaServed": {"@type": "Country", "name": "Brasil"},
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "4.9",
+        "ratingValue": "5.0",
         "reviewCount": "314",
         "bestRating": "5"
       },
       "priceRange": "R$899 - R$1.390",
-      "openingHours": "Mo-Sa 09:00-18:00",
+      "openingHours": "Mo-Sa 09:30-18:00",
       "sameAs": [
-        "https://www.instagram.com/omundodabebereborn",
+        "https://www.instagram.com/mundodabeberebornoficial/",
+        "https://www.facebook.com/omundodabebereborn/",
         "https://wa.me/5581979001072"
       ]
     }
@@ -786,7 +789,7 @@
         }
         
         .image-wrapper {
-            margin-bottom: 20px;
+            margin-bottom: 0;
             overflow: hidden;
             border-radius: 10px 10px 0 0;
             position: relative;
@@ -801,6 +804,7 @@
             opacity: 0;
             transition: opacity 0.4s ease;
             pointer-events: none;
+            z-index: 1;
         }
 
         .product-card:hover .image-wrapper::after {
@@ -815,12 +819,230 @@
             transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                         filter 0.55s ease;
             filter: brightness(1) saturate(1);
+            cursor: zoom-in;
         }
 
         /* Zoom suave + leve saturação no hover */
         .product-card:hover .product-image {
             transform: scale(1.1);
             filter: brightness(1.04) saturate(1.08);
+        }
+
+        /* === GALERIA THUMBNAILS ESTILO ML === */
+        .gallery-thumbs {
+            display: flex;
+            gap: 4px;
+            padding: 6px 8px;
+            background: #fafafa;
+            justify-content: center;
+            overflow-x: auto;
+        }
+        .gallery-thumbs img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.2s ease;
+        }
+        .gallery-thumbs img:hover,
+        .gallery-thumbs img.active {
+            border-color: #ff69b4;
+            opacity: 1;
+            transform: scale(1.08);
+        }
+        .gallery-counter {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* === ZOOM FULLSCREEN === */
+        .zoom-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 99999;
+            cursor: zoom-out;
+            align-items: center;
+            justify-content: center;
+        }
+        .zoom-overlay.active { display: flex; }
+        .zoom-overlay img {
+            max-width: 92vw;
+            max-height: 88vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .zoom-close {
+            position: absolute;
+            top: 20px; right: 25px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 100000;
+        }
+        .zoom-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            width: 50px;
+            height: 80px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            z-index: 100000;
+        }
+        .zoom-nav:hover { background: rgba(255,255,255,0.3); }
+        .zoom-prev { left: 15px; }
+        .zoom-next { right: 15px; }
+        .zoom-thumbs {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+        .zoom-thumbs img {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.2s;
+        }
+        .zoom-thumbs img:hover,
+        .zoom-thumbs img.active {
+            border-color: #ff69b4;
+            opacity: 1;
+        }
+
+        /* === BARRA DE BUSCA === */
+        .search-bar {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 9999;
+            backdrop-filter: blur(6px);
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 80px;
+        }
+        .search-bar.active { display: flex; }
+        .search-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px 28px;
+            width: 90%;
+            max-width: 580px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .search-box h3 {
+            font-size: 0.85rem;
+            color: #999;
+            font-weight: 400;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .search-input-wrap {
+            display: flex;
+            align-items: center;
+            background: #f5f0f2;
+            border-radius: 50px;
+            padding: 10px 18px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+        .search-input-wrap:focus-within { border-color: #ff69b4; }
+        .search-input-wrap i { color: #ccc; margin-right: 10px; font-size: 1rem; }
+        .search-input-wrap input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 0.95rem;
+            color: #333;
+            width: 100%;
+            font-family: 'Jost', sans-serif;
+        }
+        .search-input-wrap input::placeholder { color: #bbb; }
+        .search-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 14px;
+            justify-content: center;
+        }
+        .search-tag {
+            background: linear-gradient(135deg, #ffeef7, #f0f8ff);
+            border: 1px solid #e8d5f0;
+            color: #a0668c;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .search-tag:hover { background: #ff69b4; color: #fff; border-color: #ff69b4; }
+        .search-results {
+            margin-top: 16px;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .search-result-item:hover { background: #fef0f5; }
+        .search-result-item img {
+            width: 52px; height: 52px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .search-result-info h4 { font-size: 0.85rem; color: #333; margin: 0; }
+        .search-result-info p { font-size: 0.72rem; color: #999; margin: 2px 0 0; }
+        .search-result-info .search-price { color: #ff69b4; font-weight: 600; font-size: 0.8rem; }
+        .search-no-results {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 0.85rem;
+        }
+        .search-close {
+            position: absolute;
+            top: 12px; right: 16px;
+            background: none; border: none;
+            font-size: 1.3rem; color: #ccc;
+            cursor: pointer;
         }
 
         .product-info {
@@ -2239,6 +2461,7 @@
     <!-- WELCOME MODAL -->
     <div id="welcomeModal">
         <div class="welcome-box">
+            <div class="confetti-container" id="confettiContainer"></div>
             <div class="welcome-particle wp1"></div>
             <div class="welcome-particle wp2"></div>
             <div class="welcome-particle wp3"></div>
@@ -2304,7 +2527,7 @@
                     </div>
                 </div>
                 <div class="icons">
-                    <a href="#" aria-label="Buscar"><i class="fas fa-search"></i></a>
+                    <a href="#" aria-label="Buscar" onclick="toggleSearchBar(event)"><i class="fas fa-search"></i></a>
                     <a href="#" aria-label="Minha Conta"><i class="fas fa-user"></i></a>
                     <a href="#" aria-label="Carrinho"><i class="fas fa-shopping-bag"></i></a>
                 </div>
@@ -2319,7 +2542,15 @@
                 
                 <div class="product-card" data-apelido="Docinho" data-linha="Linha Encanto" data-altura="55cm" data-peso="1,300 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Docinho">
                     <div class="image-wrapper">
-                        <img src="produto-docinho.jpg" alt="BEBÊ REBORN - LINHA ENCANTO - Docinho" class="product-image">
+                        <img src="produto-docinho.jpg" alt="BEBÊ REBORN - LINHA ENCANTO - Docinho" class="product-image" data-gallery='["produto-docinho.jpg","img/docinho-1.png","img/docinho-2.png","img/docinho-3.png","img/docinho-4.jpg"]'>
+                        <span class="gallery-counter">1/5</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-docinho.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/docinho-1.png" onclick="switchPhoto(this,1)">
+                        <img src="img/docinho-2.png" onclick="switchPhoto(this,2)">
+                        <img src="img/docinho-3.png" onclick="switchPhoto(this,3)">
+                        <img src="img/docinho-4.jpg" onclick="switchPhoto(this,4)">
                     </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Docinho</h3>
@@ -2342,7 +2573,16 @@
                 
                 <div class="product-card" data-apelido="Luninha" data-linha="Linha Encanto" data-altura="50cm" data-peso="1,100 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Luninha">
                     <div class="image-wrapper">
-                        <img src="produto-luninha.jpg" alt="LINHA ENCANTO - Luninha" class="product-image">
+                        <img src="produto-luninha.jpg" alt="LINHA ENCANTO - Luninha" class="product-image" data-gallery='["produto-luninha.jpg","img/luninha-1.jpg","img/luninha-2.jpg","img/luninha-3.jpg","img/luninha-4.jpg","img/luninha-5.jpg"]'>
+                        <span class="gallery-counter">1/6</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-luninha.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/luninha-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/luninha-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/luninha-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/luninha-4.jpg" onclick="switchPhoto(this,4)">
+                        <img src="img/luninha-5.jpg" onclick="switchPhoto(this,5)">
                     </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Luninha 🌙</h3>
@@ -2365,7 +2605,16 @@
                 
                 <div class="product-card" data-apelido="Sorrisinha" data-linha="Linha Encanto" data-altura="48cm" data-peso="1,100 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="Sorrisinha%20Magn%C3%A9tica">
                     <div class="image-wrapper">
-                        <img src="produto-sorrisinha.jpg" alt="Sorrisinha Magnética" class="product-image">
+                        <img src="produto-sorrisinha.jpg" alt="Sorrisinha Magnética" class="product-image" data-gallery='["produto-sorrisinha.jpg","img/sorrisinha-1.jpg","img/sorrisinha-2.jpg","img/sorrisinha-3.jpg","img/sorrisinha-4.jpg","img/sorrisinha-5.jpg"]'>
+                        <span class="gallery-counter">1/6</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-sorrisinha.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/sorrisinha-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/sorrisinha-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/sorrisinha-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/sorrisinha-4.jpg" onclick="switchPhoto(this,4)">
+                        <img src="img/sorrisinha-5.jpg" onclick="switchPhoto(this,5)">
                     </div>
                     <div class="product-info">
                         <h3>Sorrisinha Magnética 🧲😊</h3>
@@ -2388,7 +2637,17 @@
                 
                 <div class="product-card" data-apelido="Princesinha" data-linha="Linha Encanto" data-altura="55cm" data-peso="1,380 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="Princesinha%20Mandona">
                     <div class="image-wrapper">
-                        <img src="produto-princesinha.jpg" alt="Princesinha Mandona" class="product-image">
+                        <img src="produto-princesinha.jpg" alt="Princesinha Mandona" class="product-image" data-gallery='["produto-princesinha.jpg","img/princesinha-1.png","img/princesinha-2.png","img/princesinha-3.png","img/princesinha-4.png","img/princesinha-5.jpeg","img/princesinha-6.jpeg"]'>
+                        <span class="gallery-counter">1/7</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-princesinha.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/princesinha-1.png" onclick="switchPhoto(this,1)">
+                        <img src="img/princesinha-2.png" onclick="switchPhoto(this,2)">
+                        <img src="img/princesinha-3.png" onclick="switchPhoto(this,3)">
+                        <img src="img/princesinha-4.png" onclick="switchPhoto(this,4)">
+                        <img src="img/princesinha-5.jpeg" onclick="switchPhoto(this,5)">
+                        <img src="img/princesinha-6.jpeg" onclick="switchPhoto(this,6)">
                     </div>
                     <div class="product-info">
                         <h3>Princesinha Mandona 👑😌</h3>
@@ -2411,7 +2670,16 @@
                 
                 <div class="product-card" data-apelido="Safira" data-linha="Linha Premium" data-altura="55cm" data-peso="1,380 kg" data-genero="menina" data-material="Silicone Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="Princesa%20Safira%20Diamante">
                     <div class="image-wrapper">
-                        <img src="produto-safira.jpg" alt="Princesa Safira Diamante" class="product-image">
+                        <img src="produto-safira.jpg" alt="Princesa Safira Diamante" class="product-image" data-gallery='["produto-safira.jpg","img/safira-1.jpg","img/safira-2.jpg","img/safira-3.jpg","img/safira-4.jpg","img/safira-5.jpg"]'>
+                        <span class="gallery-counter">1/6</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-safira.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/safira-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/safira-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/safira-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/safira-4.jpg" onclick="switchPhoto(this,4)">
+                        <img src="img/safira-5.jpg" onclick="switchPhoto(this,5)">
                     </div>
                     <div class="product-info">
                         <h3>Princesa Safira Diamante 💎👑</h3>
@@ -2434,7 +2702,17 @@
                 
                 <div class="product-card" data-apelido="Ruivinha" data-linha="Linha Encanto" data-altura="55cm" data-peso="1,300 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Ruivinha">
                     <div class="image-wrapper">
-                        <img src="produto-ruivinha.jpg" alt="LINHA ENCANTO - Ruivinha" class="product-image">
+                        <img src="produto-ruivinha.jpg" alt="LINHA ENCANTO - Ruivinha" class="product-image" data-gallery='["produto-ruivinha.jpg","img/ruivinha-1.jpg","img/ruivinha-2.jpg","img/ruivinha-3.jpg","img/ruivinha-4.jpg","img/ruivinha-5.png","img/ruivinha-6.png"]'>
+                        <span class="gallery-counter">1/7</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-ruivinha.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/ruivinha-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/ruivinha-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/ruivinha-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/ruivinha-4.jpg" onclick="switchPhoto(this,4)">
+                        <img src="img/ruivinha-5.png" onclick="switchPhoto(this,5)">
+                        <img src="img/ruivinha-6.png" onclick="switchPhoto(this,6)">
                     </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Ruivinha 🍓</h3>
@@ -2457,7 +2735,15 @@
                 
                 <div class="product-card" data-apelido="Sorrisinho" data-linha="Linha Encanto" data-altura="52cm" data-peso="0,900 kg" data-genero="menino" data-material="Corpo de Tecido + Silicone" data-banho="Não" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Sorrisinho">
                     <div class="image-wrapper">
-                        <img src="produto-sorrisinho.jpg" alt="LINHA ENCANTO - Sorrisinho" class="product-image">
+                        <img src="produto-sorrisinho.jpg" alt="LINHA ENCANTO - Sorrisinho" class="product-image" data-gallery='["produto-sorrisinho.jpg","img/sorrisinho-1.jpg","img/sorrisinho-2.jpg","img/sorrisinho-3.jpg","img/sorrisinho-4.png"]'>
+                        <span class="gallery-counter">1/5</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-sorrisinho.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/sorrisinho-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/sorrisinho-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/sorrisinho-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/sorrisinho-4.png" onclick="switchPhoto(this,4)">
                     </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Sorrisinho 😄</h3>
@@ -2480,7 +2766,16 @@
 
                 <div class="product-card" data-apelido="Nuvem Azul" data-linha="Linha Encanto" data-altura="48cm" data-peso="1,100 kg" data-genero="menino" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Nuvem%20Azul%20Fofo">
                     <div class="image-wrapper">
-                        <img src="produto-nuvem-azul.png" alt="LINHA ENCANTO - Nuvem Azul Fofo" class="product-image">
+                        <img src="produto-nuvem-azul.png" alt="LINHA ENCANTO - Nuvem Azul Fofo" class="product-image" data-gallery='["produto-nuvem-azul.png","img/nuvem-azul-1.png","img/nuvem-azul-2.png","img/nuvem-azul-3.png","img/nuvem-azul-4.png","img/nuvem-azul-5.png"]'>
+                        <span class="gallery-counter">1/6</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-nuvem-azul.png" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/nuvem-azul-1.png" onclick="switchPhoto(this,1)">
+                        <img src="img/nuvem-azul-2.png" onclick="switchPhoto(this,2)">
+                        <img src="img/nuvem-azul-3.png" onclick="switchPhoto(this,3)">
+                        <img src="img/nuvem-azul-4.png" onclick="switchPhoto(this,4)">
+                        <img src="img/nuvem-azul-5.png" onclick="switchPhoto(this,5)">
                     </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Nuvem Azul Fofo 👦☁️</h3>
@@ -2749,10 +3044,10 @@
     <footer id="contato">
         <div class="container">
             <p>&copy; 2024 O Mundo da Bebê Reborn. Todos os direitos reservados.</p>
-            <p>CNPJ: 61.626.085/0001-02</p>
             <p>Contato: (81) 97900-1072 | omundodabebereborn@gmail.com</p>
             <p>Entrega para todo o Brasil 📦 | Parcelamento sem juros 💳</p>
             <p><a href="https://omundodabebereborn.com.br/politica-de-privacidade/" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Política de Privacidade</a></p>
+            <p style="margin-top:12px; font-size:0.7rem; color:#b0a0a8; letter-spacing:1px;">CNPJ: 61.626.085/0001-02</p>
         </div>
     </footer>
 
@@ -3507,6 +3802,251 @@
         panel.classList.remove('open');
         if (conhecaBtn) conhecaBtn.textContent = `✨ Conheça ${pronome} ${apelido} de perto`;
     }
+    </script>
+
+    <!-- BARRA DE BUSCA -->
+    <div class="search-bar" id="searchBar">
+        <div class="search-box">
+            <button class="search-close" onclick="closeSearchBar()">&times;</button>
+            <h3>O que você está procurando?</h3>
+            <div class="search-input-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Ex: silicone soft, ruivinha, 55cm, menino..." oninput="doSearch(this.value)" autocomplete="off">
+            </div>
+            <div class="search-tags">
+                <span class="search-tag" onclick="doSearch('silicone soft premium')">Silicone Soft Premium</span>
+                <span class="search-tag" onclick="doSearch('silicone solido')">Silicone Sólido</span>
+                <span class="search-tag" onclick="doSearch('corpo de tecido')">Corpo de Tecido</span>
+                <span class="search-tag" onclick="doSearch('menino')">Menino</span>
+                <span class="search-tag" onclick="doSearch('menina')">Menina</span>
+                <span class="search-tag" onclick="doSearch('55cm')">55cm</span>
+                <span class="search-tag" onclick="doSearch('48cm')">48cm</span>
+                <span class="search-tag" onclick="doSearch('premium')">Linha Premium</span>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- ZOOM OVERLAY FULLSCREEN -->
+    <div class="zoom-overlay" id="zoomOverlay">
+        <button class="zoom-close" onclick="closeZoom()">&times;</button>
+        <button class="zoom-nav zoom-prev" onclick="zoomNav(-1)">&#8249;</button>
+        <img id="zoomImg" src="" alt="Zoom">
+        <button class="zoom-nav zoom-next" onclick="zoomNav(1)">&#8250;</button>
+        <div class="zoom-thumbs" id="zoomThumbs"></div>
+    </div>
+
+    <!-- BUSCA BROAD MATCH JS -->
+    <script>
+    function toggleSearchBar(e) {
+        e.preventDefault();
+        var bar = document.getElementById('searchBar');
+        bar.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setTimeout(function(){ document.getElementById('searchInput').focus(); }, 200);
+        doSearch(''); // mostra todos
+    }
+    function closeSearchBar() {
+        document.getElementById('searchBar').classList.remove('active');
+        document.body.style.overflow = 'auto';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('searchResults').innerHTML = '';
+    }
+    document.getElementById('searchBar').addEventListener('click', function(e) {
+        if (e.target === this) closeSearchBar();
+    });
+
+    function doSearch(query) {
+        document.getElementById('searchInput').value = query;
+        var results = document.getElementById('searchResults');
+        var cards = document.querySelectorAll('.product-card');
+        var q = query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+        // Sinônimos broad match estilo Google Ads
+        var synonyms = {
+            'macia': ['soft','molinha','macio'],
+            'molinha': ['soft','macia','macio'],
+            'soft': ['macia','molinha','macio'],
+            'dura': ['solido','solida','firme'],
+            'solido': ['dura','firme','solida'],
+            'solida': ['dura','firme','solido'],
+            'banho': ['banheira','agua','piscina','lavar'],
+            'piscina': ['banho','agua','banheira'],
+            'banheira': ['banho','agua','piscina'],
+            'ruiva': ['ruivinha','cabelo ruivo','vermelha'],
+            'loira': ['docinho','cabelo loiro','loirinha'],
+            'menino': ['garoto','masculino','azul','nuvem'],
+            'menina': ['garota','feminino','rosa','princesa'],
+            'grande': ['55cm','55'],
+            'pequena': ['45cm','38cm','48cm','prematura'],
+            'prematura': ['38cm','pequena'],
+            'barata': ['899','promocao','menor preco'],
+            'cara': ['1390','premium','luxo'],
+            'luxo': ['premium','safira','diamante'],
+            'tecido': ['corpo de tecido','algodao'],
+            'encanto': ['linha encanto'],
+            'presente': ['kit','enxoval','maternidade']
+        };
+
+        // Expandir query com sinônimos
+        var expandedTerms = q.split(/\s+/).filter(Boolean);
+        expandedTerms.forEach(function(term) {
+            if (synonyms[term]) expandedTerms = expandedTerms.concat(synonyms[term]);
+        });
+
+        var html = '';
+        var count = 0;
+
+        cards.forEach(function(card) {
+            // Montar texto buscável com TODOS os dados
+            var searchText = [
+                card.dataset.apelido,
+                card.dataset.linha,
+                card.dataset.altura,
+                card.dataset.peso,
+                card.dataset.genero,
+                card.dataset.material,
+                card.dataset.banho === 'Sim' ? 'banho banheira piscina agua' : '',
+                card.querySelector('h3') ? card.querySelector('h3').textContent : '',
+                card.querySelector('.product-desc') ? card.querySelector('.product-desc').textContent : '',
+                Array.from(card.querySelectorAll('.product-tag')).map(function(t){ return t.textContent; }).join(' ')
+            ].join(' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+            // Broad match: QUALQUER termo expandido precisa casar
+            var match = !q || expandedTerms.some(function(term) {
+                return searchText.indexOf(term) !== -1;
+            });
+
+            if (match) {
+                count++;
+                var img = card.querySelector('.product-image');
+                var name = card.querySelector('h3').textContent;
+                var price = card.querySelector('.main-price').textContent;
+                var desc = card.dataset.material + ' | ' + card.dataset.altura + ' | ' + card.dataset.peso;
+
+                html += '<div class="search-result-item" onclick="goToProduct(\'' + card.dataset.apelido + '\')">' +
+                    '<img src="' + img.src + '" alt="' + name + '">' +
+                    '<div class="search-result-info">' +
+                    '<h4>' + name + '</h4>' +
+                    '<p>' + desc + '</p>' +
+                    '<span class="search-price">' + price + '</span>' +
+                    '</div></div>';
+            }
+        });
+
+        if (q && count === 0) {
+            html = '<div class="search-no-results">Nenhuma bebê encontrada para "<strong>' + query + '</strong>"<br><small>Tente: silicone, ruivinha, menino, 55cm...</small></div>';
+        }
+
+        results.innerHTML = html;
+    }
+
+    function goToProduct(apelido) {
+        closeSearchBar();
+        var cards = document.querySelectorAll('.product-card');
+        cards.forEach(function(card) {
+            if (card.dataset.apelido === apelido) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.style.animation = 'none';
+                card.offsetHeight;
+                card.style.animation = 'cardJump 0.6s ease';
+            }
+        });
+    }
+
+    // ESC fecha busca
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && document.getElementById('searchBar').classList.contains('active')) {
+            closeSearchBar();
+        }
+    });
+    </script>
+
+    <!-- GALERIA + ZOOM JS -->
+    <script>
+    // Troca foto na miniatura do card
+    function switchPhoto(thumb, idx) {
+        const card = thumb.closest('.product-card');
+        const mainImg = card.querySelector('.product-image');
+        const gallery = JSON.parse(mainImg.dataset.gallery);
+        const counter = card.querySelector('.gallery-counter');
+
+        mainImg.style.opacity = '0';
+        setTimeout(() => {
+            mainImg.src = gallery[idx];
+            mainImg.style.opacity = '1';
+        }, 150);
+
+        card.querySelectorAll('.gallery-thumbs img').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        if (counter) counter.textContent = (idx + 1) + '/' + gallery.length;
+    }
+
+    // Adiciona transição suave às imagens principais
+    document.querySelectorAll('.product-image').forEach(img => {
+        img.style.transition = 'opacity 0.15s ease, transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.55s ease';
+    });
+
+    // Zoom fullscreen
+    let zoomGallery = [];
+    let zoomIndex = 0;
+
+    document.querySelectorAll('.product-image').forEach(img => {
+        img.addEventListener('click', function() {
+            if (!this.dataset.gallery) return;
+            zoomGallery = JSON.parse(this.dataset.gallery);
+            zoomIndex = zoomGallery.indexOf(this.src.replace(window.location.origin + '/', ''));
+            if (zoomIndex < 0) zoomIndex = 0;
+            openZoom();
+        });
+    });
+
+    function openZoom() {
+        const overlay = document.getElementById('zoomOverlay');
+        const img = document.getElementById('zoomImg');
+        const thumbs = document.getElementById('zoomThumbs');
+
+        img.src = zoomGallery[zoomIndex];
+        thumbs.innerHTML = zoomGallery.map((src, i) =>
+            '<img src="' + src + '" class="' + (i === zoomIndex ? 'active' : '') + '" onclick="zoomTo(' + i + ')">'
+        ).join('');
+
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeZoom() {
+        document.getElementById('zoomOverlay').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function zoomNav(dir) {
+        zoomIndex = (zoomIndex + dir + zoomGallery.length) % zoomGallery.length;
+        updateZoom();
+    }
+
+    function zoomTo(idx) {
+        zoomIndex = idx;
+        updateZoom();
+    }
+
+    function updateZoom() {
+        document.getElementById('zoomImg').src = zoomGallery[zoomIndex];
+        document.querySelectorAll('#zoomThumbs img').forEach((t, i) => {
+            t.classList.toggle('active', i === zoomIndex);
+        });
+    }
+
+    // Fechar zoom com ESC ou clicando no fundo
+    document.getElementById('zoomOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeZoom();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (!document.getElementById('zoomOverlay').classList.contains('active')) return;
+        if (e.key === 'Escape') closeZoom();
+        if (e.key === 'ArrowLeft') zoomNav(-1);
+        if (e.key === 'ArrowRight') zoomNav(1);
+    });
     </script>
 </body>
 </html>
