@@ -1,0 +1,17 @@
+node_modules/
+.git/
+.vscode/
+.claude/
+package.json
+package-lock.json
+server.js
+remove-bg.js
+CONTEXTO-MASTER.md
+PROGRESSO.md
+INSTRUCOES-CONTINUACAO.md
+exemplo-abas.html
+mockup-formulario.html
+dengosa-molinha.html
+redirects_301.txt
+INICIAR-LOJA.bat
+deploy-clean.zip
