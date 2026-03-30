@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprovação — Sorrisinha Molinha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Jost', sans-serif; background: #fdf5f7; padding: 15px; }
+        h1 { text-align: center; color: #d9a19c; margin-bottom: 20px; font-size: 1.1rem; letter-spacing: 2px; }
+        .card { background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); max-width: 500px; margin: 0 auto; }
+        .card h2 { color: #8b5e6b; margin-bottom: 5px; font-size: 1.1rem; }
+        .card .linha { color: #b8860b; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 12px; }
+        .fotos { display: flex; gap: 6px; overflow-x: auto; padding: 8px 0; }
+        .fotos img { height: 180px; border-radius: 10px; object-fit: cover; flex-shrink: 0; border: 2px solid #f0e0e6; }
+        .desc { color: #666; font-size: 0.82rem; line-height: 1.7; margin: 12px 0; font-style: italic; }
+        .specs { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+        .spec { background: linear-gradient(135deg, #ffeef7, #f0f8ff); border: 1px solid #e8d5f0; color: #a0668c; font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+        .info-item { background: #faf5f7; padding: 8px 12px; border-radius: 10px; }
+        .info-item label { font-size: 0.65rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+        .info-item span { display: block; font-size: 0.9rem; color: #333; font-weight: 600; }
+        .preco { text-align: center; margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #fff5f7, #f5f0ff); border-radius: 12px; }
+        .preco .valor { font-size: 1.8rem; color: #d9a19c; font-weight: 700; }
+        .preco .parcela { font-size: 0.75rem; color: #888; }
+        .btn-wpp { display: block; text-align: center; background: #25D366; color: white; text-decoration: none; padding: 12px; border-radius: 25px; font-weight: 600; margin-top: 12px; font-size: 0.9rem; }
+        .kit { margin: 12px 0; padding: 12px; background: #f9f5f0; border-radius: 10px; }
+        .kit h4 { font-size: 0.75rem; color: #b8860b; margin-bottom: 6px; letter-spacing: 1px; }
+        .kit ul { list-style: none; font-size: 0.8rem; color: #666; }
+        .kit ul li::before { content: "✦ "; color: #d9a19c; }
+        .nota { text-align: center; margin-top: 20px; padding: 15px; color: #999; font-size: 0.75rem; border-top: 1px solid #eee; }
+        .nota strong { color: #d9a19c; }
+    </style>
+</head>
+<body>
+    <h1>APROVAÇÃO — NOVA BONECA</h1>
+
+    <div class="card">
+        <h2>Sorrisinha Molinha</h2>
+        <div class="linha">SILICONE SÓLIDO — BEM MOLINHA ORIGINAL</div>
+
+        <div class="fotos">
+            <img src="img/solida-roxa-1.jpg" alt="Sorrisinha Molinha 1">
+            <img src="img/solida-roxa-3.jpg" alt="Sorrisinha Molinha 2">
+            <img src="img/solida-roxa-4.jpg" alt="Sorrisinha Molinha 3">
+            <img src="img/solida-roxa-2.jpg" alt="Sorrisinha Molinha 4">
+            <img src="img/solida-roxa-5.jpg" alt="Sorrisinha Molinha 5">
+            <img src="img/solida-roxa-6.jpg" alt="Sorrisinha Molinha 6">
+        </div>
+
+        <p class="desc">Bebê artesanal de silicone sólido inteiro — a famosa "Bem Molinha Original". Toque ultra realista, pesinho de bebê de verdade. Pode tomar banho, ir na piscina e brincar na água.</p>
+
+        <div class="specs">
+            <span class="spec">Silicone Sólido</span>
+            <span class="spec">Bem Molinha</span>
+            <span class="spec">52cm</span>
+            <span class="spec">3,5kg</span>
+            <span class="spec">Pode Banho</span>
+            <span class="spec">Pronta Entrega</span>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <label>Tamanho</label>
+                <span>52cm</span>
+            </div>
+            <div class="info-item">
+                <label>Peso</label>
+                <span>3,5kg</span>
+            </div>
+            <div class="info-item">
+                <label>Material</label>
+                <span>Silicone Sólido</span>
+            </div>
+            <div class="info-item">
+                <label>Banho</label>
+                <span>Sim — Piscina e Banho</span>
+            </div>
+        </div>
+
+        <div class="kit">
+            <h4>KIT COMPLETO INCLUSO</h4>
+            <ul>
+                <li>Roupinha Completa</li>
+                <li>Kit Maternidade Completo</li>
+                <li>Certidão de Nascimento Personalizada</li>
+                <li>Mamadeira Magnética</li>
+                <li>Chupeta Magnética</li>
+                <li>Pelúcia de Coelhinho</li>
+                <li>Enxoval Completo</li>
+            </ul>
+        </div>
+
+        <div class="preco">
+            <div class="valor">R$ 2.990,00</div>
+            <div class="parcela">10x de R$ 299,00 sem juros</div>
+        </div>
+
+        <a href="#" class="btn-wpp">WhatsApp — Quero a Sorrisinha Molinha</a>
+    </div>
+
+    <div class="nota">
+        <strong>CEO, aprova?</strong><br>
+        Nome, fotos, descrição e tags estão corretos?<br>
+        Qual o preço?
+    </div>
+</body>
+</html>
