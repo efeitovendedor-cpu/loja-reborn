@@ -4074,19 +4074,17 @@
         img.style.transition = 'opacity 0.15s ease, transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.55s ease';
     });
 
-    // Zoom fullscreen - DESATIVADO PARA ABRIR PÁGINA DE PRODUTO
-    // O zoom agora é substituído pela função abrirPaginaProduto()
+    // Zoom fullscreen
     let zoomGallery = [];
     let zoomIndex = 0;
 
     document.querySelectorAll('.product-image').forEach(img => {
         img.addEventListener('click', function() {
-            // Não abre zoom mais - usa abrirPaginaProduto() no event listener já configurado
-            // if (!this.dataset.gallery) return;
-            // zoomGallery = JSON.parse(this.dataset.gallery);
-            // zoomIndex = zoomGallery.indexOf(this.src.replace(window.location.origin + '/', ''));
-            // if (zoomIndex < 0) zoomIndex = 0;
-            // openZoom();
+            if (!this.dataset.gallery) return;
+            zoomGallery = JSON.parse(this.dataset.gallery);
+            zoomIndex = zoomGallery.indexOf(this.src.replace(window.location.origin + '/', ''));
+            if (zoomIndex < 0) zoomIndex = 0;
+            openZoom();
         });
     });
 
