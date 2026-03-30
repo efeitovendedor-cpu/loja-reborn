@@ -4433,5 +4433,336 @@
         });
     });
     </script>
+
+<!-- ===== CARRINHO LATERAL (DRAWER) ===== -->
+<style>
+    /* Overlay escuro */
+    .cart-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 9000;
+    }
+    .cart-overlay.open { display: block; }
+
+    /* Drawer */
+    .cart-drawer {
+        position: fixed;
+        top: 0;
+        right: -420px;
+        width: 100%;
+        max-width: 400px;
+        height: 100%;
+        background: #fff;
+        z-index: 9001;
+        display: flex;
+        flex-direction: column;
+        transition: right 0.35s cubic-bezier(.4,0,.2,1);
+        box-shadow: -4px 0 30px rgba(0,0,0,0.2);
+    }
+    .cart-drawer.open { right: 0; }
+
+    /* Header do drawer */
+    .cart-drawer-header {
+        background: #FFB6C1;
+        color: #fff;
+        padding: 18px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: 'Jost', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    .cart-drawer-header .back-btn {
+        background: rgba(255,255,255,0.3);
+        border: none;
+        color: #fff;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+    .cart-drawer-header .back-btn:hover { background: rgba(255,255,255,0.5); }
+    .cart-drawer-header .cart-count-badge {
+        background: #DAA520;
+        color: #fff;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+    }
+
+    /* Lista de itens */
+    .cart-drawer-items {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+    }
+    .cart-drawer-empty {
+        text-align: center;
+        color: #aaa;
+        padding: 60px 20px;
+        font-family: 'Jost', sans-serif;
+    }
+    .cart-drawer-empty i { font-size: 3rem; margin-bottom: 12px; display: block; }
+
+    .cart-item-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 0;
+        border-bottom: 1px solid #f5f5f5;
+        font-family: 'Jost', sans-serif;
+    }
+    .cart-item-row img {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid #f0e0e8;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-info .item-name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 4px;
+    }
+    .cart-item-info .item-qty {
+        font-size: 0.78rem;
+        color: #888;
+        margin-bottom: 4px;
+    }
+    .cart-item-info .item-price {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #FFB6C1;
+    }
+    .cart-item-remove {
+        background: none;
+        border: none;
+        color: #ccc;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: color 0.2s;
+    }
+    .cart-item-remove:hover { color: #e05555; }
+
+    /* Footer */
+    .cart-drawer-footer {
+        padding: 16px 20px;
+        border-top: 1px solid #f0e0e8;
+        font-family: 'Jost', sans-serif;
+    }
+    .cart-subtotal {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+        font-size: 0.9rem;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .cart-subtotal strong {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #FFB6C1;
+    }
+    .cart-btn-finalizar {
+        display: block;
+        width: 100%;
+        background: #25D366;
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 16px;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-bottom: 10px;
+    }
+    .cart-btn-finalizar:hover { background: #1da855; transform: translateY(-2px); }
+    .cart-btn-continuar {
+        display: block;
+        width: 100%;
+        background: none;
+        border: none;
+        color: #aaa;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        text-align: center;
+        padding: 8px;
+        transition: color 0.2s;
+    }
+    .cart-btn-continuar:hover { color: #FFB6C1; }
+
+    /* Ícone flutuante do carrinho */
+    .cart-float-icon {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #DAA520, #FFD700);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 4px 20px rgba(218,165,32,0.5);
+        font-size: 1.3rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 8999;
+        transition: transform 0.2s;
+    }
+    .cart-float-icon:hover { transform: scale(1.1); }
+    .cart-float-icon .cart-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #FFB6C1;
+        color: #fff;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Jost', sans-serif;
+    }
+    .cart-float-icon .cart-badge.hidden { display: none; }
+</style>
+
+<!-- Overlay -->
+<div class="cart-overlay" id="cartOverlay" onclick="fecharCarrinho()"></div>
+
+<!-- Drawer -->
+<div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+        <button class="back-btn" onclick="fecharCarrinho()">&#8249;</button>
+        MEU CARRINHO DE COMPRAS
+        <span class="cart-count-badge" id="cartCountBadge">0</span>
+    </div>
+    <div class="cart-drawer-items" id="cartDrawerItems">
+        <div class="cart-drawer-empty">
+            <i class="fas fa-shopping-bag"></i>
+            Seu carrinho está vazio
+        </div>
+    </div>
+    <div class="cart-drawer-footer">
+        <div class="cart-subtotal">
+            <span>SUBTOTAL:</span>
+            <strong id="cartSubtotal">R$ 0,00</strong>
+        </div>
+        <button class="cart-btn-finalizar" onclick="irCheckout()">FINALIZAR COMPRA</button>
+        <button class="cart-btn-continuar" onclick="fecharCarrinho()">CONTINUAR COMPRANDO</button>
+    </div>
+</div>
+
+<!-- Ícone flutuante -->
+<button class="cart-float-icon" id="cartFloatIcon" onclick="abrirCarrinho()">
+    <i class="fas fa-shopping-bag"></i>
+    <span class="cart-badge hidden" id="cartFloatBadge">0</span>
+</button>
+
+<script>
+    function abrirCarrinho() {
+        document.getElementById('cartDrawer').classList.add('open');
+        document.getElementById('cartOverlay').classList.add('open');
+        renderCarrinhoDrawer();
+    }
+    function fecharCarrinho() {
+        document.getElementById('cartDrawer').classList.remove('open');
+        document.getElementById('cartOverlay').classList.remove('open');
+    }
+    function renderCarrinhoDrawer() {
+        const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+        const el = document.getElementById('cartDrawerItems');
+        const badge = document.getElementById('cartCountBadge');
+        const floatBadge = document.getElementById('cartFloatBadge');
+        const subtotalEl = document.getElementById('cartSubtotal');
+        const total = carrinho.reduce((s,i) => s + i.preco * i.qtd, 0);
+        const qtdTotal = carrinho.reduce((s,i) => s + i.qtd, 0);
+        badge.textContent = qtdTotal;
+        floatBadge.textContent = qtdTotal;
+        floatBadge.classList.toggle('hidden', qtdTotal === 0);
+        subtotalEl.textContent = 'R$ ' + total.toFixed(2).replace('.',',');
+        if (carrinho.length === 0) {
+            el.innerHTML = '<div class="cart-drawer-empty"><i class="fas fa-shopping-bag"></i>Seu carrinho está vazio</div>';
+            return;
+        }
+        el.innerHTML = carrinho.map((item, idx) => `
+            <div class="cart-item-row">
+                <img src="${item.img}" alt="${item.nome}">
+                <div class="cart-item-info">
+                    <div class="item-name">${item.nome}</div>
+                    <div class="item-qty">Quantidade: ${item.qtd}</div>
+                    <div class="item-price">R$ ${(item.preco * item.qtd).toFixed(2).replace('.',',')}</div>
+                </div>
+                <button class="cart-item-remove" onclick="removerItem(${idx})"><i class="fas fa-trash"></i></button>
+            </div>
+        `).join('');
+    }
+    function removerItem(idx) {
+        let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+        carrinho.splice(idx, 1);
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        renderCarrinhoDrawer();
+    }
+    function irCheckout() {
+        const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+        if (carrinho.length === 0) return;
+        const total = carrinho.reduce((s,i) => s + i.preco * i.qtd, 0);
+        localStorage.setItem('carrinhoTotal', total.toFixed(2));
+        localStorage.setItem('carrinhoSnapshot', JSON.stringify(carrinho));
+        window.location.href = 'checkout.html';
+    }
+    // Atualizar badge ao carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        renderCarrinhoDrawer();
+    });
+    // Sobrescreve adicionarCarrinho para abrir drawer em vez de redirecionar
+    window.adicionarCarrinho = function(btn) {
+        const card = btn.closest('.product-card');
+        const apelido = card.dataset.apelido;
+        const nome = card.querySelector('h3').textContent;
+        const precoTexto = card.querySelector('.main-price').textContent;
+        const preco = parseFloat(precoTexto.replace('R$','').replace(/\./g,'').replace(',','.').trim());
+        const img = card.querySelector('.product-image').src;
+        let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+        const existe = carrinho.find(i => i.apelido === apelido);
+        if (existe) { existe.qtd += 1; } else { carrinho.push({ apelido, nome, preco, img, qtd: 1 }); }
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        btn.textContent = '✅ ADICIONADO!';
+        setTimeout(() => {
+            btn.textContent = '🛒 COMPRAR';
+            abrirCarrinho();
+        }, 600);
+    };
+</script>
 </body>
 </html>
