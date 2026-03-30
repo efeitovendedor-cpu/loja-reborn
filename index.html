@@ -555,6 +555,25 @@
             to   { opacity: 1; }
         }
 
+        @keyframes zoomBounce {
+            0% {
+                transform: scale(0) rotate(-10deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to   { opacity: 0; }
+        }
+
         @media (max-width: 480px) {
             .welcome-modal-content { padding: 32px 20px 24px; }
             .welcome-title { font-size: 1.3rem; }
@@ -2465,14 +2484,14 @@
             <div class="welcome-particle wp1"></div>
             <div class="welcome-particle wp2"></div>
             <div class="welcome-particle wp3"></div>
-            <div class="welcome-ribbon" data-i18n="welcome_ribbon">✦ Nossa Nova Casa ✦</div>
+            <div class="welcome-ribbon" data-i18n="welcome_ribbon">🎉 AGORA SIM! 🎉</div>
             <div class="welcome-logo-wrap">
                 <img src="logo.png" alt="Mundo da Bebê Reborn">
             </div>
-            <h2 class="welcome-title" data-i18n="welcome_title">Que alegria ter<br>você <span>aqui!</span> 🌸</h2>
-            <p class="welcome-sub" data-i18n="welcome_sub">Bem-vinda à nossa nova loja.<br>Cada bebê reborn é criada com amor,<br>dedicação e muito carinho — só para você.</p>
-            <button class="welcome-cta" onclick="closeWelcome()" data-i18n="welcome_cta">🍼 Quero conhecer as bebês</button><br>
-            <button class="welcome-close" onclick="closeWelcome()" data-i18n="welcome_close">Entrar sem tour</button>
+            <h2 class="welcome-title" data-i18n="welcome_title">O <span>MUNDO DA BEBÊ REBORN</span><br>É SEU MUNDO! 💝</h2>
+            <p class="welcome-sub" data-i18n="welcome_sub">A mesma loja, mas <strong>MAIS MODERNA E FÁCIL DE ACHAR.</strong><br>Queremos virar seu mundo, com a melhor experiência<br>em bebês reborn esperando por você.</p>
+            <button class="welcome-cta" onclick="triggerWelcomeAnimation()" data-i18n="welcome_cta">🌟 ENTRAR NO MEU MUNDO 🌟</button><br>
+            <button class="welcome-close" onclick="closeWelcome()" data-i18n="welcome_close">Entrar sem efeito</button>
         </div>
     </div>
 
@@ -3592,6 +3611,53 @@
         });
 
         // ====== WELCOME MODAL ======
+        function triggerWelcomeAnimation() {
+            const m = document.getElementById('welcomeModal');
+            m.style.display = 'none';
+
+            // Criar overlay com "BEM VINDAS(OS)!"
+            const overlay = document.createElement('div');
+            overlay.id = 'welcomeAnimationOverlay';
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, rgba(255, 182, 193, 0.95), rgba(173, 216, 230, 0.95));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                animation: fadeIn 0.5s ease-in;
+            `;
+
+            const text = document.createElement('div');
+            text.style.cssText = `
+                font-size: 4rem;
+                font-weight: 900;
+                color: #fff;
+                text-align: center;
+                text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                animation: zoomBounce 1s ease-out;
+                font-family: 'Arial Black', sans-serif;
+                letter-spacing: 3px;
+            `;
+            text.innerHTML = '🎉 SEJAM MUITO BEM VINDAS(OS)! 🎉<br><span style="font-size: 2rem; margin-top: 20px; display: block;">Bem-vindo ao seu Mundo da Bebê Reborn 💝</span>';
+
+            overlay.appendChild(text);
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                overlay.style.animation = 'fadeOut 0.6s ease-out';
+                setTimeout(() => {
+                    overlay.remove();
+                }, 600);
+            }, 2000);
+
+            sessionStorage.setItem('welcomed', '1');
+        }
+
         function closeWelcome() {
             const m = document.getElementById('welcomeModal');
             m.style.animation = 'fadeInOverlay 0.4s ease reverse';
