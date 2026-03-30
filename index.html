@@ -2562,7 +2562,7 @@
                 <div class="icons">
                     <a href="#" aria-label="Buscar" onclick="toggleSearchBar(event)"><i class="fas fa-search"></i></a>
                     <a href="#" aria-label="Minha Conta"><i class="fas fa-user"></i></a>
-                    <a href="#" aria-label="Carrinho"><i class="fas fa-shopping-bag"></i></a>
+                    <a href="#" aria-label="Carrinho" onclick="event.preventDefault(); abrirCarrinho()"><i class="fas fa-shopping-bag"></i></a>
                 </div>
             </div>
         </div>
@@ -3090,10 +3090,10 @@
                 <span style="display:inline-block; background: linear-gradient(135deg,#ff69b4,#e8448a); color:white; font-size:0.65rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; padding:5px 20px; border-radius:30px; margin-bottom:16px;">✦ Transparência Total ✦</span>
             </div>
             <h2 style="font-size:2.2rem; color:#2a1020; font-weight:800; margin-bottom:4px; letter-spacing:-0.5px; text-align:center; line-height:1.2;">
-                Avaliações Reais · Clientes Reais
-                <span style="display:block; color:#ff69b4;">Loja Física Real 🏪</span>
+                O QUE NOSSOS CLIENTES DIZEM
+                <span style="display:block; color:#ff69b4;">Avaliações Reais · Loja Física Real 🏪</span>
             </h2>
-            <p style="font-size:0.72rem; color:#bbb; margin-bottom:36px; font-style:italic; letter-spacing:3px; text-transform:uppercase; text-align:center;">(What Our Customers Say)</p>
+            <p style="font-size:0.68rem; color:#ccc; margin-bottom:36px; font-style:italic; letter-spacing:3px; text-transform:uppercase; text-align:center;">(What Our Customers Say)</p>
 
             <!-- Google Reviews Widget -->
             <div class="reviews-widget">
@@ -4585,7 +4585,7 @@
     .cart-btn-finalizar {
         display: block;
         width: 100%;
-        background: #25D366;
+        background: linear-gradient(135deg, #FFB6C1 0%, #DAA520 100%);
         color: #fff;
         border: none;
         border-radius: 50px;
@@ -4598,8 +4598,9 @@
         cursor: pointer;
         transition: all 0.3s;
         margin-bottom: 10px;
+        box-shadow: 0 6px 20px rgba(218,165,32,0.35);
     }
-    .cart-btn-finalizar:hover { background: #1da855; transform: translateY(-2px); }
+    .cart-btn-finalizar:hover { background: linear-gradient(135deg, #DAA520 0%, #FFB6C1 100%); transform: translateY(-2px); }
     .cart-btn-continuar {
         display: block;
         width: 100%;
