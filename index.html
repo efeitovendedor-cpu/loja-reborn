@@ -3659,6 +3659,13 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Click para fechar pop-up em qualquer canto
+            document.getElementById('welcomeModal').addEventListener('click', (e) => {
+                if (e.target.id === 'welcomeModal') {
+                    closeWelcome();
+                }
+            });
+
             if (!sessionStorage.getItem('welcomed')) {
                 setTimeout(() => {
                     document.getElementById('welcomeModal').classList.add('show');
