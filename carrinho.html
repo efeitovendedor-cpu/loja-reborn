@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - Mundo da Bebê Reborn</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Jost', sans-serif; background: #fafafa; color: #333; }
+
+        /* HEADER */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #f0e0e8;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(255,182,193,0.15);
+        }
+        .header-logo img { height: 55px; }
+        .header-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+        }
+        .header-voltar {
+            color: #DAA520;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* PROGRESS */
+        .progress-bar {
+            background: #fff;
+            padding: 16px 20px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+        }
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .step.active .step-circle { background: #FFB6C1; color: #fff; }
+        .step.done .step-circle { background: #25D366; color: #fff; }
+        .step:not(.active):not(.done) .step-circle { background: #eee; color: #999; }
+        .step-label { font-size: 0.7rem; color: #999; text-align: center; }
+        .step.active .step-label { color: #FFB6C1; font-weight: 600; }
+        .step-line { flex: 1; height: 2px; background: #eee; max-width: 60px; }
+        .step-line.done { background: #25D366; }
+
+        /* MAIN */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+
+        .page-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* CARRINHO VAZIO */
+        .carrinho-vazio {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+        .carrinho-vazio.show { display: block; }
+        .carrinho-vazio i { font-size: 4rem; color: #ddd; margin-bottom: 20px; }
+        .carrinho-vazio h3 { color: #999; font-size: 1.2rem; margin-bottom: 10px; }
+        .carrinho-vazio p { color: #bbb; font-size: 0.95rem; margin-bottom: 30px; }
+        .btn-continuar-vazio {
+            background: linear-gradient(135deg, #FFB6C1, #ff8fa3);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* LAYOUT GRID */
+        .carrinho-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* LISTA DE ITENS */
+        .itens-lista { display: flex; flex-direction: column; gap: 16px; }
+
+        .item-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #f5f5f5;
+            transition: box-shadow 0.2s;
+        }
+        .item-card:hover { box-shadow: 0 4px 20px rgba(255,182,193,0.2); }
+
+        .item-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #f9f9f9;
+        }
+
+        .item-info { flex: 1; min-width: 0; }
+        .item-nome {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        .item-sub {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .item-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* QUANTIDADE */
+        .qty-control {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .qty-btn {
+            background: #f9f9f9;
+            border: none;
+            width: 34px;
+            height: 34px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: #555;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .qty-btn:hover { background: #FFB6C1; color: #fff; }
+        .qty-num {
+            width: 38px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            background: #fff;
+            color: #333;
+        }
+
+        .item-preco {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFB6C1;
+        }
+        .item-remover {
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+            transition: color 0.2s;
+            align-self: flex-start;
+            margin-top: 2px;
+        }
+        .item-remover:hover { color: #ff4444; }
+
+        /* RESUMO */
+        .resumo-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f5f5f5;
+            position: sticky;
+            top: 100px;
+        }
+        .resumo-titulo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .resumo-linha {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: #666;
+            border-bottom: 1px solid #f9f9f9;
+        }
+        .resumo-linha:last-of-type { border-bottom: none; }
+        .resumo-linha.total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-top: 8px;
+            padding-top: 12px;
+            border-top: 2px solid #f0e0e8;
+        }
+        .resumo-linha.total span:last-child { color: #FFB6C1; }
+
+        .cupom-wrap {
+            display: flex;
+            gap: 8px;
+            margin: 16px 0;
+        }
+        .cupom-input {
+            flex: 1;
+            border: 1.5px solid #eee;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .cupom-input:focus { border-color: #FFB6C1; }
+        .cupom-btn {
+            background: #f5f5f5;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.2s;
+        }
+        .cupom-btn:hover { background: #FFB6C1; color: #fff; }
+
+        .frete-info {
+            background: #f0fff4;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: #25D366;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(218,165,32,0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            margin-top: 4px;
+        }
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(218,165,32,0.45);
+        }
+
+        .btn-continuar {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #999;
+            border: 1.5px solid #eee;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        .btn-continuar:hover { border-color: #FFB6C1; color: #FFB6C1; }
+
+        .seguranca {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: #bbb;
+            margin-top: 14px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .carrinho-layout {
+                grid-template-columns: 1fr;
+            }
+            .resumo-card { position: static; }
+            .item-img { width: 75px; height: 75px; }
+        }
+
+        @media (max-width: 480px) {
+            .header { padding: 12px 16px; }
+            .header-logo img { height: 44px; }
+            .container { padding: 16px 12px; }
+            .item-card { padding: 12px; gap: 12px; }
+            .item-img { width: 68px; height: 68px; }
+            .page-title { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <a href="index.html" class="header-voltar"><i class="fas fa-arrow-left"></i> Loja</a>
+    <span class="header-title">🛒 Meu Carrinho</span>
+    <a href="index.html"><img src="logo.png" alt="MBR" style="height:44px;"></a>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-bar">
+    <div class="progress-steps">
+        <div class="step active">
+            <div class="step-circle">1</div>
+            <div class="step-label">Carrinho</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+            <div class="step-circle">2</div>
+            <div class="step-label">Dados</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+            <div class="step-circle">3</div>
+            <div class="step-label">Pagamento</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+            <div class="step-circle">4</div>
+            <div class="step-label">Confirmação</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- CARRINHO VAZIO -->
+    <div class="carrinho-vazio" id="carrinhoVazio">
+        <i class="fas fa-shopping-bag"></i>
+        <h3>Seu carrinho está vazio</h3>
+        <p>Adicione bebês reborn incríveis ao seu carrinho</p>
+        <a href="index.html" class="btn-continuar-vazio">Ver Bebês Reborn</a>
+    </div>
+
+    <!-- CARRINHO COM ITENS -->
+    <div id="carrinhoConteudo">
+        <h1 class="page-title">Meu Carrinho (<span id="qtdItens">0</span> itens)</h1>
+
+        <div class="carrinho-layout">
+            <!-- ITENS -->
+            <div class="itens-lista" id="listaItens"></div>
+
+            <!-- RESUMO -->
+            <div class="resumo-card">
+                <div class="resumo-titulo">Resumo do pedido</div>
+
+                <div class="frete-info">
+                    <i class="fas fa-truck"></i> Frete grátis para todo o Brasil
+                </div>
+
+                <div class="cupom-wrap">
+                    <input class="cupom-input" type="text" placeholder="Cupom de desconto" id="cupomInput">
+                    <button class="cupom-btn" onclick="aplicarCupom()">Aplicar</button>
+                </div>
+
+                <div class="resumo-linha">
+                    <span>Subtotal</span>
+                    <span id="subtotalTexto">R$ 0,00</span>
+                </div>
+                <div class="resumo-linha">
+                    <span>Frete</span>
+                    <span style="color:#25D366; font-weight:600;">Grátis</span>
+                </div>
+                <div class="resumo-linha" id="descontoLinha" style="display:none;">
+                    <span>Desconto</span>
+                    <span id="descontoTexto" style="color:#25D366;">-R$ 0,00</span>
+                </div>
+                <div class="resumo-linha total">
+                    <span>Total</span>
+                    <span id="totalTexto">R$ 0,00</span>
+                </div>
+
+                <a href="checkout.html" class="btn-checkout" id="btnCheckout">
+                    <i class="fas fa-lock"></i> Finalizar Compra
+                </a>
+                <a href="index.html" class="btn-continuar">← Continuar Comprando</a>
+
+                <div class="seguranca">
+                    <i class="fas fa-shield-alt"></i>
+                    Compra 100% segura e protegida
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+    let desconto = 0;
+
+    const CUPONS = {
+        'MBR10': 10,
+        'BEBE15': 15,
+        'REBORN20': 20
+    };
+
+    function formatarPreco(valor) {
+        return 'R$ ' + valor.toFixed(2).replace('.', ',');
+    }
+
+    function precoNumerico(str) {
+        return parseFloat(str.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
+    }
+
+    function calcularSubtotal() {
+        return carrinho.reduce((acc, item) => {
+            return acc + (precoNumerico(item.preco) * item.qtd);
+        }, 0);
+    }
+
+    function atualizarResumo() {
+        const sub = calcularSubtotal();
+        const descontoValor = sub * (desconto / 100);
+        const total = sub - descontoValor;
+
+        document.getElementById('subtotalTexto').textContent = formatarPreco(sub);
+        document.getElementById('totalTexto').textContent = formatarPreco(total);
+        document.getElementById('qtdItens').textContent = carrinho.reduce((a, i) => a + i.qtd, 0);
+
+        if (desconto > 0) {
+            document.getElementById('descontoLinha').style.display = 'flex';
+            document.getElementById('descontoTexto').textContent = '-' + formatarPreco(descontoValor);
+        }
+
+        // Salva total no localStorage para o checkout usar
+        localStorage.setItem('carrinhoTotal', total.toFixed(2));
+        localStorage.setItem('carrinhoDesconto', desconto);
+    }
+
+    function removerItem(index) {
+        carrinho.splice(index, 1);
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        renderCarrinho();
+    }
+
+    function alterarQtd(index, delta) {
+        carrinho[index].qtd += delta;
+        if (carrinho[index].qtd < 1) carrinho[index].qtd = 1;
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        renderCarrinho();
+    }
+
+    function aplicarCupom() {
+        const codigo = document.getElementById('cupomInput').value.trim().toUpperCase();
+        if (CUPONS[codigo]) {
+            desconto = CUPONS[codigo];
+            document.getElementById('cupomInput').style.borderColor = '#25D366';
+            renderCarrinho();
+            alert(`✅ Cupom "${codigo}" aplicado! ${desconto}% de desconto.`);
+        } else {
+            document.getElementById('cupomInput').style.borderColor = '#ff4444';
+            alert('❌ Cupom inválido ou expirado.');
+        }
+    }
+
+    function renderCarrinho() {
+        const lista = document.getElementById('listaItens');
+        const vazio = document.getElementById('carrinhoVazio');
+        const conteudo = document.getElementById('carrinhoConteudo');
+
+        if (carrinho.length === 0) {
+            vazio.classList.add('show');
+            conteudo.style.display = 'none';
+            return;
+        }
+
+        vazio.classList.remove('show');
+        conteudo.style.display = 'block';
+
+        lista.innerHTML = carrinho.map((item, i) => {
+            const precoUnit = precoNumerico(item.preco);
+            const precoTotal = precoUnit * item.qtd;
+            return `
+                <div class="item-card">
+                    <img class="item-img" src="${item.imagem}" alt="${item.titulo}" onerror="this.src='logo.png'">
+                    <div class="item-info">
+                        <div class="item-nome">${item.titulo}</div>
+                        <div class="item-sub">Pronta Entrega · Silicone Premium</div>
+                        <div class="item-footer">
+                            <div class="qty-control">
+                                <button class="qty-btn" onclick="alterarQtd(${i}, -1)">−</button>
+                                <span class="qty-num">${item.qtd}</span>
+                                <button class="qty-btn" onclick="alterarQtd(${i}, 1)">+</button>
+                            </div>
+                            <div class="item-preco">${formatarPreco(precoTotal)}</div>
+                        </div>
+                    </div>
+                    <button class="item-remover" onclick="removerItem(${i})" title="Remover">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+        }).join('');
+
+        atualizarResumo();
+    }
+
+    renderCarrinho();
+</script>
+</body>
+</html>

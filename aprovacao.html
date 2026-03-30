@@ -3,107 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprovação — Sorrisinha Molinha</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Pedido Confirmado - Mundo da Bebê Reborn</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Jost', sans-serif; background: #fdf5f7; padding: 15px; }
-        h1 { text-align: center; color: #d9a19c; margin-bottom: 20px; font-size: 1.1rem; letter-spacing: 2px; }
-        .card { background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); max-width: 500px; margin: 0 auto; }
-        .card h2 { color: #8b5e6b; margin-bottom: 5px; font-size: 1.1rem; }
-        .card .linha { color: #b8860b; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 12px; }
-        .fotos { display: flex; gap: 6px; overflow-x: auto; padding: 8px 0; }
-        .fotos img { height: 180px; border-radius: 10px; object-fit: cover; flex-shrink: 0; border: 2px solid #f0e0e6; }
-        .desc { color: #666; font-size: 0.82rem; line-height: 1.7; margin: 12px 0; font-style: italic; }
-        .specs { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
-        .spec { background: linear-gradient(135deg, #ffeef7, #f0f8ff); border: 1px solid #e8d5f0; color: #a0668c; font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
-        .info-item { background: #faf5f7; padding: 8px 12px; border-radius: 10px; }
-        .info-item label { font-size: 0.65rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
-        .info-item span { display: block; font-size: 0.9rem; color: #333; font-weight: 600; }
-        .preco { text-align: center; margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #fff5f7, #f5f0ff); border-radius: 12px; }
-        .preco .valor { font-size: 1.8rem; color: #d9a19c; font-weight: 700; }
-        .preco .parcela { font-size: 0.75rem; color: #888; }
-        .btn-wpp { display: block; text-align: center; background: #25D366; color: white; text-decoration: none; padding: 12px; border-radius: 25px; font-weight: 600; margin-top: 12px; font-size: 0.9rem; }
-        .kit { margin: 12px 0; padding: 12px; background: #f9f5f0; border-radius: 10px; }
-        .kit h4 { font-size: 0.75rem; color: #b8860b; margin-bottom: 6px; letter-spacing: 1px; }
-        .kit ul { list-style: none; font-size: 0.8rem; color: #666; }
-        .kit ul li::before { content: "✦ "; color: #d9a19c; }
-        .nota { text-align: center; margin-top: 20px; padding: 15px; color: #999; font-size: 0.75rem; border-top: 1px solid #eee; }
-        .nota strong { color: #d9a19c; }
+        body { font-family: 'Jost', sans-serif; background: #fafafa; color: #333; min-height: 100vh; }
+
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #f0e0e8;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(255,182,193,0.15);
+        }
+        .header img { height: 50px; }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 40px 16px;
+        }
+
+        /* CONFETTI ANIMADO */
+        .confetti-wrap {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 3rem;
+            animation: bounce 0.6s ease;
+        }
+        @keyframes bounce {
+            0%   { transform: scale(0); opacity: 0; }
+            60%  { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .titulo-ok {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .titulo-ok h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #25D366;
+            margin-bottom: 8px;
+        }
+        .titulo-ok p {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* CARD PEDIDO */
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border: 1px solid #f5f5f5;
+            margin-bottom: 20px;
+        }
+        .card-titulo {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        /* NÚMERO DO PEDIDO */
+        .pedido-num {
+            background: linear-gradient(135deg, #fdf0f4, #fff8e1);
+            border-radius: 14px;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .pedido-num-label { font-size: 0.82rem; color: #999; }
+        .pedido-num-valor {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #DAA520;
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        /* ITENS */
+        .item-linha {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f9f9f9;
+        }
+        .item-linha:last-child { border-bottom: none; }
+        .item-linha img {
+            width: 56px; height: 56px;
+            border-radius: 12px; object-fit: cover; flex-shrink: 0;
+        }
+        .item-linha-info { flex: 1; }
+        .item-linha-nome { font-weight: 600; font-size: 0.9rem; color: #333; }
+        .item-linha-qtd { font-size: 0.78rem; color: #999; }
+        .item-linha-preco { font-weight: 700; color: #FFB6C1; font-size: 0.95rem; white-space: nowrap; }
+
+        /* TOTAIS */
+        .total-linha {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .total-linha.destaque {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            border-top: 2px solid #f0e0e8;
+            margin-top: 8px;
+            padding-top: 14px;
+        }
+        .total-linha.destaque span:last-child { color: #FFB6C1; }
+
+        /* INFO ENTREGA */
+        .entrega-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .entrega-item {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 14px;
+        }
+        .entrega-item label {
+            font-size: 0.72rem;
+            color: #bbb;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .entrega-item span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* PRAZO ENTREGA */
+        .prazo-card {
+            background: linear-gradient(135deg, #f0fff4, #e8f5e9);
+            border-radius: 14px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .prazo-icon { font-size: 2rem; }
+        .prazo-info h3 { font-size: 0.95rem; font-weight: 700; color: #2e7d32; }
+        .prazo-info p { font-size: 0.82rem; color: #66bb6a; margin-top: 2px; }
+
+        /* BOTÕES */
+        .btn-wpp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px;
+            background: #25D366;
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.35);
+        }
+        .btn-wpp:hover { transform: translateY(-2px); background: #20ba57; }
+
+        .btn-voltar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 13px;
+            background: transparent;
+            color: #999;
+            border: 1.5px solid #eee;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-voltar:hover { border-color: #FFB6C1; color: #FFB6C1; }
+
+        /* MOBILE */
+        @media (max-width: 480px) {
+            .container { padding: 24px 12px; }
+            .card { padding: 20px 16px; }
+            .entrega-grid { grid-template-columns: 1fr; }
+            .titulo-ok h1 { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
-    <h1>APROVAÇÃO — NOVA BONECA</h1>
 
+<header class="header">
+    <a href="index.html"><img src="logo.png" alt="Mundo da Bebê Reborn"></a>
+</header>
+
+<div class="container">
+
+    <div class="confetti-wrap">🎉</div>
+    <div class="titulo-ok">
+        <h1>✅ Pedido Confirmado!</h1>
+        <p>Seu pagamento foi aprovado.<br>Em breve você receberá uma confirmação por e-mail.</p>
+    </div>
+
+    <!-- NÚMERO DO PEDIDO -->
+    <div class="pedido-num">
+        <div>
+            <div class="pedido-num-label">Número do pedido</div>
+            <div class="pedido-num-valor" id="pedidoId">—</div>
+        </div>
+        <i class="fas fa-check-circle" style="color:#25D366; font-size:1.8rem;"></i>
+    </div>
+
+    <!-- PRAZO ENTREGA -->
+    <div class="prazo-card">
+        <div class="prazo-icon">🚚</div>
+        <div class="prazo-info">
+            <h3 id="prazoTitulo">Entrega em até 10 dias úteis</h3>
+            <p id="prazoSub">Você receberá o código de rastreio por WhatsApp</p>
+        </div>
+    </div>
+
+    <!-- ITENS DO PEDIDO -->
     <div class="card">
-        <h2>Sorrisinha Molinha</h2>
-        <div class="linha">SILICONE SÓLIDO — BEM MOLINHA ORIGINAL</div>
+        <div class="card-titulo">Itens do pedido</div>
+        <div id="itensPedido"></div>
 
-        <div class="fotos">
-            <img src="img/solida-roxa-1.jpg" alt="Sorrisinha Molinha 1">
-            <img src="img/solida-roxa-3.jpg" alt="Sorrisinha Molinha 2">
-            <img src="img/solida-roxa-4.jpg" alt="Sorrisinha Molinha 3">
-            <img src="img/solida-roxa-2.jpg" alt="Sorrisinha Molinha 4">
-            <img src="img/solida-roxa-5.jpg" alt="Sorrisinha Molinha 5">
-            <img src="img/solida-roxa-6.jpg" alt="Sorrisinha Molinha 6">
-        </div>
-
-        <p class="desc">Bebê artesanal de silicone sólido inteiro — a famosa "Bem Molinha Original". Toque ultra realista, pesinho de bebê de verdade. Pode tomar banho, ir na piscina e brincar na água.</p>
-
-        <div class="specs">
-            <span class="spec">Silicone Sólido</span>
-            <span class="spec">Bem Molinha</span>
-            <span class="spec">52cm</span>
-            <span class="spec">3,5kg</span>
-            <span class="spec">Pode Banho</span>
-            <span class="spec">Pronta Entrega</span>
-        </div>
-
-        <div class="info-grid">
-            <div class="info-item">
-                <label>Tamanho</label>
-                <span>52cm</span>
+        <div style="margin-top:16px;">
+            <div class="total-linha">
+                <span>Subtotal</span>
+                <span id="totalSubtotal">—</span>
             </div>
-            <div class="info-item">
-                <label>Peso</label>
-                <span>3,5kg</span>
+            <div class="total-linha">
+                <span>Frete</span>
+                <span style="color:#25D366; font-weight:600;">Grátis</span>
             </div>
-            <div class="info-item">
-                <label>Material</label>
-                <span>Silicone Sólido</span>
-            </div>
-            <div class="info-item">
-                <label>Banho</label>
-                <span>Sim — Piscina e Banho</span>
+            <div class="total-linha destaque">
+                <span>Total pago</span>
+                <span id="totalPago">—</span>
             </div>
         </div>
-
-        <div class="kit">
-            <h4>KIT COMPLETO INCLUSO</h4>
-            <ul>
-                <li>Roupinha Completa</li>
-                <li>Kit Maternidade Completo</li>
-                <li>Certidão de Nascimento Personalizada</li>
-                <li>Mamadeira Magnética</li>
-                <li>Chupeta Magnética</li>
-                <li>Pelúcia de Coelhinho</li>
-                <li>Enxoval Completo</li>
-            </ul>
-        </div>
-
-        <div class="preco">
-            <div class="valor">R$ 2.990,00</div>
-            <div class="parcela">10x de R$ 299,00 sem juros</div>
-        </div>
-
-        <a href="#" class="btn-wpp">WhatsApp — Quero a Sorrisinha Molinha</a>
     </div>
 
-    <div class="nota">
-        <strong>CEO, aprova?</strong><br>
-        Nome, fotos, descrição e tags estão corretos?<br>
-        Qual o preço?
+    <!-- DADOS DO CLIENTE -->
+    <div class="card">
+        <div class="card-titulo">Dados da entrega</div>
+        <div class="entrega-grid">
+            <div class="entrega-item">
+                <label>Nome</label>
+                <span id="clienteNome">—</span>
+            </div>
+            <div class="entrega-item">
+                <label>E-mail</label>
+                <span id="clienteEmail" style="font-size:0.82rem;">—</span>
+            </div>
+            <div class="entrega-item">
+                <label>Telefone</label>
+                <span id="clienteTelefone">—</span>
+            </div>
+            <div class="entrega-item">
+                <label>Pagamento</label>
+                <span>💳 Cartão aprovado</span>
+            </div>
+        </div>
     </div>
+
+    <!-- BOTÕES -->
+    <a href="https://wa.me/5581979001072" target="_blank" class="btn-wpp">
+        <i class="fab fa-whatsapp"></i> Falar com nossa equipe no WhatsApp
+    </a>
+    <a href="index.html" class="btn-voltar">
+        <i class="fas fa-store"></i> Voltar para a loja
+    </a>
+
+</div>
+
+<script>
+    function formatarPreco(v) {
+        return 'R$ ' + parseFloat(v).toFixed(2).replace('.', ',');
+    }
+    function precoNumerico(str) {
+        if (typeof str === 'number') return str;
+        return parseFloat((str||'0').replace('R$','').replace(/\./g,'').replace(',','.').trim()) || 0;
+    }
+
+    const pedidoId = localStorage.getItem('pedidoId') || '';
+    const cliente = JSON.parse(localStorage.getItem('pedidoCliente') || '{}');
+    const itens = JSON.parse(localStorage.getItem('carrinhoSnapshot') || '[]');
+    const totalPago = parseFloat(localStorage.getItem('totalPago') || '0');
+
+    // ID resumido
+    document.getElementById('pedidoId').textContent = pedidoId
+        ? '#' + pedidoId.replace('pi_','').slice(0,12).toUpperCase()
+        : '#MBR' + Date.now().toString().slice(-6);
+
+    // Cliente
+    if (cliente.nome) document.getElementById('clienteNome').textContent = cliente.nome;
+    if (cliente.email) document.getElementById('clienteEmail').textContent = cliente.email;
+    if (cliente.telefone) document.getElementById('clienteTelefone').textContent = cliente.telefone;
+
+    // Prazo por cidade
+    const cidade = (cliente.cidade || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    if (cidade === 'recife') {
+        document.getElementById('prazoTitulo').textContent = '🏠 Entrega em Recife — Combinar horário';
+        document.getElementById('prazoSub').textContent = 'Nossa equipe entrará em contato para agendar';
+    } else if (cidade === 'maceio' || cidade === 'maceió') {
+        document.getElementById('prazoTitulo').textContent = '🚚 Entrega em Maceió — 5 a 8 dias úteis';
+        document.getElementById('prazoSub').textContent = 'Você receberá o código de rastreio por WhatsApp';
+    } else if (cidade === 'joao pessoa' || cidade === 'joão pessoa') {
+        document.getElementById('prazoTitulo').textContent = '🚚 Entrega em João Pessoa — 5 a 8 dias úteis';
+        document.getElementById('prazoSub').textContent = 'Você receberá o código de rastreio por WhatsApp';
+    }
+
+    // Itens
+    const itensSalvos = itens.length ? itens : JSON.parse(localStorage.getItem('carrinho') || '[]');
+    let subtotal = 0;
+
+    document.getElementById('itensPedido').innerHTML = itensSalvos.map(item => {
+        const preco = precoNumerico(item.preco) * item.qtd;
+        subtotal += preco;
+        return `
+            <div class="item-linha">
+                <img src="${item.imagem}" alt="${item.titulo}" onerror="this.src='logo.png'">
+                <div class="item-linha-info">
+                    <div class="item-linha-nome">${item.titulo}</div>
+                    <div class="item-linha-qtd">Quantidade: ${item.qtd}</div>
+                </div>
+                <div class="item-linha-preco">${formatarPreco(preco)}</div>
+            </div>
+        `;
+    }).join('') || '<p style="color:#bbb;text-align:center;padding:20px;">Pedido processado com sucesso.</p>';
+
+    const totalFinal = totalPago || subtotal;
+    document.getElementById('totalSubtotal').textContent = formatarPreco(subtotal);
+    document.getElementById('totalPago').textContent = formatarPreco(totalFinal);
+
+    // Limpa localStorage
+    localStorage.removeItem('carrinho');
+    localStorage.removeItem('carrinhoTotal');
+    localStorage.removeItem('carrinhoDesconto');
+    localStorage.removeItem('carrinhoSnapshot');
+</script>
 </body>
 </html>
