@@ -1136,37 +1136,7 @@
             font-weight: 300;
         }
         
-        /* --- Buy Button --- */
-        .buy-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #25D366;
-            color: #FFFFFF;
-            padding: 15px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border: 3px solid #25D366;
-            border-radius: 50px;
-            width: 100%;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 2px 8px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Wrapper grid — empilha WhatsApp e Comprar no mesmo espaço */
-        .btn-swap-wrapper {
-            display: grid;
-            width: 100%;
-        }
-        .btn-swap-wrapper > * {
-            grid-area: 1 / 1;
-        }
-        /* Botão Comprar — aparece no hover do card */
+        /* Botão Comprar dourado */
         .btn-comprar {
             display: inline-flex;
             align-items: center;
@@ -1184,56 +1154,13 @@
             width: 100%;
             box-shadow: 0 6px 20px rgba(218,165,32,0.4);
             cursor: pointer;
-            opacity: 0;
             transition: all 0.3s ease;
-            z-index: 2;
-        }
-        .buy-button {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 1;
-        }
-        .product-card:hover .buy-button {
-            opacity: 0;
-            pointer-events: none;
-        }
-        .product-card:hover .btn-comprar {
-            opacity: 1;
-            pointer-events: auto;
         }
         .btn-comprar:hover {
             background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
             box-shadow: 0 8px 25px rgba(218,165,32,0.6);
         }
         
-        .buy-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .buy-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        .buy-button:hover {
-            background: linear-gradient(135deg, #25D366 0%, #E36D88 100%);
-            border-color: #E36D88;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5), 0 3px 10px rgba(0,0,0,0.15);
-        }
-        
-        .buy-button:active {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-        }
 
         /* --- WhatsApp Button Enhanced --- */
         .whatsapp-btn .whatsapp-icon,
@@ -1595,6 +1522,20 @@
         }
 
         @media (max-width: 768px) {
+            #produto-page .container {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+                padding: 20px 15px !important;
+            }
+            #galeria-thumbnails {
+                flex-direction: row !important;
+                max-height: none !important;
+                overflow-x: auto !important;
+                order: 2;
+            }
+            #produto-page .container > div:nth-child(3) {
+                padding-left: 0 !important;
+            }
             .cadastro-btn {
                 width: 60px;
                 height: 60px;
@@ -2571,63 +2512,66 @@
     </header>
 
     <!-- PÁGINA DE PRODUTO INDIVIDUAL (container dinâmico) -->
-    <section id="produto-page" style="display: none;">
-        <header style="padding: 25px 0; border-bottom: 1px solid #eee;">
-            <div class="container header-content">
-                <div class="logo">
-                    <a href="#" onclick="voltarHome(); return false;" class="logo-link">
-                        <img src="logo.png" alt="Mundo da Bebê Reborn" style="max-width: 100px;">
-                    </a>
-                </div>
-                <div style="flex: 1; text-align: center; font-family: 'Jost', sans-serif;">
-                    <a href="#" onclick="voltarHome(); return false;" style="color: #DAA520; text-decoration: none; font-weight: 600;">← Voltar</a>
-                </div>
+    <section id="produto-page" style="display: none; background: #fff; min-height: 100vh;">
+        <!-- Breadcrumb -->
+        <div style="background: #fafafa; border-bottom: 1px solid #eee; padding: 12px 0;">
+            <div class="container" style="max-width: 1300px;">
+                <nav style="font-size: 0.85rem; color: #999; font-family: 'Jost', sans-serif;">
+                    <a href="#" onclick="voltarHome(); return false;" style="color: #DAA520; text-decoration: none;">Home</a>
+                    <span style="margin: 0 8px;">›</span>
+                    <span style="color: #999;">Bonecas</span>
+                    <span style="margin: 0 8px;">›</span>
+                    <span id="produto-breadcrumb" style="color: #555;">Docinho</span>
+                </nav>
             </div>
-        </header>
+        </div>
 
-        <div class="container" style="display: grid; grid-template-columns: 40% 60%; gap: 60px; padding: 60px 0; max-width: 1400px;">
-            <!-- ESQUERDA: GALERIA -->
-            <div>
-                <div style="position: relative; margin-bottom: 20px;">
-                    <img id="produto-imagem-grande" src="img/docinho-1.png" alt="Produto" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
-                </div>
-                <div style="display: flex; gap: 10px; overflow-x: auto;" id="galeria-thumbnails">
-                    <!-- Thumbnails preenchidas dinamicamente -->
-                </div>
+        <div class="container" style="display: grid; grid-template-columns: 80px 1fr 420px; gap: 20px; padding: 40px 0; max-width: 1300px;">
+            <!-- ESQUERDA: THUMBNAILS VERTICAL -->
+            <div id="galeria-thumbnails" style="display: flex; flex-direction: column; gap: 8px; max-height: 520px; overflow-y: auto;">
+                <!-- Thumbnails preenchidas dinamicamente -->
+            </div>
+
+            <!-- CENTRO: IMAGEM GRANDE -->
+            <div style="position: relative;">
+                <img id="produto-imagem-grande" src="" alt="Produto" style="width: 100%; max-height: 560px; object-fit: contain; border-radius: 8px; cursor: zoom-in;" onclick="openZoomProduto()">
+                <button onclick="produtoGaleriaNav(-1)" style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">‹</button>
+                <button onclick="produtoGaleriaNav(1)" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">›</button>
             </div>
 
             <!-- DIREITA: INFO -->
-            <div>
-                <h1 id="produto-titulo" style="font-size: 2rem; color: #333; margin: 0 0 10px 0; font-weight: 700;">LINHA ENCANTO - DOCINHO</h1>
-                <div style="color: #888; margin-bottom: 15px; font-size: 0.9rem;">✅ Pronta Entrega</div>
+            <div style="padding-left: 20px;">
+                <h1 id="produto-titulo" style="font-size: 1.7rem; color: #222; margin: 0 0 12px 0; font-weight: 600; font-family: 'Jost', sans-serif; line-height: 1.3;">LINHA ENCANTO - DOCINHO</h1>
 
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                    <span style="color: #FFD700; font-size: 1.2rem;">⭐⭐⭐⭐⭐</span>
-                    <span style="color: #999; font-size: 0.9rem;">(<span id="produto-avaliações">314</span> avaliações)</span>
+                <div style="margin-bottom: 12px;">
+                    <span style="background: #e8f5e9; color: #2e7d32; font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px;">O ESTOQUE VAI ACABAR!</span>
                 </div>
 
-                <div style="margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 25px;">
-                    <div style="font-size: 2.5rem; color: #FFB6C1; font-weight: 700; margin-bottom: 8px;"><span id="produto-preco">R$ 1.390,90</span></div>
-                    <div style="color: #999; font-size: 0.95rem;" id="produto-parcelamento">ou 12x de R$ 115,91 sem juros</div>
+                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 20px;">
+                    <span style="color: #FF9800; font-size: 1.1rem;">★★★★★</span>
+                    <span style="color: #999; font-size: 0.85rem;">(<span id="produto-avaliações">314</span>)</span>
                 </div>
 
-                <p id="produto-descricao" style="color: #666; line-height: 1.6; margin-bottom: 30px;">Bebê artesanal de silicone inteiro com cabelos implantados fio a fio e expressão de doçura irresistível. 55cm, 1.3kg. Kit maternidade completo com certidão de nascimento, mamadeira, chupeta magnética e enxoval.</p>
+                <div style="margin-bottom: 24px; border-bottom: 1px solid #eee; padding-bottom: 24px;">
+                    <div style="font-size: 2.2rem; color: #DAA520; font-weight: 700; margin-bottom: 4px; font-family: 'Jost', sans-serif;"><span id="produto-preco">R$ 1.390,90</span></div>
+                    <div style="color: #777; font-size: 0.9rem;" id="produto-parcelamento">ou 12x de R$ 115,91 <strong>Sem juros</strong></div>
+                </div>
 
-                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 30px;">
-                    <label style="font-weight: 600; color: #333;">Quantidade:</label>
-                    <div style="display: flex; align-items: center; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-                        <button onclick="diminuiQtd()" style="background: #f5f5f5; border: none; padding: 8px 12px; cursor: pointer; font-size: 1.1rem;">−</button>
-                        <input id="qtd-produto" type="number" value="1" min="1" style="width: 50px; text-align: center; border: none; font-size: 1rem;">
-                        <button onclick="aumentaQtd()" style="background: #f5f5f5; border: none; padding: 8px 12px; cursor: pointer; font-size: 1.1rem;">+</button>
+                <p id="produto-descricao" style="color: #555; line-height: 1.7; margin-bottom: 28px; font-size: 0.95rem;"></p>
+
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; border: 2px solid #eee; border-radius: 6px; overflow: hidden;">
+                        <button onclick="diminuiQtd()" style="background: #fff; border: none; padding: 10px 14px; cursor: pointer; font-size: 1.1rem; color: #333;">−</button>
+                        <input id="qtd-produto" type="number" value="1" min="1" style="width: 45px; text-align: center; border: none; border-left: 2px solid #eee; border-right: 2px solid #eee; font-size: 1rem; font-weight: 600; color: #333;">
+                        <button onclick="aumentaQtd()" style="background: #fff; border: none; padding: 10px 14px; cursor: pointer; font-size: 1.1rem; color: #333;">+</button>
                     </div>
+                    <button onclick="adicionarAoCarrinho()" style="flex: 1; padding: 14px 24px; background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%); color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(218,165,32,0.3); text-transform: uppercase; letter-spacing: 1px;">
+                        COMPRAR
+                    </button>
                 </div>
 
-                <button onclick="adicionarAoCarrinho()" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-bottom: 15px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);">
-                    🛒 COMPRAR AGORA
-                </button>
-
-                <a id="produto-whatsapp-link" href="#" target="_blank" style="display: block; padding: 12px; text-align: center; background: #f5f5f5; color: #25D366; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s;">
-                    💬 Dúvidas? Fale com uma consultora
+                <a id="produto-whatsapp-link" href="#" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: #fff; border: 2px solid #25D366; color: #25D366; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s;">
+                    <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Dúvidas? Fale com uma consultora
                 </a>
             </div>
         </div>
@@ -2665,10 +2609,7 @@
                             <span class="main-price">R$ 1.390,90</span>
                             <span class="installments">12x de R$ 115,91 sem juros</span>
                         </div>
-                        <div class="btn-swap-wrapper">
-                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Docinho.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
-                        </div>
+                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
                     </div>
                 </div>
                 
@@ -2700,10 +2641,7 @@
                             <span class="main-price">R$ 990,98</span>
                             <span class="installments">12x de R$ 82,58 sem juros</span>
                         </div>
-                        <div class="btn-swap-wrapper">
-                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Luninha.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
-                        </div>
+                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
                     </div>
                 </div>
                 
@@ -2735,10 +2673,7 @@
                             <span class="main-price">R$ 990,98</span>
                             <span class="installments">12x de R$ 82,58 sem juros</span>
                         </div>
-                        <div class="btn-swap-wrapper">
-                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Sorrisinha%20Magnética.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
-                        </div>
+                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
                     </div>
                 </div>
                 
@@ -2771,10 +2706,7 @@
                             <span class="main-price">R$ 899,98</span>
                             <span class="installments">12x de R$ 75,00 sem juros</span>
                         </div>
-                        <div class="btn-swap-wrapper">
-                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Princesinha%20Mandona.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
-                        </div>
+                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
                     </div>
                 </div>
                 
@@ -2806,10 +2738,7 @@
                             <span class="main-price">R$ 1.190,00</span>
                             <span class="installments">12x de R$ 99,17 sem juros</span>
                         </div>
-                        <div class="btn-swap-wrapper">
-                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Princesa%20Safira%20Diamante.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
-                        </div>
+                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
                     </div>
                 </div>
                 
@@ -2842,10 +2771,7 @@
                             <span class="main-price">R$ 990,00</span>
                             <span class="installments">12x de R$ 82,50 sem juros</span>
                         </div>
-                        <div class="btn-swap-wrapper">
-                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Ruivinha.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
-                        </div>
+                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
                     </div>
                 </div>
                 
@@ -2876,10 +2802,7 @@
                             <span class="main-price">R$ 899,00</span>
                             <span class="installments">12x de R$ 74,92 sem juros</span>
                         </div>
-                        <div class="btn-swap-wrapper">
-                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Sorrisinho.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
-                        </div>
+                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
                     </div>
                 </div>
 
@@ -2911,10 +2834,7 @@
                             <span class="main-price">R$ 1.190,00</span>
                             <span class="installments">12x de R$ 99,17 sem juros</span>
                         </div>
-                        <div class="btn-swap-wrapper">
-                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20no%20bebê%20LINHA%20ENCANTO%20-%20Nuvem%20Azul%20Fofo.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
-                        </div>
+                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
                     </div>
                 </div>
 
@@ -4313,12 +4233,19 @@
         const imagemGrande = document.getElementById('produto-imagem-grande');
         imagemGrande.src = produto.imagens[0];
 
-        // Atualiza thumbnails
+        // Atualiza breadcrumb
+        document.getElementById('produto-breadcrumb').textContent = produto.titulo;
+
+        // Guarda galeria atual para navegação
+        window._produtoGaleria = produto.imagens;
+        window._produtoGaleriaIdx = 0;
+
+        // Atualiza thumbnails (vertical)
         const galeriaThumbs = document.getElementById('galeria-thumbnails');
         galeriaThumbs.innerHTML = produto.imagens.map((img, idx) => `
             <img src="${img}" class="thumb-mini ${idx === 0 ? 'active' : ''}"
-                 onclick="trocaImagemProduto('${img}')"
-                 style="width: 80px; height: 80px; cursor: pointer; border-radius: 10px; border: 2px solid ${idx === 0 ? '#FFB6C1' : 'transparent'}; transition: all 0.3s;">
+                 onclick="trocaImagemProduto('${img}', ${idx})"
+                 style="width: 70px; height: 70px; object-fit: cover; cursor: pointer; border-radius: 6px; border: 2px solid ${idx === 0 ? '#DAA520' : '#eee'}; transition: all 0.2s;">
         `).join('');
 
         // Reseta quantidade
@@ -4338,23 +4265,19 @@
     }
 
     // Trocar imagem ao clicar em thumbnail
-    function trocaImagemProduto(novaImagemPath) {
-        const imagemGrande = document.getElementById('produto-imagem-grande');
-        imagemGrande.src = novaImagemPath;
-
-        // Atualiza border das thumbnails
-        document.querySelectorAll('.thumb-mini').forEach(thumb => {
-            thumb.classList.remove('active');
-            thumb.style.border = '2px solid transparent';
+    function trocaImagemProduto(novaImagemPath, idx) {
+        document.getElementById('produto-imagem-grande').src = novaImagemPath;
+        if (typeof idx === 'number') window._produtoGaleriaIdx = idx;
+        document.querySelectorAll('#galeria-thumbnails .thumb-mini').forEach((thumb, i) => {
+            thumb.style.border = '2px solid ' + (thumb.src.includes(novaImagemPath) ? '#DAA520' : '#eee');
         });
+    }
 
-        // Procura e marca a thumbnail clicada
-        document.querySelectorAll('.thumb-mini').forEach(thumb => {
-            if (thumb.src.includes(novaImagemPath)) {
-                thumb.classList.add('active');
-                thumb.style.border = '2px solid #FFB6C1';
-            }
-        });
+    function produtoGaleriaNav(dir) {
+        if (!window._produtoGaleria) return;
+        const g = window._produtoGaleria;
+        window._produtoGaleriaIdx = (window._produtoGaleriaIdx + dir + g.length) % g.length;
+        trocaImagemProduto(g[window._produtoGaleriaIdx], window._produtoGaleriaIdx);
     }
 
     // Aumentar quantidade
