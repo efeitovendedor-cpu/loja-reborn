@@ -2523,6 +2523,69 @@
         </div>
     </header>
 
+    <!-- PÁGINA DE PRODUTO INDIVIDUAL (container dinâmico) -->
+    <section id="produto-page" style="display: none;">
+        <header style="padding: 25px 0; border-bottom: 1px solid #eee;">
+            <div class="container header-content">
+                <div class="logo">
+                    <a href="#" onclick="voltarHome(); return false;" class="logo-link">
+                        <img src="logo.png" alt="Mundo da Bebê Reborn" style="max-width: 100px;">
+                    </a>
+                </div>
+                <div style="flex: 1; text-align: center; font-family: 'Jost', sans-serif;">
+                    <a href="#" onclick="voltarHome(); return false;" style="color: #DAA520; text-decoration: none; font-weight: 600;">← Voltar</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="container" style="display: grid; grid-template-columns: 40% 60%; gap: 60px; padding: 60px 0; max-width: 1400px;">
+            <!-- ESQUERDA: GALERIA -->
+            <div>
+                <div style="position: relative; margin-bottom: 20px;">
+                    <img id="produto-imagem-grande" src="img/docinho-1.png" alt="Produto" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+                </div>
+                <div style="display: flex; gap: 10px; overflow-x: auto;" id="galeria-thumbnails">
+                    <!-- Thumbnails preenchidas dinamicamente -->
+                </div>
+            </div>
+
+            <!-- DIREITA: INFO -->
+            <div>
+                <h1 id="produto-titulo" style="font-size: 2rem; color: #333; margin: 0 0 10px 0; font-weight: 700;">LINHA ENCANTO - DOCINHO</h1>
+                <div style="color: #888; margin-bottom: 15px; font-size: 0.9rem;">✅ Pronta Entrega</div>
+
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <span style="color: #FFD700; font-size: 1.2rem;">⭐⭐⭐⭐⭐</span>
+                    <span style="color: #999; font-size: 0.9rem;">(<span id="produto-avaliações">314</span> avaliações)</span>
+                </div>
+
+                <div style="margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 25px;">
+                    <div style="font-size: 2.5rem; color: #FFB6C1; font-weight: 700; margin-bottom: 8px;"><span id="produto-preco">R$ 1.390,90</span></div>
+                    <div style="color: #999; font-size: 0.95rem;" id="produto-parcelamento">ou 12x de R$ 115,91 sem juros</div>
+                </div>
+
+                <p id="produto-descricao" style="color: #666; line-height: 1.6; margin-bottom: 30px;">Bebê artesanal de silicone inteiro com cabelos implantados fio a fio e expressão de doçura irresistível. 55cm, 1.3kg. Kit maternidade completo com certidão de nascimento, mamadeira, chupeta magnética e enxoval.</p>
+
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 30px;">
+                    <label style="font-weight: 600; color: #333;">Quantidade:</label>
+                    <div style="display: flex; align-items: center; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+                        <button onclick="diminuiQtd()" style="background: #f5f5f5; border: none; padding: 8px 12px; cursor: pointer; font-size: 1.1rem;">−</button>
+                        <input id="qtd-produto" type="number" value="1" min="1" style="width: 50px; text-align: center; border: none; font-size: 1rem;">
+                        <button onclick="aumentaQtd()" style="background: #f5f5f5; border: none; padding: 8px 12px; cursor: pointer; font-size: 1.1rem;">+</button>
+                    </div>
+                </div>
+
+                <button onclick="adicionarAoCarrinho()" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-bottom: 15px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);">
+                    🛒 COMPRAR AGORA
+                </button>
+
+                <a id="produto-whatsapp-link" href="#" target="_blank" style="display: block; padding: 12px; text-align: center; background: #f5f5f5; color: #25D366; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s;">
+                    💬 Dúvidas? Fale com uma consultora
+                </a>
+            </div>
+        </div>
+    </section>
+
     <main id="inicio">
         <div class="container">
             <h1 id="pronta-entrega">Pronta Entrega</h1>
@@ -4070,6 +4133,233 @@
         if (e.key === 'Escape') closeZoom();
         if (e.key === 'ArrowLeft') zoomNav(-1);
         if (e.key === 'ArrowRight') zoomNav(1);
+    });
+
+    // ===== DADOS DOS PRODUTOS =====
+    const produtosData = {
+        'Docinho': {
+            titulo: 'LINHA ENCANTO - DOCINHO',
+            preco: 'R$ 1.390,90',
+            parcelamento: 'ou 12x de R$ 115,91 sem juros',
+            descricao: 'Bebê artesanal de silicone inteiro com cabelos implantados fio a fio e expressão de doçura irresistível. 55cm, 1.3kg. Kit maternidade completo com certidão de nascimento, mamadeira, chupeta magnética e enxoval.',
+            imagens: ['img/docinho-1.png', 'img/docinho-2.png', 'img/docinho-3.png', 'img/docinho-4.jpg'],
+            avaliacoes: 314,
+            whatsapp_msg: 'Olá! Tenho interesse no DOCINHO. Pode me ajudar?'
+        },
+        'Luninha': {
+            titulo: 'LINHA ENCANTO - LUNINHA',
+            preco: 'R$ 1.290,00',
+            parcelamento: 'ou 12x de R$ 107,50 sem juros',
+            descricao: 'Bebê reborn delicada com acabamento premium em silicone soft. 50cm, 1.1kg. Expressão serena e meiga. Kit maternidade completo com enxoval.',
+            imagens: ['img/luninha-1.jpg', 'img/luninha-2.jpg', 'img/luninha-3.jpg', 'img/luninha-4.jpg', 'img/luninha-5.jpg'],
+            avaliacoes: 287,
+            whatsapp_msg: 'Olá! Tenho interesse na LUNINHA. Pode me ajudar?'
+        },
+        'Princesinha': {
+            titulo: 'LINHA REAL - PRINCESINHA',
+            preco: 'R$ 1.590,00',
+            parcelamento: 'ou 12x de R$ 132,50 sem juros',
+            descricao: 'Bebê reborn premium com detalhes reais incríveis. 52cm, 1.2kg. Silicone soft com cabelos implantados e acessórios de princesa.',
+            imagens: ['img/princesinha-1.png', 'img/princesinha-2.png', 'img/princesinha-3.png', 'img/princesinha-4.png', 'img/princesinha-5.jpeg', 'img/princesinha-6.jpeg'],
+            avaliacoes: 298,
+            whatsapp_msg: 'Olá! Tenho interesse na PRINCESINHA. Pode me ajudar?'
+        },
+        'Ruivinha': {
+            titulo: 'LINHA ENCANTO - RUIVINHA',
+            preco: 'R$ 1.450,00',
+            parcelamento: 'ou 12x de R$ 120,83 sem juros',
+            descricao: 'Bebê reborn com lindos cabelos ruivos implantados. 55cm, 1.3kg. Silicone soft premium com expressão alegre e brincalhona.',
+            imagens: ['img/ruivinha-1.jpg', 'img/ruivinha-2.jpg', 'img/ruivinha-3.jpg', 'img/ruivinha-4.jpg', 'img/ruivinha-5.png', 'img/ruivinha-6.png'],
+            avaliacoes: 265,
+            whatsapp_msg: 'Olá! Tenho interesse na RUIVINHA. Pode me ajudar?'
+        },
+        'Safira': {
+            titulo: 'LINHA PREMIUM - SAFIRA',
+            preco: 'R$ 1.680,00',
+            parcelamento: 'ou 12x de R$ 140,00 sem juros',
+            descricao: 'Bebê reborn exclusiva com acabamento de luxo. 56cm, 1.4kg. Silicone inteiro premium com detalhes incríveis. Boneca de colecionador.',
+            imagens: ['img/safira-1.jpg', 'img/safira-2.jpg', 'img/safira-3.jpg', 'img/safira-4.jpg', 'img/safira-5.jpg'],
+            avaliacoes: 201,
+            whatsapp_msg: 'Olá! Tenho interesse na SAFIRA. Pode me ajudar?'
+        },
+        'Nuvem Azul': {
+            titulo: 'MENINO - NUVEM AZUL',
+            preco: 'R$ 1.350,00',
+            parcelamento: 'ou 12x de R$ 112,50 sem juros',
+            descricao: 'Lindo reborn menino com estilo moderno. 54cm, 1.2kg. Silicone soft com acessórios temáticos. Perfeito para quem adora meninos reborn.',
+            imagens: ['img/nuvem-azul-1.png', 'img/nuvem-azul-2.png', 'img/nuvem-azul-3.png', 'img/nuvem-azul-4.png', 'img/nuvem-azul-5.png'],
+            avaliacoes: 156,
+            whatsapp_msg: 'Olá! Tenho interesse no NUVEM AZUL. Pode me ajudar?'
+        },
+        'Sorrisinha': {
+            titulo: 'COLEÇÃO ESPECIAL - SORRISINHA',
+            preco: 'R$ 1.520,00',
+            parcelamento: 'ou 12x de R$ 126,67 sem juros',
+            descricao: 'Bebê reborn com sorriso irresistível. 51cm, 1.15kg. Silicone soft com acabamento delicado e expressão feliz.',
+            imagens: ['img/sorrisinha-1.jpg', 'img/sorrisinha-2.jpg', 'img/sorrisinha-3.jpg', 'img/sorrisinha-4.jpg', 'img/sorrisinha-5.jpg'],
+            avaliacoes: 189,
+            whatsapp_msg: 'Olá! Tenho interesse na SORRISINHA. Pode me ajudar?'
+        },
+        'Sorrisinho': {
+            titulo: 'MENINO - SORRISINHO',
+            preco: 'R$ 1.380,00',
+            parcelamento: 'ou 12x de R$ 115,00 sem juros',
+            descricao: 'Adorável menino reborn com expressão alegre. 50cm, 1.1kg. Silicone soft premium. Um presente perfeito para colecionadores.',
+            imagens: ['img/sorrisinho-1.jpg', 'img/sorrisinho-2.jpg', 'img/sorrisinho-3.jpg', 'img/sorrisinho-4.png'],
+            avaliacoes: 143,
+            whatsapp_msg: 'Olá! Tenho interesse no SORRISINHO. Pode me ajudar?'
+        }
+    };
+
+    // ===== FUNÇÕES DA PÁGINA DE PRODUTO =====
+
+    // Abrir página de produto dinamicamente
+    function abrirPaginaProduto(apelido) {
+        const produto = produtosData[apelido];
+        if (!produto) {
+            console.error('Produto não encontrado:', apelido);
+            return;
+        }
+
+        // Atualiza título
+        document.getElementById('produto-titulo').textContent = produto.titulo;
+
+        // Atualiza preço e parcelamento
+        document.getElementById('produto-preco').textContent = produto.preco;
+        document.getElementById('produto-parcelamento').textContent = produto.parcelamento;
+
+        // Atualiza descrição
+        document.getElementById('produto-descricao').textContent = produto.descricao;
+
+        // Atualiza avaliações
+        document.getElementById('produto-avaliações').textContent = produto.avaliacoes;
+
+        // Atualiza WhatsApp link
+        const waLink = document.getElementById('produto-whatsapp-link');
+        waLink.href = `https://wa.me/5581979001072?text=${encodeURIComponent(produto.whatsapp_msg)}`;
+
+        // Atualiza imagem grande
+        const imagemGrande = document.getElementById('produto-imagem-grande');
+        imagemGrande.src = produto.imagens[0];
+
+        // Atualiza thumbnails
+        const galeriaThumbs = document.getElementById('galeria-thumbnails');
+        galeriaThumbs.innerHTML = produto.imagens.map((img, idx) => `
+            <img src="${img}" class="thumb-mini ${idx === 0 ? 'active' : ''}"
+                 onclick="trocaImagemProduto('${img}')"
+                 style="width: 80px; height: 80px; cursor: pointer; border-radius: 10px; border: 2px solid ${idx === 0 ? '#FFB6C1' : 'transparent'}; transition: all 0.3s;">
+        `).join('');
+
+        // Reseta quantidade
+        document.getElementById('qtd-produto').value = 1;
+
+        // Mostra página de produto e esconde catálogo
+        document.getElementById('inicio').style.display = 'none';
+        document.getElementById('produto-page').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    // Voltar para home (esconde #produto-page, mostra #inicio)
+    function voltarHome() {
+        document.getElementById('produto-page').style.display = 'none';
+        document.getElementById('inicio').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    // Trocar imagem ao clicar em thumbnail
+    function trocaImagemProduto(novaImagemPath) {
+        const imagemGrande = document.getElementById('produto-imagem-grande');
+        imagemGrande.src = novaImagemPath;
+
+        // Atualiza border das thumbnails
+        document.querySelectorAll('.thumb-mini').forEach(thumb => {
+            thumb.classList.remove('active');
+            thumb.style.border = '2px solid transparent';
+        });
+
+        // Procura e marca a thumbnail clicada
+        document.querySelectorAll('.thumb-mini').forEach(thumb => {
+            if (thumb.src.includes(novaImagemPath)) {
+                thumb.classList.add('active');
+                thumb.style.border = '2px solid #FFB6C1';
+            }
+        });
+    }
+
+    // Aumentar quantidade
+    function aumentaQtd() {
+        const input = document.getElementById('qtd-produto');
+        input.value = parseInt(input.value) + 1;
+    }
+
+    // Diminuir quantidade (mínimo 1)
+    function diminuiQtd() {
+        const input = document.getElementById('qtd-produto');
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    }
+
+    // Adicionar ao carrinho (localStorage)
+    function adicionarAoCarrinho() {
+        const qtd = parseInt(document.getElementById('qtd-produto').value);
+        const titulo = document.getElementById('produto-titulo').textContent;
+        const preco = document.getElementById('produto-preco').textContent;
+        const imagem = document.getElementById('produto-imagem-grande').src;
+
+        // Recupera carrinho existente
+        let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+
+        // Procura se o produto já está no carrinho
+        const indexProduto = carrinho.findIndex(p => p.titulo === titulo);
+
+        if (indexProduto > -1) {
+            // Se já existe, aumenta a quantidade
+            carrinho[indexProduto].qtd += qtd;
+        } else {
+            // Se não existe, adiciona novo
+            carrinho.push({
+                titulo: titulo,
+                preco: preco,
+                qtd: qtd,
+                imagem: imagem
+            });
+        }
+
+        // Salva no localStorage
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+        // Feedback visual
+        const btnComprar = event.target;
+        const textOriginal = btnComprar.textContent;
+        btnComprar.textContent = '✅ Adicionado ao Carrinho!';
+        btnComprar.style.background = 'linear-gradient(135deg, #25D366 0%, #34FF6B 100%)';
+
+        setTimeout(() => {
+            btnComprar.textContent = textOriginal;
+            btnComprar.style.background = 'linear-gradient(135deg, #DAA520 0%, #FFD700 100%)';
+        }, 2000);
+    }
+
+    // Adicionar listeners aos cards do catálogo principal
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.product-card').forEach(card => {
+            const apelido = card.dataset.apelido;
+            if (apelido) {
+                // Clique na imagem abre página de produto
+                card.querySelector('.image-wrapper')?.addEventListener('click', function() {
+                    abrirPaginaProduto(apelido);
+                });
+
+                // Clique no título abre página de produto
+                card.querySelector('.product-info h3')?.addEventListener('click', function() {
+                    abrirPaginaProduto(apelido);
+                });
+
+                // Clique no botão "Conheça de perto" pode abrir página de produto
+                // (mantém a jornada atual como está)
+            }
+        });
     });
     </script>
 </body>
