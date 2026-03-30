@@ -12,10 +12,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Jost', sans-serif; background: #fafafa; color: #333; }
 
+        /* HEADER */
         .header {
             background: #fff;
             border-bottom: 1px solid #f0e0e8;
-            padding: 16px 20px;
+            padding: 14px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -43,40 +44,28 @@
         }
 
         /* PROGRESS */
-        .progress-bar {
-            background: #fff;
-            padding: 16px 20px;
-            border-bottom: 1px solid #f5f5f5;
-        }
+        .progress-bar { background: #fff; padding: 14px 20px; border-bottom: 1px solid #f5f5f5; }
         .progress-steps {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
-            max-width: 400px;
-            margin: 0 auto;
+            display: flex; align-items: center; justify-content: center;
+            max-width: 400px; margin: 0 auto;
         }
         .step { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
         .step-circle {
-            width: 32px; height: 32px; border-radius: 50%;
+            width: 30px; height: 30px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 0.85rem;
+            font-weight: 700; font-size: 0.82rem;
         }
-        .step.done .step-circle { background: #25D366; color: #fff; }
+        .step.done .step-circle   { background: #25D366; color: #fff; }
         .step.active .step-circle { background: #FFB6C1; color: #fff; }
         .step:not(.active):not(.done) .step-circle { background: #eee; color: #999; }
-        .step-label { font-size: 0.7rem; color: #999; text-align: center; }
+        .step-label { font-size: 0.68rem; color: #999; }
         .step.active .step-label { color: #FFB6C1; font-weight: 600; }
-        .step.done .step-label { color: #25D366; }
+        .step.done .step-label   { color: #25D366; }
         .step-line { flex: 1; height: 2px; background: #eee; max-width: 60px; }
         .step-line.done { background: #25D366; }
 
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 28px 16px;
-        }
-
+        /* LAYOUT */
+        .container { max-width: 980px; margin: 0 auto; padding: 28px 16px; }
         .checkout-layout {
             display: grid;
             grid-template-columns: 1fr 360px;
@@ -84,156 +73,120 @@
             align-items: start;
         }
 
-        /* FORMULÁRIOS */
+        /* SEÇÕES */
         .secao {
             background: #fff;
             border-radius: 18px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            border: 1px solid #f5f5f5;
+            padding: 22px 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
         }
         .secao-titulo {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
         }
-        .secao-titulo i { color: #FFB6C1; }
+        .secao-titulo i { color: #FFB6C1; width: 16px; }
 
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        /* FORM */
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .form-row.full { grid-template-columns: 1fr; }
         .form-row.tres { grid-template-columns: 1fr 1fr 1fr; }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        label {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #555;
-        }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        label { font-size: 0.8rem; font-weight: 600; color: #666; }
         input, select {
-            border: 1.5px solid #eee;
+            border: 1.5px solid #e8e8e8;
             border-radius: 10px;
-            padding: 12px 14px;
+            padding: 11px 13px;
             font-family: 'Jost', sans-serif;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             color: #333;
             outline: none;
             transition: border 0.2s;
-            background: #fff;
             width: 100%;
+            background: #fff;
         }
-        input:focus, select:focus { border-color: #FFB6C1; }
+        input:focus, select:focus { border-color: #FFB6C1; box-shadow: 0 0 0 3px rgba(255,182,193,0.15); }
         input.error { border-color: #ff4444 !important; }
 
-        /* STRIPE ELEMENTS */
-        .stripe-element-wrap {
-            border: 1.5px solid #eee;
-            border-radius: 10px;
-            padding: 13px 14px;
-            transition: border 0.2s;
-            background: #fff;
+        /* STRIPE PAYMENT ELEMENT */
+        #payment-element-wrap {
+            margin-top: 4px;
         }
-        .stripe-element-wrap.focused { border-color: #FFB6C1; }
-        .stripe-element-wrap.error { border-color: #ff4444; }
-
-        .card-icons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-        }
-        .card-icon {
-            background: #f9f9f9;
-            border: 1px solid #eee;
-            border-radius: 6px;
-            padding: 4px 8px;
-            font-size: 0.75rem;
-            color: #666;
-            font-weight: 600;
+        #payment-element {
+            min-height: 60px;
         }
 
         /* RESUMO LATERAL */
         .resumo-card {
             background: #fff;
             border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 1px solid #f5f5f5;
+            padding: 22px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border: 1px solid #f0f0f0;
             position: sticky;
-            top: 100px;
+            top: 90px;
         }
-        .resumo-titulo { font-size: 1rem; font-weight: 700; margin-bottom: 18px; color: #333; }
+        .resumo-titulo { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; color: #333; }
 
         .resumo-item {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #f9f9f9;
+            display: flex; gap: 11px; align-items: center;
+            padding: 10px 0; border-bottom: 1px solid #f9f9f9;
         }
+        .resumo-item:last-of-type { border-bottom: none; }
         .resumo-item img {
-            width: 52px; height: 52px;
-            border-radius: 10px; object-fit: cover;
-            flex-shrink: 0;
+            width: 50px; height: 50px;
+            border-radius: 10px; object-fit: cover; flex-shrink: 0;
         }
         .resumo-item-info { flex: 1; min-width: 0; }
-        .resumo-item-nome { font-size: 0.82rem; font-weight: 600; color: #333; line-height: 1.3; }
-        .resumo-item-qtd { font-size: 0.75rem; color: #999; }
-        .resumo-item-preco { font-size: 0.9rem; font-weight: 700; color: #FFB6C1; white-space: nowrap; }
+        .resumo-item-nome { font-size: 0.8rem; font-weight: 600; color: #333; line-height: 1.3; }
+        .resumo-item-qtd  { font-size: 0.73rem; color: #aaa; }
+        .resumo-item-preco { font-size: 0.88rem; font-weight: 700; color: #FFB6C1; white-space: nowrap; }
 
         .resumo-linha {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 8px 0; font-size: 0.88rem; color: #666;
+            padding: 7px 0; font-size: 0.87rem; color: #777;
         }
         .resumo-linha.total {
-            font-size: 1.15rem; font-weight: 700; color: #333;
-            border-top: 2px solid #f0e0e8; margin-top: 8px; padding-top: 14px;
+            font-size: 1.1rem; font-weight: 700; color: #333;
+            border-top: 2px solid #f0e0e8; margin-top: 8px; padding-top: 12px;
         }
         .resumo-linha.total span:last-child { color: #FFB6C1; }
-
-        .frete-badge {
-            background: #f0fff4;
-            color: #25D366;
-            font-size: 0.78rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
+        .frete-ok { color: #25D366; font-weight: 600; font-size: 0.82rem; }
 
         /* BOTÃO PAGAR */
         .btn-pagar {
             width: 100%;
-            padding: 17px;
+            padding: 16px;
             background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%);
             color: #fff;
             border: none;
             border-radius: 14px;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 18px rgba(218,165,32,0.4);
+            box-shadow: 0 4px 18px rgba(218,165,32,0.38);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 9px;
+            margin-top: 18px;
         }
-        .btn-pagar:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(218,165,32,0.5); }
-        .btn-pagar:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-pagar:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(218,165,32,0.5);
+        }
+        .btn-pagar:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 
-        /* SPINNER */
         .spinner {
-            width: 18px; height: 18px;
-            border: 2.5px solid rgba(255,255,255,0.4);
+            width: 17px; height: 17px;
+            border: 2.5px solid rgba(255,255,255,0.35);
             border-top-color: #fff;
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
@@ -241,30 +194,37 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* MENSAGEM ERRO */
+        /* ERRO */
         .payment-error {
-            background: #fff0f0;
-            border: 1px solid #ffcccc;
-            border-radius: 10px;
-            padding: 12px 16px;
-            font-size: 0.88rem;
-            color: #cc0000;
-            margin-top: 14px;
-            display: none;
-            align-items: center;
-            gap: 8px;
+            background: #fff0f0; border: 1px solid #ffd0d0; border-radius: 10px;
+            padding: 11px 14px; font-size: 0.85rem; color: #cc0000;
+            margin-top: 12px; display: none; align-items: center; gap: 8px;
         }
 
+        /* CARREGANDO STRIPE */
+        .stripe-loading {
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px; padding: 28px 0; color: #bbb; font-size: 0.88rem;
+        }
+        .stripe-loading-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #FFB6C1; animation: pulse 1.2s ease-in-out infinite;
+        }
+        .stripe-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+        .stripe-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes pulse { 0%,100%{opacity:0.3;transform:scale(0.8)} 50%{opacity:1;transform:scale(1)} }
+
+        /* SEGURANÇA */
         .seguranca-info {
-            display: flex; flex-direction: column; gap: 6px;
-            margin-top: 16px; padding-top: 16px;
+            display: flex; flex-direction: column; gap: 5px;
+            margin-top: 14px; padding-top: 14px;
             border-top: 1px solid #f5f5f5;
         }
         .seguranca-linha {
-            display: flex; align-items: center; gap: 8px;
-            font-size: 0.75rem; color: #bbb;
+            display: flex; align-items: center; gap: 7px;
+            font-size: 0.73rem; color: #c0c0c0;
         }
-        .seguranca-linha i { color: #25D366; }
+        .seguranca-linha i { color: #25D366; width: 12px; }
 
         /* MOBILE */
         @media (max-width: 768px) {
@@ -274,10 +234,10 @@
             .form-row.tres { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 480px) {
-            .container { padding: 16px 12px; }
-            .secao { padding: 18px 14px; }
+            .container { padding: 14px 11px; }
+            .secao { padding: 16px 14px; }
             .form-row.tres { grid-template-columns: 1fr; }
-            .btn-pagar { padding: 15px; font-size: 0.97rem; }
+            .btn-pagar { padding: 14px; font-size: 0.95rem; }
         }
     </style>
 </head>
@@ -285,14 +245,14 @@
 
 <header class="header">
     <a href="carrinho.html" class="header-voltar"><i class="fas fa-arrow-left"></i> Carrinho</a>
-    <a href="index.html"><img src="logo.png" alt="MBR" style="height:44px;"></a>
+    <a href="index.html"><img src="logo.png" alt="MBR" style="height:42px;"></a>
     <div class="header-lock"><i class="fas fa-lock"></i> Pagamento Seguro</div>
 </header>
 
 <div class="progress-bar">
     <div class="progress-steps">
         <div class="step done">
-            <div class="step-circle"><i class="fas fa-check" style="font-size:0.75rem;"></i></div>
+            <div class="step-circle"><i class="fas fa-check" style="font-size:0.7rem;"></i></div>
             <div class="step-label">Carrinho</div>
         </div>
         <div class="step-line done"></div>
@@ -316,26 +276,26 @@
 <div class="container">
     <div class="checkout-layout">
 
-        <!-- COLUNA ESQUERDA: FORMULÁRIOS -->
+        <!-- ESQUERDA -->
         <div>
             <!-- DADOS PESSOAIS -->
             <div class="secao">
                 <div class="secao-titulo"><i class="fas fa-user"></i> Dados Pessoais</div>
-                <div style="display:flex; flex-direction:column; gap:14px;">
+                <div style="display:flex;flex-direction:column;gap:12px;">
                     <div class="form-row">
                         <div class="form-group">
                             <label>Nome completo *</label>
-                            <input type="text" id="nome" placeholder="Seu nome completo">
+                            <input type="text" id="nome" placeholder="Seu nome completo" autocomplete="name">
                         </div>
                         <div class="form-group">
                             <label>E-mail *</label>
-                            <input type="email" id="email" placeholder="seu@email.com">
+                            <input type="email" id="email" placeholder="seu@email.com" autocomplete="email">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Telefone / WhatsApp *</label>
-                            <input type="tel" id="telefone" placeholder="(81) 99999-9999">
+                            <input type="tel" id="telefone" placeholder="(81) 99999-9999" autocomplete="tel">
                         </div>
                         <div class="form-group">
                             <label>CPF</label>
@@ -348,21 +308,21 @@
             <!-- ENDEREÇO -->
             <div class="secao">
                 <div class="secao-titulo"><i class="fas fa-map-marker-alt"></i> Endereço de Entrega</div>
-                <div style="display:flex; flex-direction:column; gap:14px;">
+                <div style="display:flex;flex-direction:column;gap:12px;">
                     <div class="form-row">
                         <div class="form-group">
                             <label>CEP *</label>
-                            <input type="text" id="cep" placeholder="00000-000" maxlength="9" oninput="buscarCep(this)">
+                            <input type="text" id="cep" placeholder="00000-000" maxlength="9" oninput="buscarCep(this)" autocomplete="postal-code">
                         </div>
                         <div class="form-group">
                             <label>Estado</label>
-                            <input type="text" id="estado" placeholder="PE" maxlength="2">
+                            <input type="text" id="estado" placeholder="PE" maxlength="2" autocomplete="address-level1">
                         </div>
                     </div>
                     <div class="form-row full">
                         <div class="form-group">
                             <label>Rua / Logradouro *</label>
-                            <input type="text" id="rua" placeholder="Rua das Flores">
+                            <input type="text" id="rua" placeholder="Rua das Flores" autocomplete="address-line1">
                         </div>
                     </div>
                     <div class="form-row tres">
@@ -372,7 +332,7 @@
                         </div>
                         <div class="form-group">
                             <label>Complemento</label>
-                            <input type="text" id="complemento" placeholder="Apto 4">
+                            <input type="text" id="complemento" placeholder="Apto 4" autocomplete="address-line2">
                         </div>
                         <div class="form-group">
                             <label>Bairro</label>
@@ -382,84 +342,66 @@
                     <div class="form-row full">
                         <div class="form-group">
                             <label>Cidade *</label>
-                            <input type="text" id="cidade" placeholder="Recife">
+                            <input type="text" id="cidade" placeholder="Recife" autocomplete="address-level2">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- PAGAMENTO STRIPE -->
+            <!-- STRIPE PAYMENT ELEMENT -->
             <div class="secao">
-                <div class="secao-titulo"><i class="fas fa-credit-card"></i> Pagamento</div>
+                <div class="secao-titulo"><i class="fas fa-credit-card"></i> Forma de Pagamento</div>
 
-                <div class="card-icons">
-                    <span class="card-icon">Visa</span>
-                    <span class="card-icon">Mastercard</span>
-                    <span class="card-icon">Elo</span>
-                    <span class="card-icon">American Express</span>
-                    <span class="card-icon">Pix</span>
+                <!-- Loading state -->
+                <div class="stripe-loading" id="stripeLoading">
+                    <div class="stripe-loading-dot"></div>
+                    <div class="stripe-loading-dot"></div>
+                    <div class="stripe-loading-dot"></div>
+                    <span>Carregando opções de pagamento...</span>
                 </div>
 
-                <div style="display:flex; flex-direction:column; gap:14px;">
-                    <div class="form-group">
-                        <label>Número do cartão</label>
-                        <div class="stripe-element-wrap" id="cardNumberWrap">
-                            <div id="cardNumber"></div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Validade</label>
-                            <div class="stripe-element-wrap" id="cardExpiryWrap">
-                                <div id="cardExpiry"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>CVV</label>
-                            <div class="stripe-element-wrap" id="cardCvcWrap">
-                                <div id="cardCvc"></div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Stripe Payment Element monta aqui -->
+                <div id="payment-element-wrap" style="display:none;">
+                    <div id="payment-element"></div>
                 </div>
 
                 <div class="payment-error" id="paymentError">
                     <i class="fas fa-exclamation-circle"></i>
-                    <span id="paymentErrorMsg"></span>
+                    <span id="paymentErrorMsg">Erro ao processar pagamento.</span>
                 </div>
             </div>
         </div>
 
-        <!-- COLUNA DIREITA: RESUMO + BOTÃO PAGAR -->
+        <!-- DIREITA: RESUMO -->
         <div>
             <div class="resumo-card">
-                <div class="resumo-titulo">Seu pedido</div>
+                <div class="resumo-titulo">Resumo do pedido</div>
                 <div id="resumoItens"></div>
 
-                <div style="margin-top:12px;">
+                <div style="margin-top:10px;">
                     <div class="resumo-linha">
                         <span>Subtotal</span>
-                        <span id="resumoSubtotal">R$ 0,00</span>
+                        <span id="resumoSubtotal">—</span>
                     </div>
                     <div class="resumo-linha">
                         <span>Frete</span>
-                        <span class="frete-badge" id="freteBadge">🚚 Frete Grátis</span>
+                        <span class="frete-ok" id="freteBadge">🚚 Grátis</span>
                     </div>
                     <div class="resumo-linha total">
                         <span>Total</span>
-                        <span id="resumoTotal">R$ 0,00</span>
+                        <span id="resumoTotal">—</span>
                     </div>
                 </div>
 
-                <button class="btn-pagar" id="btnPagar" onclick="processarPagamento()">
+                <button class="btn-pagar" id="btnPagar" onclick="processarPagamento()" disabled>
                     <div class="spinner" id="spinner"></div>
                     <i class="fas fa-lock" id="btnIcon"></i>
-                    <span id="btnTexto">Pagar agora</span>
+                    <span id="btnTexto">Carregando...</span>
                 </button>
 
                 <div class="seguranca-info">
                     <div class="seguranca-linha"><i class="fas fa-shield-alt"></i> Pagamento 100% seguro — SSL</div>
-                    <div class="seguranca-linha"><i class="fas fa-lock"></i> Seus dados são criptografados</div>
+                    <div class="seguranca-linha"><i class="fas fa-lock"></i> Dados criptografados</div>
                     <div class="seguranca-linha"><i class="fab fa-stripe"></i> Processado pelo Stripe</div>
                 </div>
             </div>
@@ -469,243 +411,263 @@
 </div>
 
 <script>
-    // ======= CARRINHO =======
-    const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
-    const total = parseFloat(localStorage.getItem('carrinhoTotal') || '0');
+// ====== CARRINHO ======
+const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
 
-    function formatarPreco(v) {
-        return 'R$ ' + v.toFixed(2).replace('.', ',');
-    }
-    function precoNumerico(str) {
-        return parseFloat(str.replace('R$','').replace(/\./g,'').replace(',','.').trim());
-    }
+function fmt(v) { return 'R$ ' + parseFloat(v).toFixed(2).replace('.', ','); }
+function toNum(s) {
+    if (typeof s === 'number') return s;
+    return parseFloat((s||'0').replace('R$','').replace(/\./g,'').replace(',','.').trim()) || 0;
+}
 
-    function renderResumo() {
-        const subtotal = carrinho.reduce((a, i) => a + (precoNumerico(i.preco) * i.qtd), 0);
-        const totalFinal = total > 0 ? total : subtotal;
-
-        document.getElementById('resumoItens').innerHTML = carrinho.map(item => `
-            <div class="resumo-item">
-                <img src="${item.imagem}" alt="${item.titulo}" onerror="this.src='logo.png'">
-                <div class="resumo-item-info">
-                    <div class="resumo-item-nome">${item.titulo}</div>
-                    <div class="resumo-item-qtd">Qtd: ${item.qtd}</div>
-                </div>
-                <div class="resumo-item-preco">${formatarPreco(precoNumerico(item.preco) * item.qtd)}</div>
+function renderResumo() {
+    const sub = carrinho.reduce((a, i) => a + toNum(i.preco) * i.qtd, 0);
+    const total = parseFloat(localStorage.getItem('carrinhoTotal') || sub);
+    document.getElementById('resumoItens').innerHTML = carrinho.map(i => `
+        <div class="resumo-item">
+            <img src="${i.imagem}" alt="${i.titulo}" onerror="this.src='logo.png'">
+            <div class="resumo-item-info">
+                <div class="resumo-item-nome">${i.titulo}</div>
+                <div class="resumo-item-qtd">Qtd: ${i.qtd}</div>
             </div>
-        `).join('');
+            <div class="resumo-item-preco">${fmt(toNum(i.preco) * i.qtd)}</div>
+        </div>`).join('');
+    document.getElementById('resumoSubtotal').textContent = fmt(sub);
+    document.getElementById('resumoTotal').textContent = fmt(total);
+}
+renderResumo();
 
-        document.getElementById('resumoSubtotal').textContent = formatarPreco(subtotal);
-        document.getElementById('resumoTotal').textContent = formatarPreco(totalFinal);
-    }
+// ====== FRETE ======
+function textoFrete(cidade) {
+    const c = (cidade||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    if (c === 'recife') return '🏠 Entrega Grátis em Recife';
+    if (c === 'maceio') return '🚚 Frete Grátis — Maceió';
+    if (c === 'joao pessoa') return '🚚 Frete Grátis — João Pessoa';
+    return '🚚 Frete Grátis';
+}
+document.getElementById('cidade').addEventListener('input', function() {
+    document.getElementById('freteBadge').textContent = textoFrete(this.value);
+});
 
-    renderResumo();
-
-    // ======= FRETE POR CIDADE =======
-    const CIDADES_FRETE_GRATIS = ['recife','maceió','maceio','joão pessoa','joao pessoa'];
-
-    function calcularFrete(cidade) {
-        const c = (cidade || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        const gratis = CIDADES_FRETE_GRATIS.some(fc =>
-            fc.normalize('NFD').replace(/[\u0300-\u036f]/g, '') === c
-        );
-        return gratis ? 0 : 0; // todas grátis por ora — adaptar se precisar cobrar
-    }
-
-    function textoFrete(cidade) {
-        const c = (cidade || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        if (c === 'recife') return '🏠 Entrega Grátis em Recife';
-        if (c === 'maceio' || c === 'maceió') return '🚚 Frete Grátis para Maceió';
-        if (c === 'joao pessoa' || c === 'joão pessoa') return '🚚 Frete Grátis para João Pessoa';
-        return '🚚 Frete Grátis para todo o Brasil';
-    }
-
-    function atualizarFrete() {
-        const cidade = document.getElementById('cidade').value;
-        const badge = document.getElementById('freteBadge');
-        if (badge) badge.textContent = textoFrete(cidade);
-    }
-
-    // ======= CEP AUTO-PREENCHIMENTO =======
-    async function buscarCep(input) {
-        let val = input.value.replace(/\D/g, '');
-        if (val.length > 5) val = val.slice(0,5) + '-' + val.slice(5,8);
-        input.value = val;
-
-        if (val.replace('-','').length === 8) {
-            try {
-                const res = await fetch(`https://viacep.com.br/ws/${val.replace('-','')}/json/`);
-                const data = await res.json();
-                if (!data.erro) {
-                    document.getElementById('rua').value = data.logradouro || '';
-                    document.getElementById('bairro').value = data.bairro || '';
-                    document.getElementById('cidade').value = data.localidade || '';
-                    document.getElementById('estado').value = data.uf || '';
-                    document.getElementById('numero').focus();
-                    atualizarFrete();
-                }
-            } catch(e) {}
-        }
-    }
-
-    document.getElementById('cidade').addEventListener('input', atualizarFrete);
-
-    // ======= MÁSCARAS =======
-    document.getElementById('telefone').addEventListener('input', function() {
-        let v = this.value.replace(/\D/g,'');
-        if (v.length <= 10) v = v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');
-        else v = v.replace(/(\d{2})(\d{5})(\d{0,4})/,'($1) $2-$3');
-        this.value = v;
-    });
-    document.getElementById('cpf').addEventListener('input', function() {
-        let v = this.value.replace(/\D/g,'');
-        v = v.replace(/(\d{3})(\d)/,'$1.$2');
-        v = v.replace(/(\d{3})(\d)/,'$1.$2');
-        v = v.replace(/(\d{3})(\d{1,2})$/,'$1-$2');
-        this.value = v;
-    });
-
-    // ======= STRIPE =======
-    let stripeInstance, cardNumber, cardExpiry, cardCvc;
-
-    async function setupStripe() {
+// ====== CEP ======
+async function buscarCep(input) {
+    let v = input.value.replace(/\D/g,'');
+    if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5,8);
+    input.value = v;
+    if (v.replace('-','').length === 8) {
         try {
-            const res = await fetch('/.netlify/functions/get-config');
-            const { stripeKey } = await res.json();
-            stripeInstance = Stripe(stripeKey);
-        } catch(e) {
-            // fallback local: sem Stripe inicializado
-            return;
-        }
-
-        const elements = stripeInstance.elements({
-            locale: 'pt-BR',
-            fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap' }]
-        });
-
-        const elementStyle = {
-            base: {
-                fontFamily: 'Jost, sans-serif',
-                fontSize: '15px',
-                color: '#333',
-                '::placeholder': { color: '#bbb' }
-            },
-            invalid: { color: '#ff4444' }
-        };
-
-        cardNumber = elements.create('cardNumber', { style: elementStyle, showIcon: true });
-        cardExpiry = elements.create('cardExpiry', { style: elementStyle });
-        cardCvc    = elements.create('cardCvc',    { style: elementStyle });
-
-        cardNumber.mount('#cardNumber');
-        cardExpiry.mount('#cardExpiry');
-        cardCvc.mount('#cardCvc');
-
-        [
-            [cardNumber, 'cardNumberWrap'],
-            [cardExpiry, 'cardExpiryWrap'],
-            [cardCvc,    'cardCvcWrap']
-        ].forEach(([el, wrapId]) => {
-            el.on('focus', () => document.getElementById(wrapId).classList.add('focused'));
-            el.on('blur',  () => document.getElementById(wrapId).classList.remove('focused'));
-            el.on('change', ev => document.getElementById(wrapId).classList.toggle('error', !!ev.error));
-        });
-    }
-
-    setupStripe();
-
-    // ======= VALIDAÇÃO =======
-    function validarCampos() {
-        const obrigatorios = ['nome','email','telefone','cep','rua','numero','cidade'];
-        let ok = true;
-        obrigatorios.forEach(id => {
-            const el = document.getElementById(id);
-            if (!el.value.trim()) { el.classList.add('error'); ok = false; }
-            else el.classList.remove('error');
-        });
-        return ok;
-    }
-
-    // ======= PROCESSAR PAGAMENTO =======
-    async function processarPagamento() {
-        if (!validarCampos()) { mostrarErro('Preencha todos os campos obrigatórios.'); return; }
-        if (!stripeInstance || !cardNumber) { mostrarErro('Stripe não carregado. Recarregue a página.'); return; }
-
-        setCarregando(true);
-        esconderErro();
-
-        const totalFinal = parseFloat(localStorage.getItem('carrinhoTotal') || '0');
-        const customer = {
-            nome:     document.getElementById('nome').value,
-            email:    document.getElementById('email').value,
-            telefone: document.getElementById('telefone').value,
-            cidade:   document.getElementById('cidade').value
-        };
-
-        try {
-            // 1. Cria Payment Intent
-            const res = await fetch('/.netlify/functions/create-payment-intent', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ amount: totalFinal, items: carrinho, customer })
-            });
-            const { clientSecret, error: serverError } = await res.json();
-            if (serverError) throw new Error(serverError);
-
-            // 2. Confirma pagamento
-            const { error, paymentIntent } = await stripeInstance.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: cardNumber,
-                    billing_details: {
-                        name: customer.nome,
-                        email: customer.email,
-                        phone: customer.telefone,
-                        address: {
-                            line1: document.getElementById('rua').value + ', ' + document.getElementById('numero').value,
-                            city: customer.cidade,
-                            state: document.getElementById('estado').value,
-                            postal_code: document.getElementById('cep').value.replace('-',''),
-                            country: 'BR'
-                        }
-                    }
-                },
-                receipt_email: customer.email
-            });
-
-            if (error) throw new Error(error.message);
-
-            // 3. Sucesso
-            if (paymentIntent.status === 'succeeded') {
-                localStorage.setItem('pedidoId', paymentIntent.id);
-                localStorage.setItem('pedidoCliente', JSON.stringify(customer));
-                localStorage.setItem('totalPago', totalFinal);
-                localStorage.setItem('carrinhoSnapshot', localStorage.getItem('carrinho') || '[]');
-                window.location.href = 'aprovacao.html';
+            const r = await fetch(`https://viacep.com.br/ws/${v.replace('-','')}/json/`);
+            const d = await r.json();
+            if (!d.erro) {
+                document.getElementById('rua').value    = d.logradouro || '';
+                document.getElementById('bairro').value = d.bairro     || '';
+                document.getElementById('cidade').value = d.localidade  || '';
+                document.getElementById('estado').value = d.uf          || '';
+                document.getElementById('freteBadge').textContent = textoFrete(d.localidade);
+                document.getElementById('numero').focus();
             }
-
-        } catch (err) {
-            mostrarErro(err.message || 'Erro ao processar pagamento. Tente novamente.');
-            setCarregando(false);
-        }
+        } catch(e) {}
     }
+}
 
-    function setCarregando(sim) {
+// ====== MÁSCARAS ======
+document.getElementById('telefone').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,11);
+    v = v.length <= 10
+        ? v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3')
+        : v.replace(/(\d{2})(\d{5})(\d{0,4})/,'($1) $2-$3');
+    this.value = v;
+});
+document.getElementById('cpf').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,11);
+    v = v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+    this.value = v;
+});
+
+// ====== STRIPE PAYMENT ELEMENT ======
+let stripeInstance, stripeElements;
+
+async function iniciarStripe() {
+    try {
+        const totalFinal = parseFloat(localStorage.getItem('carrinhoTotal') || '0');
+        if (totalFinal <= 0) return;
+
+        // 1. Busca publishable key
+        const cfgRes = await fetch('/.netlify/functions/get-config');
+        const { stripeKey } = await cfgRes.json();
+        stripeInstance = Stripe(stripeKey);
+
+        // 2. Cria Payment Intent logo ao carregar
+        const piRes = await fetch('/.netlify/functions/create-payment-intent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                amount: totalFinal,
+                items: carrinho,
+                customer: {}
+            })
+        });
+        const { clientSecret, error: piError } = await piRes.json();
+        if (piError) throw new Error(piError);
+
+        // 3. Monta Payment Element com aparência MBR
+        const appearance = {
+            theme: 'stripe',
+            variables: {
+                colorPrimary:      '#FFB6C1',
+                colorBackground:   '#ffffff',
+                colorText:         '#333333',
+                colorDanger:       '#ff4444',
+                colorTextSecondary:'#888888',
+                fontFamily:        'Jost, sans-serif',
+                fontSizeBase:      '15px',
+                spacingUnit:       '5px',
+                borderRadius:      '10px',
+                focusBoxShadow:    '0 0 0 3px rgba(255,182,193,0.25)',
+                focusOutline:      'none',
+            },
+            rules: {
+                '.Input': {
+                    border: '1.5px solid #e8e8e8',
+                    boxShadow: 'none',
+                    padding: '11px 13px',
+                },
+                '.Input:focus': {
+                    border: '1.5px solid #FFB6C1',
+                    boxShadow: '0 0 0 3px rgba(255,182,193,0.18)',
+                },
+                '.Label': {
+                    fontWeight: '600',
+                    color: '#666',
+                    fontSize: '13px',
+                },
+                '.Tab': {
+                    border: '1.5px solid #e8e8e8',
+                    borderRadius: '10px',
+                },
+                '.Tab:hover': {
+                    border: '1.5px solid #FFB6C1',
+                    color: '#FFB6C1',
+                },
+                '.Tab--selected': {
+                    border: '1.5px solid #FFB6C1',
+                    boxShadow: '0 0 0 2px rgba(255,182,193,0.25)',
+                    color: '#FFB6C1',
+                },
+                '.Tab--selected:focus': {
+                    boxShadow: '0 0 0 3px rgba(255,182,193,0.3)',
+                },
+                '.CheckboxInput': {
+                    border: '1.5px solid #e8e8e8',
+                },
+                '.CheckboxInput--checked': {
+                    backgroundColor: '#FFB6C1',
+                    border: '1.5px solid #FFB6C1',
+                },
+            }
+        };
+
+        stripeElements = stripeInstance.elements({ clientSecret, appearance, locale: 'pt-BR' });
+
+        const paymentElement = stripeElements.create('payment', {
+            layout: { type: 'tabs', defaultCollapsed: false },
+            fields: { billingDetails: { email: 'never', phone: 'never', name: 'never' } }
+        });
+
+        paymentElement.mount('#payment-element');
+
+        // Esconde loading, mostra elemento
+        document.getElementById('stripeLoading').style.display = 'none';
+        document.getElementById('payment-element-wrap').style.display = 'block';
+
+        // Ativa botão
         const btn = document.getElementById('btnPagar');
-        document.getElementById('spinner').style.display = sim ? 'block' : 'none';
-        document.getElementById('btnIcon').style.display  = sim ? 'none' : 'inline';
-        document.getElementById('btnTexto').textContent   = sim ? 'Processando...' : 'Pagar agora';
-        btn.disabled = sim;
-    }
+        btn.disabled = false;
+        document.getElementById('btnTexto').textContent = 'Pagar agora';
 
-    function mostrarErro(msg) {
-        const el = document.getElementById('paymentError');
-        document.getElementById('paymentErrorMsg').textContent = msg;
-        el.style.display = 'flex';
-        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch(err) {
+        document.getElementById('stripeLoading').style.display = 'none';
+        document.getElementById('paymentError').style.display = 'flex';
+        document.getElementById('paymentErrorMsg').textContent = 'Erro ao iniciar pagamento. Recarregue a página.';
+        console.error(err);
     }
-    function esconderErro() { document.getElementById('paymentError').style.display = 'none'; }
+}
 
-    document.querySelectorAll('input').forEach(i => i.addEventListener('input', () => i.classList.remove('error')));
+// ====== VALIDAÇÃO ======
+function validarCampos() {
+    const campos = ['nome','email','telefone','cep','rua','numero','cidade'];
+    let ok = true;
+    campos.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) { el.classList.add('error'); ok = false; }
+        else el.classList.remove('error');
+    });
+    return ok;
+}
+document.querySelectorAll('input').forEach(i => i.addEventListener('input', () => i.classList.remove('error')));
+
+// ====== PAGAMENTO ======
+async function processarPagamento() {
+    if (!validarCampos()) {
+        document.getElementById('paymentError').style.display = 'flex';
+        document.getElementById('paymentErrorMsg').textContent = 'Preencha todos os campos obrigatórios.';
+        return;
+    }
+    if (!stripeInstance || !stripeElements) return;
+
+    setCarregando(true);
+    document.getElementById('paymentError').style.display = 'none';
+
+    const customer = {
+        nome:     document.getElementById('nome').value,
+        email:    document.getElementById('email').value,
+        telefone: document.getElementById('telefone').value,
+        cidade:   document.getElementById('cidade').value
+    };
+
+    const { error } = await stripeInstance.confirmPayment({
+        elements: stripeElements,
+        confirmParams: {
+            return_url: window.location.origin + '/aprovacao.html',
+            payment_method_data: {
+                billing_details: {
+                    name:  customer.nome,
+                    email: customer.email,
+                    phone: customer.telefone,
+                    address: {
+                        line1:       document.getElementById('rua').value + ', ' + document.getElementById('numero').value,
+                        city:        customer.cidade,
+                        state:       document.getElementById('estado').value,
+                        postal_code: document.getElementById('cep').value.replace('-',''),
+                        country:     'BR'
+                    }
+                }
+            }
+        }
+    });
+
+    if (error) {
+        document.getElementById('paymentError').style.display = 'flex';
+        document.getElementById('paymentErrorMsg').textContent = error.message;
+        setCarregando(false);
+    } else {
+        // Stripe redireciona para return_url automaticamente
+        localStorage.setItem('pedidoCliente', JSON.stringify(customer));
+        localStorage.setItem('carrinhoSnapshot', localStorage.getItem('carrinho') || '[]');
+        localStorage.setItem('totalPago', localStorage.getItem('carrinhoTotal') || '0');
+    }
+}
+
+function setCarregando(sim) {
+    const btn = document.getElementById('btnPagar');
+    document.getElementById('spinner').style.display  = sim ? 'block' : 'none';
+    document.getElementById('btnIcon').style.display  = sim ? 'none'  : 'inline';
+    document.getElementById('btnTexto').textContent   = sim ? 'Processando...' : 'Pagar agora';
+    btn.disabled = sim;
+}
+
+// Inicia o Stripe ao carregar a página
+iniciarStripe();
 </script>
 </body>
 </html>
