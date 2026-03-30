@@ -1158,6 +1158,14 @@
             overflow: hidden;
         }
 
+        /* Wrapper grid — empilha WhatsApp e Comprar no mesmo espaço */
+        .btn-swap-wrapper {
+            display: grid;
+            width: 100%;
+        }
+        .btn-swap-wrapper > * {
+            grid-area: 1 / 1;
+        }
         /* Botão Comprar — aparece no hover do card */
         .btn-comprar {
             display: inline-flex;
@@ -1176,30 +1184,24 @@
             width: 100%;
             box-shadow: 0 6px 20px rgba(218,165,32,0.4);
             cursor: pointer;
-            position: absolute;
-            bottom: 0;
-            left: 0;
             opacity: 0;
-            transform: translateY(10px);
             transition: all 0.3s ease;
+            z-index: 2;
         }
-        .product-info { position: relative; }
         .buy-button {
             transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1;
         }
         .product-card:hover .buy-button {
             opacity: 0;
             pointer-events: none;
-            transform: translateY(-10px);
         }
         .product-card:hover .btn-comprar {
             opacity: 1;
             pointer-events: auto;
-            transform: translateY(0);
         }
         .btn-comprar:hover {
             background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
-            transform: translateY(-3px) !important;
             box-shadow: 0 8px 25px rgba(218,165,32,0.6);
         }
         
@@ -2663,8 +2665,10 @@
                             <span class="main-price">R$ 1.390,90</span>
                             <span class="installments">12x de R$ 115,91 sem juros</span>
                         </div>
-                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Docinho.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        <div class="btn-swap-wrapper">
+                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Docinho.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -2696,8 +2700,10 @@
                             <span class="main-price">R$ 990,98</span>
                             <span class="installments">12x de R$ 82,58 sem juros</span>
                         </div>
-                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Luninha.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        <div class="btn-swap-wrapper">
+                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Luninha.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -2729,8 +2735,10 @@
                             <span class="main-price">R$ 990,98</span>
                             <span class="installments">12x de R$ 82,58 sem juros</span>
                         </div>
-                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Sorrisinha%20Magnética.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        <div class="btn-swap-wrapper">
+                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Sorrisinha%20Magnética.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -2763,8 +2771,10 @@
                             <span class="main-price">R$ 899,98</span>
                             <span class="installments">12x de R$ 75,00 sem juros</span>
                         </div>
-                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Princesinha%20Mandona.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        <div class="btn-swap-wrapper">
+                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Princesinha%20Mandona.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -2796,8 +2806,10 @@
                             <span class="main-price">R$ 1.190,00</span>
                             <span class="installments">12x de R$ 99,17 sem juros</span>
                         </div>
-                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Princesa%20Safira%20Diamante.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        <div class="btn-swap-wrapper">
+                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20Princesa%20Safira%20Diamante.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -2830,8 +2842,10 @@
                             <span class="main-price">R$ 990,00</span>
                             <span class="installments">12x de R$ 82,50 sem juros</span>
                         </div>
-                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Ruivinha.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        <div class="btn-swap-wrapper">
+                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Ruivinha.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -2862,8 +2876,10 @@
                             <span class="main-price">R$ 899,00</span>
                             <span class="installments">12x de R$ 74,92 sem juros</span>
                         </div>
-                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Sorrisinho.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        <div class="btn-swap-wrapper">
+                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20na%20boneca%20LINHA%20ENCANTO%20-%20Sorrisinho.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        </div>
                     </div>
                 </div>
 
@@ -2895,8 +2911,10 @@
                             <span class="main-price">R$ 1.190,00</span>
                             <span class="installments">12x de R$ 99,17 sem juros</span>
                         </div>
-                        <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20no%20bebê%20LINHA%20ENCANTO%20-%20Nuvem%20Azul%20Fofo.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
-                        <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        <div class="btn-swap-wrapper">
+                            <a href="https://wa.me/5581979001072?text=Olá!%20Tenho%20interesse%20no%20bebê%20LINHA%20ENCANTO%20-%20Nuvem%20Azul%20Fofo.%20Gostaria%20de%20mais%20informações%20sobre%20disponibilidade%20e%20formas%20de%20pagamento." target="_blank" class="buy-button"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+                            <button class="btn-comprar" onclick="adicionarCarrinho(this)">🛒 COMPRAR</button>
+                        </div>
                     </div>
                 </div>
 
