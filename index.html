@@ -1204,14 +1204,28 @@
             cursor: pointer;
             text-decoration: none;
         }
-        .wbtn-icon, .wbtn-heart { position: absolute; }
-        .wbtn-icon { animation: wbtn-loop 45s infinite; animation-delay: 0s; }
-        .wbtn-heart { animation: wbtn-loop 45s infinite; animation-delay: 40s; font-size: 24px; }
-        @keyframes wbtn-loop {
+        .wbtn-icon {
+          position: absolute;
+          opacity: 1;
+          animation: mostra-icon 45s infinite;
+        }
+        .wbtn-heart {
+          position: absolute;
+          opacity: 0;
+          font-size: 24px;
+          animation: mostra-heart 45s infinite;
+        }
+        @keyframes mostra-icon {
           0%   { opacity: 1; }
           88%  { opacity: 1; }
           89%  { opacity: 0; }
           100% { opacity: 0; }
+        }
+        @keyframes mostra-heart {
+          0%   { opacity: 0; }
+          88%  { opacity: 0; }
+          89%  { opacity: 1; }
+          100% { opacity: 1; }
         }
 
         @keyframes zapPulse {
