@@ -944,6 +944,29 @@
         .zoom-nav:hover { background: rgba(255,255,255,0.3); }
         .zoom-prev { left: 15px; }
         .zoom-next { right: 15px; }
+        .zoom-thumbs {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+        .zoom-thumbs img {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.2s;
+        }
+        .zoom-thumbs img:hover,
+        .zoom-thumbs img.active {
+            border-color: #ff69b4;
+            opacity: 1;
+        }
 
         /* === BARRA DE BUSCA === */
         .search-bar {
@@ -1166,22 +1189,8 @@
         }
         
         .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 20px;
-            width: 56px;
-            height: 56px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1002;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
-            cursor: pointer;
-            text-decoration: none;
+            display: none !important; /* Removido: botão flutuante desativado */
         }
-        .whatsapp-btn img { display:block; }
 
         @keyframes zapPulse {
             0%, 100% {
@@ -1263,25 +1272,7 @@
 
         /* --- Botão Flutuante Cadastro (Canto Direito) --- */
         .cadastro-btn {
-            display: flex;
-            position: fixed;
-            bottom: 30px;
-            right: 20px;
-            z-index: 8999;
-            background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            width: 56px;
-            height: 56px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(218,165,32,0.5);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            padding: 0;
-            gap: 0;
+            display: none !important; /* Removido: botão flutuante desativado */
         }
 
         .cadastro-btn.expanded {
@@ -1630,18 +1621,6 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 10px;
-        }
-        /* Título inglês do widget Google — bem pequeno e discreto */
-        .reviews-widget .eapps-google-reviews-title,
-        .reviews-widget [class*="title"],
-        .reviews-widget h2,
-        .reviews-widget h3 {
-            font-size: 0.6rem !important;
-            color: #ccc !important;
-            font-weight: 300 !important;
-            letter-spacing: 2px !important;
-            text-transform: uppercase !important;
-            opacity: 0.5 !important;
         }
 
         /* --- Language Selector --- */
@@ -2292,26 +2271,6 @@
             color: #906070;
         }
 
-        .welcome-x {
-            position: absolute;
-            top: 12px;
-            right: 14px;
-            width: 32px;
-            height: 32px;
-            background: rgba(255,255,255,0.15);
-            border: none;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-            z-index: 10;
-        }
-        .welcome-x:hover { background: rgba(255,255,255,0.35); }
-
         /* Partículas decorativas */
         .welcome-particle {
             position: absolute;
@@ -2478,7 +2437,6 @@
     <!-- WELCOME MODAL -->
     <div id="welcomeModal">
         <div class="welcome-box">
-            <button onclick="closeWelcome()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#999;">✕</button>
             <div class="confetti-container" id="confettiContainer"></div>
             <div class="welcome-particle wp1"></div>
             <div class="welcome-particle wp2"></div>
@@ -2489,7 +2447,8 @@
             </div>
             <h2 class="welcome-title" data-i18n="welcome_title">O <span>MUNDO DA BEBÊ REBORN</span><br>É SEU MUNDO! 💝</h2>
             <p class="welcome-sub" data-i18n="welcome_sub">A mesma loja, mas <strong>MAIS MODERNA E FÁCIL DE ACHAR.</strong><br>Queremos virar seu mundo, com a melhor experiência<br>em bebês reborn esperando por você.</p>
-            <button class="welcome-cta" onclick="triggerWelcomeAnimation()" data-i18n="welcome_cta">🌟 ENTRAR NO MEU MUNDO 🌟</button>
+            <button class="welcome-cta" onclick="triggerWelcomeAnimation()" data-i18n="welcome_cta">🌟 ENTRAR NO MEU MUNDO 🌟</button><br>
+            <button class="welcome-close" onclick="closeWelcome()" data-i18n="welcome_close">Entrar sem efeito</button>
         </div>
     </div>
 
@@ -2544,19 +2503,13 @@
                     </div>
                 </div>
                 <div class="icons">
-                    <a href="#" aria-label="Busca" onclick="toggleBusca(); return false;"><i class="fas fa-search"></i></a>
+                    <a href="#" aria-label="Buscar" onclick="toggleSearchBar(event)"><i class="fas fa-search"></i></a>
                     <a href="#" aria-label="Minha Conta"><i class="fas fa-user"></i></a>
                     <a href="#" aria-label="Carrinho" onclick="event.preventDefault(); abrirCarrinho()"><i class="fas fa-shopping-bag"></i></a>
                 </div>
             </div>
         </div>
     </header>
-
-    <div id="barra-busca" style="display:none; background:#fff; padding:15px 20px; box-shadow:0 4px 15px rgba(0,0,0,0.1); position:sticky; top:80px; z-index:999;">
-      <input id="input-busca" type="text" placeholder="🔍 Buscar bebê reborn..."
-        oninput="filtrarProdutos(this.value)"
-        style="width:100%; padding:12px 20px; border:2px solid #FFB6C1; border-radius:50px; font-size:1rem; outline:none; font-family:'Jost',sans-serif;">
-    </div>
 
     <!-- PÁGINA DE PRODUTO INDIVIDUAL (container dinâmico) -->
     <section id="produto-page" style="display: none; background: #fff; min-height: 100vh;">
@@ -2631,8 +2584,15 @@
                 
                 <div class="product-card" data-apelido="Docinho" data-linha="Linha Encanto" data-altura="55cm" data-peso="1,300 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Docinho">
                     <div class="image-wrapper">
-                        <img src="produto-docinho.jpg" alt="BEBÊ REBORN - LINHA ENCANTO - Docinho" class="product-image" data-gallery='["produto-docinho.jpg"]'>
-                        <span class="gallery-counter">1/4</span>
+                        <img src="produto-docinho.jpg" alt="BEBÊ REBORN - LINHA ENCANTO - Docinho" class="product-image" data-gallery='["produto-docinho.jpg","img/docinho-1.png","img/docinho-2.png","img/docinho-3.png","img/docinho-4.jpg"]'>
+                        <span class="gallery-counter">1/5</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-docinho.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/docinho-1.png" onclick="switchPhoto(this,1)">
+                        <img src="img/docinho-2.png" onclick="switchPhoto(this,2)">
+                        <img src="img/docinho-3.png" onclick="switchPhoto(this,3)">
+                        <img src="img/docinho-4.jpg" onclick="switchPhoto(this,4)">
                     </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Docinho</h3>
@@ -2658,6 +2618,14 @@
                         <img src="produto-luninha.jpg" alt="LINHA ENCANTO - Luninha" class="product-image" data-gallery='["produto-luninha.jpg","img/luninha-1.jpg","img/luninha-2.jpg","img/luninha-3.jpg","img/luninha-4.jpg","img/luninha-5.jpg"]'>
                         <span class="gallery-counter">1/6</span>
                     </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-luninha.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/luninha-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/luninha-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/luninha-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/luninha-4.jpg" onclick="switchPhoto(this,4)">
+                        <img src="img/luninha-5.jpg" onclick="switchPhoto(this,5)">
+                    </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Luninha 🌙</h3>
                         <p class="product-desc">Delicada e serena como a lua — silicone inteiro com cabelos cacheados implantados e olhos de vidro.</p>
@@ -2682,6 +2650,13 @@
                         <img src="produto-sorrisinha.jpg" alt="Sorrisinha Magnética" class="product-image" data-gallery='["produto-sorrisinha.jpg","img/sorrisinha-1.jpg","img/sorrisinha-2.jpg","img/sorrisinha-3.jpg","img/sorrisinha-4.jpg","img/sorrisinha-5.jpg"]'>
                         <span class="gallery-counter">1/6</span>
                     </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-sorrisinha.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/sorrisinha-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/sorrisinha-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/sorrisinha-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/sorrisinha-4.jpg" onclick="switchPhoto(this,4)">
+                        <img src="img/sorrisinha-5.jpg" onclick="switchPhoto(this,5)">
                     </div>
                     <div class="product-info">
                         <h3>Sorrisinha Magnética 🧲😊</h3>
@@ -2707,6 +2682,14 @@
                         <img src="produto-princesinha.jpg" alt="Princesinha Mandona" class="product-image" data-gallery='["produto-princesinha.jpg","img/princesinha-1.png","img/princesinha-2.png","img/princesinha-3.png","img/princesinha-4.png","img/princesinha-5.jpeg","img/princesinha-6.jpeg"]'>
                         <span class="gallery-counter">1/7</span>
                     </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-princesinha.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/princesinha-1.png" onclick="switchPhoto(this,1)">
+                        <img src="img/princesinha-2.png" onclick="switchPhoto(this,2)">
+                        <img src="img/princesinha-3.png" onclick="switchPhoto(this,3)">
+                        <img src="img/princesinha-4.png" onclick="switchPhoto(this,4)">
+                        <img src="img/princesinha-5.jpeg" onclick="switchPhoto(this,5)">
+                        <img src="img/princesinha-6.jpeg" onclick="switchPhoto(this,6)">
                     </div>
                     <div class="product-info">
                         <h3>Princesinha Mandona 👑😌</h3>
@@ -2732,6 +2715,14 @@
                         <img src="produto-safira.jpg" alt="Princesa Safira Diamante" class="product-image" data-gallery='["produto-safira.jpg","img/safira-1.jpg","img/safira-2.jpg","img/safira-3.jpg","img/safira-4.jpg","img/safira-5.jpg"]'>
                         <span class="gallery-counter">1/6</span>
                     </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-safira.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/safira-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/safira-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/safira-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/safira-4.jpg" onclick="switchPhoto(this,4)">
+                        <img src="img/safira-5.jpg" onclick="switchPhoto(this,5)">
+                    </div>
                     <div class="product-info">
                         <h3>Princesa Safira Diamante 💎👑</h3>
                         <p class="product-desc">Nossa linha premium! Silicone de alta qualidade, olhos de vidro importado e enxoval de luxo completo.</p>
@@ -2756,6 +2747,14 @@
                         <img src="produto-ruivinha.jpg" alt="LINHA ENCANTO - Ruivinha" class="product-image" data-gallery='["produto-ruivinha.jpg","img/ruivinha-1.jpg","img/ruivinha-2.jpg","img/ruivinha-3.jpg","img/ruivinha-4.jpg","img/ruivinha-5.png","img/ruivinha-6.png"]'>
                         <span class="gallery-counter">1/7</span>
                     </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-ruivinha.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/ruivinha-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/ruivinha-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/ruivinha-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/ruivinha-4.jpg" onclick="switchPhoto(this,4)">
+                        <img src="img/ruivinha-5.png" onclick="switchPhoto(this,5)">
+                        <img src="img/ruivinha-6.png" onclick="switchPhoto(this,6)">
                     </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Ruivinha 🍓</h3>
@@ -2781,6 +2780,13 @@
                         <img src="produto-sorrisinho.jpg" alt="LINHA ENCANTO - Sorrisinho" class="product-image" data-gallery='["produto-sorrisinho.jpg","img/sorrisinho-1.jpg","img/sorrisinho-2.jpg","img/sorrisinho-3.jpg","img/sorrisinho-4.png"]'>
                         <span class="gallery-counter">1/5</span>
                     </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-sorrisinho.jpg" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/sorrisinho-1.jpg" onclick="switchPhoto(this,1)">
+                        <img src="img/sorrisinho-2.jpg" onclick="switchPhoto(this,2)">
+                        <img src="img/sorrisinho-3.jpg" onclick="switchPhoto(this,3)">
+                        <img src="img/sorrisinho-4.png" onclick="switchPhoto(this,4)">
+                    </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Sorrisinho 😄</h3>
                         <p class="product-desc">Corpo de tecido macio com membros de silicone. Leve, flexível e com sorriso que conquista no primeiro olhar.</p>
@@ -2804,6 +2810,14 @@
                     <div class="image-wrapper">
                         <img src="produto-nuvem-azul.png" alt="LINHA ENCANTO - Nuvem Azul Fofo" class="product-image" data-gallery='["produto-nuvem-azul.png","img/nuvem-azul-1.png","img/nuvem-azul-2.png","img/nuvem-azul-3.png","img/nuvem-azul-4.png","img/nuvem-azul-5.png"]'>
                         <span class="gallery-counter">1/6</span>
+                    </div>
+                    <div class="gallery-thumbs">
+                        <img src="produto-nuvem-azul.png" class="active" onclick="switchPhoto(this,0)">
+                        <img src="img/nuvem-azul-1.png" onclick="switchPhoto(this,1)">
+                        <img src="img/nuvem-azul-2.png" onclick="switchPhoto(this,2)">
+                        <img src="img/nuvem-azul-3.png" onclick="switchPhoto(this,3)">
+                        <img src="img/nuvem-azul-4.png" onclick="switchPhoto(this,4)">
+                        <img src="img/nuvem-azul-5.png" onclick="switchPhoto(this,5)">
                     </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Nuvem Azul Fofo 👦☁️</h3>
@@ -2912,7 +2926,7 @@
 
     <!-- WhatsApp Button Enhanced -->
     <a href="https://wa.me/5581979001072?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20bonecas%20reborn%20disponíveis%20👶💕" class="whatsapp-btn" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30" height="30" alt="WhatsApp">
+        <span class="whatsapp-text">💬 Fale conosco</span>
     </a>
 
     <!-- Botão Flutuante Cadastro -->
@@ -3014,25 +3028,22 @@
                 <span style="display:inline-block; background: linear-gradient(135deg,#ff69b4,#e8448a); color:white; font-size:0.65rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; padding:5px 20px; border-radius:30px; margin-bottom:16px;">✦ Transparência Total ✦</span>
             </div>
             <h2 style="font-size:2.2rem; color:#2a1020; font-weight:800; margin-bottom:4px; letter-spacing:-0.5px; text-align:center; line-height:1.2;">
-                O QUE NOSSOS CLIENTES DIZEM SOBRE NÓS
-                <span style="display:block; color:#ff69b4; font-size:1.1rem;">Avaliações Reais · Loja Física Real 🏪</span>
+                O QUE NOSSOS CLIENTES DIZEM
+                <span style="display:block; color:#ff69b4;">Avaliações Reais · Loja Física Real 🏪</span>
             </h2>
-            <p style="font-size:0.65rem; color:#bbb; margin-bottom:36px; font-style:italic; letter-spacing:2px; text-align:center; opacity:0.6;">"What Our Customers Say"</p>
+            <p style="font-size:0.68rem; color:#ccc; margin-bottom:36px; font-style:italic; letter-spacing:3px; text-transform:uppercase; text-align:center;">(What Our Customers Say)</p>
 
             <!-- Google Reviews Widget -->
             <div class="reviews-widget">
                 <script src="https://elfsightcdn.com/platform.js" async></script>
                 <div class="elfsight-app-fc567341-9e21-4e5c-94fd-e478f2096d9f" data-elfsight-app-lazy></div>
-                <p style="text-align:center; margin-top:8px; font-size:0.78rem; color:#DAA520; font-weight:600; letter-spacing:1px;">
-                    ↑ Clique para ver o Widget de Avaliações do Google
-                </p>
             </div>
 
-            <div style="margin-top:30px; text-align:center;">
-                <a href="https://share.google/QU11VYgxuxfA4YrQj" target="_blank" style="display:inline-flex; align-items:center; gap:10px; background:linear-gradient(135deg,#FFB6C1,#DAA520); color:#fff; font-weight:700; font-size:1rem; text-decoration:none; padding:14px 32px; border-radius:50px; box-shadow:0 6px 20px rgba(218,165,32,0.35); letter-spacing:0.5px; transition:all 0.3s;">
-                    <img src="https://www.google.com/favicon.ico" style="width:18px;height:18px;border-radius:3px;"> ⭐ Ver todas as 314 avaliações no Google →
+            <p style="margin-top: 20px; text-align:center;">
+                <a href="https://share.google/QU11VYgxuxfA4YrQj" target="_blank" style="color:#ff69b4; font-weight:600; font-size:0.85rem; text-decoration:none; border-bottom: 1px solid rgba(255,105,180,0.3); padding-bottom:2px;">
+                    ⭐ Ver todas as 314 avaliações no Google →
                 </a>
-            </div>
+            </p>
 
             <!-- SELOS DE CONFIANÇA -->
             <div style="margin-top:56px; text-align:center;">
@@ -3050,13 +3061,13 @@
                         <span class="selo-cta">📖 Entenda sua Garantia</span>
                     </div>
 
-                    <div class="selo-card selo-destaque">
+                    <a href="https://wa.me/5581979001072?text=Olá!%20Quero%20conhecer%20mais%20sobre%20a%20qualidade%20das%20bonecas!" target="_blank" class="selo-card selo-destaque">
                         <div class="selo-icon">🔒</div>
                         <div class="selo-badge">Confiança & Qualidade</div>
                         <h4 class="selo-title">Mundo da Bebê Reborn</h4>
                         <p class="selo-desc">Artesanato premium com carinho e segurança em cada detalhe</p>
-                        <span class="selo-cta">⭐ Loja oficial certificada</span>
-                    </div>
+                        <span class="selo-cta"><i class="fab fa-whatsapp"></i> Falar conosco</span>
+                    </a>
 
                     <div class="selo-card" onclick="openSegurancaBlog()" style="cursor:pointer;">
                         <div class="selo-icon">✅</div>
@@ -3660,7 +3671,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Fecha ao clicar no fundo (fora do box)
+            // Click para fechar pop-up em qualquer canto
             document.getElementById('welcomeModal').addEventListener('click', (e) => {
                 if (e.target.id === 'welcomeModal') {
                     closeWelcome();
@@ -3672,6 +3683,11 @@
                     document.getElementById('welcomeModal').classList.add('show');
                 }, 800);
             }
+        });
+
+        // QUALQUER clique no popup fecha e entra no site — zero clique perdido!
+        document.getElementById('welcomeModal').addEventListener('click', function() {
+            closeWelcome();
         });
 
         // Fechar modal ao clicar fora
@@ -3895,25 +3911,11 @@
         <button class="zoom-nav zoom-prev" onclick="zoomNav(-1)">&#8249;</button>
         <img id="zoomImg" src="" alt="Zoom">
         <button class="zoom-nav zoom-next" onclick="zoomNav(1)">&#8250;</button>
+        <div class="zoom-thumbs" id="zoomThumbs"></div>
     </div>
 
     <!-- BUSCA BROAD MATCH JS -->
     <script>
-    function toggleBusca() {
-        const b = document.getElementById('barra-busca');
-        b.style.display = b.style.display === 'none' ? 'block' : 'none';
-        if(b.style.display === 'block') document.getElementById('input-busca').focus();
-    }
-    function filtrarProdutos(termo) {
-        const cards = document.querySelectorAll('.product-card');
-        const t = termo.toLowerCase().trim();
-        cards.forEach(c => {
-            const nome = c.querySelector('h3') ? c.querySelector('h3').textContent.toLowerCase() : '';
-            const desc = c.querySelector('p') ? c.querySelector('p').textContent.toLowerCase() : '';
-            c.style.display = (!t || nome.includes(t) || desc.includes(t)) ? 'block' : 'none';
-        });
-    }
-
     function toggleSearchBar(e) {
         e.preventDefault();
         var bar = document.getElementById('searchBar');
@@ -4080,7 +4082,12 @@
     function openZoom() {
         const overlay = document.getElementById('zoomOverlay');
         const img = document.getElementById('zoomImg');
+        const thumbs = document.getElementById('zoomThumbs');
+
         img.src = zoomGallery[zoomIndex];
+        thumbs.innerHTML = zoomGallery.map((src, i) =>
+            '<img src="' + src + '" class="' + (i === zoomIndex ? 'active' : '') + '" onclick="zoomTo(' + i + ')">'
+        ).join('');
 
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -4103,6 +4110,9 @@
 
     function updateZoom() {
         document.getElementById('zoomImg').src = zoomGallery[zoomIndex];
+        document.querySelectorAll('#zoomThumbs img').forEach((t, i) => {
+            t.classList.toggle('active', i === zoomIndex);
+        });
     }
 
     // Fechar zoom com ESC ou clicando no fundo
@@ -4123,7 +4133,7 @@
             preco: 'R$ 1.390,90',
             parcelamento: 'ou 12x de R$ 115,91 sem juros',
             descricao: 'Bebê artesanal de silicone inteiro com cabelos implantados fio a fio e expressão de doçura irresistível. 55cm, 1.3kg. Kit maternidade completo com certidão de nascimento, mamadeira, chupeta magnética e enxoval.',
-            imagens: ['produto-docinho.jpg'],
+            imagens: ['produto-docinho.jpg', 'img/docinho-1.png', 'img/docinho-2.png', 'img/docinho-3.png', 'img/docinho-4.jpg'],
             avaliacoes: 314,
             whatsapp_msg: 'Olá! Tenho interesse no DOCINHO. Pode me ajudar?'
         },
@@ -4543,6 +4553,44 @@
     }
     .cart-btn-continuar:hover { color: #FFB6C1; }
 
+    /* Ícone flutuante do carrinho */
+    .cart-float-icon {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #DAA520, #FFD700);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 4px 20px rgba(218,165,32,0.5);
+        font-size: 1.3rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 8999;
+        transition: transform 0.2s;
+    }
+    .cart-float-icon:hover { transform: scale(1.1); }
+    .cart-float-icon .cart-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #FFB6C1;
+        color: #fff;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Jost', sans-serif;
+    }
+    .cart-float-icon .cart-badge.hidden { display: none; }
 </style>
 
 <!-- Overlay -->
@@ -4571,6 +4619,11 @@
     </div>
 </div>
 
+<!-- Ícone flutuante -->
+<button class="cart-float-icon" id="cartFloatIcon" onclick="abrirCarrinho()">
+    <i class="fas fa-shopping-bag"></i>
+    <span class="cart-badge hidden" id="cartFloatBadge">0</span>
+</button>
 
 <script>
     function abrirCarrinho() {
