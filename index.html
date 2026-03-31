@@ -4554,43 +4554,6 @@
     .cart-btn-continuar:hover { color: #FFB6C1; }
 
     /* Ícone flutuante do carrinho */
-    .cart-float-icon {
-        position: fixed;
-        bottom: 90px;
-        right: 20px;
-        width: 56px;
-        height: 56px;
-        background: linear-gradient(135deg, #DAA520, #FFD700);
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        box-shadow: 0 4px 20px rgba(218,165,32,0.5);
-        font-size: 1.3rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 8999;
-        transition: transform 0.2s;
-    }
-    .cart-float-icon:hover { transform: scale(1.1); }
-    .cart-float-icon .cart-badge {
-        position: absolute;
-        top: -4px;
-        right: -4px;
-        background: #FFB6C1;
-        color: #fff;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Jost', sans-serif;
-    }
-    .cart-float-icon .cart-badge.hidden { display: none; }
 </style>
 
 <!-- Overlay -->
@@ -4620,10 +4583,6 @@
 </div>
 
 <!-- Ícone flutuante -->
-<button class="cart-float-icon" id="cartFloatIcon" onclick="abrirCarrinho()">
-    <i class="fas fa-shopping-bag"></i>
-    <span class="cart-badge hidden" id="cartFloatBadge">0</span>
-</button>
 
 <script>
     function abrirCarrinho() {
