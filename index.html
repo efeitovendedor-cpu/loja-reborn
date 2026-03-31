@@ -2146,6 +2146,23 @@
             to   { transform: translateY(0)    scale(1);    opacity: 1; }
         }
 
+        .welcome-popup {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            background: radial-gradient(circle, #fff 0%, #fff5f8 100%) !important;
+            padding: 40px;
+            cursor: pointer;
+        }
+        .welcome-stars {
+            font-size: 1rem;
+            color: #DAA520;
+            margin: 6px 0 16px;
+            letter-spacing: 0.5px;
+        }
+
         /* Linha decorativa topo */
         .welcome-box::before {
             content: '';
@@ -2477,19 +2494,19 @@
 <body>
     <!-- WELCOME MODAL -->
     <div id="welcomeModal">
-        <div class="welcome-box">
+        <div class="welcome-box welcome-popup">
             <button onclick="closeWelcome()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#999;">✕</button>
             <div class="confetti-container" id="confettiContainer"></div>
             <div class="welcome-particle wp1"></div>
             <div class="welcome-particle wp2"></div>
             <div class="welcome-particle wp3"></div>
-            <div class="welcome-ribbon" data-i18n="welcome_ribbon">🎉 AGORA SIM! 🎉</div>
             <div class="welcome-logo-wrap">
                 <img src="logo.png" alt="Mundo da Bebê Reborn">
             </div>
-            <h2 class="welcome-title" data-i18n="welcome_title">O <span>MUNDO DA BEBÊ REBORN</span><br>É SEU MUNDO! 💝</h2>
-            <p class="welcome-sub" data-i18n="welcome_sub">A mesma loja, mas <strong>MAIS MODERNA E FÁCIL DE ACHAR.</strong><br>Queremos virar seu mundo, com a melhor experiência<br>em bebês reborn esperando por você.</p>
-            <button class="welcome-cta" onclick="triggerWelcomeAnimation()" data-i18n="welcome_cta">🌟 ENTRAR NO MEU MUNDO 🌟</button>
+            <h2 class="welcome-title">Sejam Bem-vindas ao seu <span>NOVO Mundo!</span> ✨</h2>
+            <p class="welcome-sub">A mesma loja, agora mais moderna e fácil de navegar.</p>
+            <p class="welcome-stars">⭐⭐⭐⭐⭐ Loja 5 Estrelas no Google</p>
+            <button class="welcome-cta" onclick="triggerWelcomeAnimation()">🌟 ENTRAR NO MEU MUNDO 🌟</button>
         </div>
     </div>
 
@@ -4646,6 +4663,38 @@
             abrirCarrinho();
         }, 600);
     };
+</script>
+
+<!-- Confetti dourado + fechar welcome ao clicar -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        if (!sessionStorage.getItem('welcomed')) {
+            setTimeout(function() {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#FFD700', '#D4AF37', '#FFFACD']
+                });
+            }, 900);
+        }
+
+        var popup = document.querySelector('.welcome-popup');
+        if (popup) {
+            popup.onclick = function(e) {
+                if (e.target.tagName === 'BUTTON') return;
+                this.style.transition = 'opacity 1s ease-out';
+                this.style.opacity = '0';
+                setTimeout(function() {
+                    var modal = document.getElementById('welcomeModal');
+                    if (modal) modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    sessionStorage.setItem('welcomed', '1');
+                }, 1000);
+            };
+        }
+    });
 </script>
 </body>
 </html>
