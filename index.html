@@ -2507,6 +2507,7 @@
             <p class="welcome-sub">A mesma loja, agora mais moderna e fácil de navegar.</p>
             <p class="welcome-stars">⭐⭐⭐⭐⭐ Loja 5 Estrelas no Google</p>
             <button class="welcome-cta" onclick="triggerWelcomeAnimation()">🌟 ENTRAR NO MEU MUNDO 🌟</button>
+            <p style="font-size:14px; opacity:0.8; margin-top:15px;">Preparamos tudo para você. Toque em qualquer lugar para entrar.</p>
         </div>
     </div>
 
@@ -4684,14 +4685,15 @@
         if (popup) {
             popup.onclick = function(e) {
                 if (e.target.tagName === 'BUTTON') return;
-                this.style.transition = 'opacity 1s ease-out';
+                this.style.transition = 'opacity 0.6s ease-out';
                 this.style.opacity = '0';
                 setTimeout(function() {
                     var modal = document.getElementById('welcomeModal');
                     if (modal) modal.style.display = 'none';
                     document.body.style.overflow = 'auto';
                     sessionStorage.setItem('welcomed', '1');
-                }, 1000);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 600);
             };
         }
     });
