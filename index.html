@@ -1189,8 +1189,37 @@
         }
         
         .whatsapp-btn {
-            display: none !important; /* Removido: botão flutuante desativado */
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+            cursor: pointer;
+            text-decoration: none;
         }
+        .wbtn-icon, .wbtn-heart {
+            position: absolute;
+            animation: wbtn-loop 2.5s infinite;
+        }
+        .wbtn-heart {
+            font-size: 22px;
+            animation-delay: 1.25s;
+            opacity: 0;
+        }
+        @keyframes wbtn-loop {
+            0%   { opacity: 1; transform: scale(1); }
+            40%  { opacity: 1; transform: scale(1.1); }
+            50%  { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        .wbtn-icon { animation-delay: 0s; }
 
         @keyframes zapPulse {
             0%, 100% {
@@ -1272,7 +1301,25 @@
 
         /* --- Botão Flutuante Cadastro (Canto Direito) --- */
         .cadastro-btn {
-            display: none !important; /* Removido: botão flutuante desativado */
+            display: flex;
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            z-index: 8999;
+            background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            width: 56px;
+            height: 56px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(218,165,32,0.5);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            padding: 0;
+            gap: 0;
         }
 
         .cadastro-btn.expanded {
@@ -1621,6 +1668,18 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 10px;
+        }
+        /* Título inglês do widget Google — bem pequeno e discreto */
+        .reviews-widget .eapps-google-reviews-title,
+        .reviews-widget [class*="title"],
+        .reviews-widget h2,
+        .reviews-widget h3 {
+            font-size: 0.6rem !important;
+            color: #ccc !important;
+            font-weight: 300 !important;
+            letter-spacing: 2px !important;
+            text-transform: uppercase !important;
+            opacity: 0.5 !important;
         }
 
         /* --- Language Selector --- */
@@ -2271,6 +2330,26 @@
             color: #906070;
         }
 
+        .welcome-x {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 10;
+        }
+        .welcome-x:hover { background: rgba(255,255,255,0.35); }
+
         /* Partículas decorativas */
         .welcome-particle {
             position: absolute;
@@ -2437,6 +2516,7 @@
     <!-- WELCOME MODAL -->
     <div id="welcomeModal">
         <div class="welcome-box">
+            <button onclick="closeWelcome()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#999;">✕</button>
             <div class="confetti-container" id="confettiContainer"></div>
             <div class="welcome-particle wp1"></div>
             <div class="welcome-particle wp2"></div>
@@ -2447,8 +2527,7 @@
             </div>
             <h2 class="welcome-title" data-i18n="welcome_title">O <span>MUNDO DA BEBÊ REBORN</span><br>É SEU MUNDO! 💝</h2>
             <p class="welcome-sub" data-i18n="welcome_sub">A mesma loja, mas <strong>MAIS MODERNA E FÁCIL DE ACHAR.</strong><br>Queremos virar seu mundo, com a melhor experiência<br>em bebês reborn esperando por você.</p>
-            <button class="welcome-cta" onclick="triggerWelcomeAnimation()" data-i18n="welcome_cta">🌟 ENTRAR NO MEU MUNDO 🌟</button><br>
-            <button class="welcome-close" onclick="closeWelcome()" data-i18n="welcome_close">Entrar sem efeito</button>
+            <button class="welcome-cta" onclick="triggerWelcomeAnimation()" data-i18n="welcome_cta">🌟 ENTRAR NO MEU MUNDO 🌟</button>
         </div>
     </div>
 
@@ -2584,15 +2663,14 @@
                 
                 <div class="product-card" data-apelido="Docinho" data-linha="Linha Encanto" data-altura="55cm" data-peso="1,300 kg" data-genero="menina" data-material="Silicone Soft Premium" data-banho="Sim" data-wpp="5581979001072" data-wpp-produto="LINHA%20ENCANTO%20-%20Docinho">
                     <div class="image-wrapper">
-                        <img src="produto-docinho.jpg" alt="BEBÊ REBORN - LINHA ENCANTO - Docinho" class="product-image" data-gallery='["produto-docinho.jpg","img/docinho-1.png","img/docinho-2.png","img/docinho-3.png","img/docinho-4.jpg"]'>
-                        <span class="gallery-counter">1/5</span>
+                        <img src="produto-docinho.jpg" alt="BEBÊ REBORN - LINHA ENCANTO - Docinho" class="product-image" data-gallery='["produto-docinho.jpg","img/docinho-1.png","img/docinho-2.png","img/docinho-3.png"]'>
+                        <span class="gallery-counter">1/4</span>
                     </div>
                     <div class="gallery-thumbs">
                         <img src="produto-docinho.jpg" class="active" onclick="switchPhoto(this,0)">
                         <img src="img/docinho-1.png" onclick="switchPhoto(this,1)">
                         <img src="img/docinho-2.png" onclick="switchPhoto(this,2)">
                         <img src="img/docinho-3.png" onclick="switchPhoto(this,3)">
-                        <img src="img/docinho-4.jpg" onclick="switchPhoto(this,4)">
                     </div>
                     <div class="product-info">
                         <h3>LINHA ENCANTO - Docinho</h3>
@@ -2926,7 +3004,10 @@
 
     <!-- WhatsApp Button Enhanced -->
     <a href="https://wa.me/5581979001072?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20bonecas%20reborn%20disponíveis%20👶💕" class="whatsapp-btn" target="_blank">
-        <span class="whatsapp-text">💬 Fale conosco</span>
+        <span class="wbtn-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="28" height="28" alt="WhatsApp">
+        </span>
+        <span class="wbtn-heart">❤️</span>
     </a>
 
     <!-- Botão Flutuante Cadastro -->
@@ -3028,22 +3109,25 @@
                 <span style="display:inline-block; background: linear-gradient(135deg,#ff69b4,#e8448a); color:white; font-size:0.65rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; padding:5px 20px; border-radius:30px; margin-bottom:16px;">✦ Transparência Total ✦</span>
             </div>
             <h2 style="font-size:2.2rem; color:#2a1020; font-weight:800; margin-bottom:4px; letter-spacing:-0.5px; text-align:center; line-height:1.2;">
-                O QUE NOSSOS CLIENTES DIZEM
-                <span style="display:block; color:#ff69b4;">Avaliações Reais · Loja Física Real 🏪</span>
+                O QUE NOSSOS CLIENTES DIZEM SOBRE NÓS
+                <span style="display:block; color:#ff69b4; font-size:1.1rem;">Avaliações Reais · Loja Física Real 🏪</span>
             </h2>
-            <p style="font-size:0.68rem; color:#ccc; margin-bottom:36px; font-style:italic; letter-spacing:3px; text-transform:uppercase; text-align:center;">(What Our Customers Say)</p>
+            <p style="font-size:0.65rem; color:#bbb; margin-bottom:36px; font-style:italic; letter-spacing:2px; text-align:center; opacity:0.6;">"What Our Customers Say"</p>
 
             <!-- Google Reviews Widget -->
             <div class="reviews-widget">
                 <script src="https://elfsightcdn.com/platform.js" async></script>
                 <div class="elfsight-app-fc567341-9e21-4e5c-94fd-e478f2096d9f" data-elfsight-app-lazy></div>
+                <p style="text-align:center; margin-top:8px; font-size:0.78rem; color:#DAA520; font-weight:600; letter-spacing:1px;">
+                    ↑ Clique para ver o Widget de Avaliações do Google
+                </p>
             </div>
 
-            <p style="margin-top: 20px; text-align:center;">
-                <a href="https://share.google/QU11VYgxuxfA4YrQj" target="_blank" style="color:#ff69b4; font-weight:600; font-size:0.85rem; text-decoration:none; border-bottom: 1px solid rgba(255,105,180,0.3); padding-bottom:2px;">
-                    ⭐ Ver todas as 314 avaliações no Google →
+            <div style="margin-top:30px; text-align:center;">
+                <a href="https://share.google/QU11VYgxuxfA4YrQj" target="_blank" style="display:inline-flex; align-items:center; gap:10px; background:linear-gradient(135deg,#FFB6C1,#DAA520); color:#fff; font-weight:700; font-size:1rem; text-decoration:none; padding:14px 32px; border-radius:50px; box-shadow:0 6px 20px rgba(218,165,32,0.35); letter-spacing:0.5px; transition:all 0.3s;">
+                    <img src="https://www.google.com/favicon.ico" style="width:18px;height:18px;border-radius:3px;"> ⭐ Ver todas as 314 avaliações no Google →
                 </a>
-            </p>
+            </div>
 
             <!-- SELOS DE CONFIANÇA -->
             <div style="margin-top:56px; text-align:center;">
@@ -3061,13 +3145,13 @@
                         <span class="selo-cta">📖 Entenda sua Garantia</span>
                     </div>
 
-                    <a href="https://wa.me/5581979001072?text=Olá!%20Quero%20conhecer%20mais%20sobre%20a%20qualidade%20das%20bonecas!" target="_blank" class="selo-card selo-destaque">
+                    <div class="selo-card selo-destaque">
                         <div class="selo-icon">🔒</div>
                         <div class="selo-badge">Confiança & Qualidade</div>
                         <h4 class="selo-title">Mundo da Bebê Reborn</h4>
                         <p class="selo-desc">Artesanato premium com carinho e segurança em cada detalhe</p>
-                        <span class="selo-cta"><i class="fab fa-whatsapp"></i> Falar conosco</span>
-                    </a>
+                        <span class="selo-cta">⭐ Loja oficial certificada</span>
+                    </div>
 
                     <div class="selo-card" onclick="openSegurancaBlog()" style="cursor:pointer;">
                         <div class="selo-icon">✅</div>
@@ -3671,7 +3755,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Click para fechar pop-up em qualquer canto
+            // Fecha ao clicar no fundo (fora do box)
             document.getElementById('welcomeModal').addEventListener('click', (e) => {
                 if (e.target.id === 'welcomeModal') {
                     closeWelcome();
@@ -3683,11 +3767,6 @@
                     document.getElementById('welcomeModal').classList.add('show');
                 }, 800);
             }
-        });
-
-        // QUALQUER clique no popup fecha e entra no site — zero clique perdido!
-        document.getElementById('welcomeModal').addEventListener('click', function() {
-            closeWelcome();
         });
 
         // Fechar modal ao clicar fora
@@ -3911,7 +3990,6 @@
         <button class="zoom-nav zoom-prev" onclick="zoomNav(-1)">&#8249;</button>
         <img id="zoomImg" src="" alt="Zoom">
         <button class="zoom-nav zoom-next" onclick="zoomNav(1)">&#8250;</button>
-        <div class="zoom-thumbs" id="zoomThumbs"></div>
     </div>
 
     <!-- BUSCA BROAD MATCH JS -->
@@ -4133,7 +4211,7 @@
             preco: 'R$ 1.390,90',
             parcelamento: 'ou 12x de R$ 115,91 sem juros',
             descricao: 'Bebê artesanal de silicone inteiro com cabelos implantados fio a fio e expressão de doçura irresistível. 55cm, 1.3kg. Kit maternidade completo com certidão de nascimento, mamadeira, chupeta magnética e enxoval.',
-            imagens: ['produto-docinho.jpg', 'img/docinho-1.png', 'img/docinho-2.png', 'img/docinho-3.png', 'img/docinho-4.jpg'],
+            imagens: ['produto-docinho.jpg', 'img/docinho-1.png', 'img/docinho-2.png', 'img/docinho-3.png'],
             avaliacoes: 314,
             whatsapp_msg: 'Olá! Tenho interesse no DOCINHO. Pode me ajudar?'
         },
@@ -4556,7 +4634,7 @@
     /* Ícone flutuante do carrinho */
     .cart-float-icon {
         position: fixed;
-        bottom: 90px;
+        bottom: 30px;
         right: 20px;
         width: 56px;
         height: 56px;
