@@ -1204,22 +1204,15 @@
             cursor: pointer;
             text-decoration: none;
         }
-        .wbtn-icon, .wbtn-heart {
-            position: absolute;
-            animation: wbtn-loop 2.5s infinite;
-        }
-        .wbtn-heart {
-            font-size: 22px;
-            animation-delay: 1.25s;
-            opacity: 0;
-        }
+        .wbtn-icon, .wbtn-heart { position: absolute; }
+        .wbtn-icon { animation: wbtn-loop 45s infinite; animation-delay: 0s; }
+        .wbtn-heart { animation: wbtn-loop 45s infinite; animation-delay: 40s; font-size: 24px; }
         @keyframes wbtn-loop {
-            0%   { opacity: 1; transform: scale(1); }
-            40%  { opacity: 1; transform: scale(1.1); }
-            50%  { opacity: 0; }
-            100% { opacity: 0; }
+          0%   { opacity: 1; }
+          88%  { opacity: 1; }
+          89%  { opacity: 0; }
+          100% { opacity: 0; }
         }
-        .wbtn-icon { animation-delay: 0s; }
 
         @keyframes zapPulse {
             0%, 100% {
