@@ -2448,11 +2448,14 @@
             </div>
         </div>
 
-        <div class="container" style="display: grid; grid-template-columns: 1fr 420px; gap: 20px; padding: 40px 0; max-width: 1300px;">
+        <div class="container" style="display: grid; grid-template-columns: 80px 1fr 420px; gap: 16px; padding: 40px 0; max-width: 1300px; align-items: start;">
+
+            <!-- ESQUERDA: THUMBNAILS -->
+            <div id="galeria-thumbnails" style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 560px;"></div>
 
             <!-- CENTRO: IMAGEM GRANDE -->
             <div style="position: relative;">
-                <img id="produto-imagem-grande" src="" alt="Produto" style="width: 100%; max-height: 560px; object-fit: contain; border-radius: 8px; cursor: zoom-in;" onclick="openZoomProduto()">
+                <img id="produto-imagem-grande" src="" alt="Produto" style="width: 100%; max-height: 560px; object-fit: contain; border-radius: 8px; cursor: zoom-in;" onclick="openZoom()">
                 <button onclick="produtoGaleriaNav(-1)" style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">‹</button>
                 <button onclick="produtoGaleriaNav(1)" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">›</button>
             </div>
@@ -4212,6 +4215,17 @@
         document.querySelectorAll('.product-card').forEach(card => {
             const apelido = card.dataset.apelido;
             if (apelido) {
+                // FONTE ÚNICA DE VERDADE: sincroniza data-gallery a partir de produtosData
+                const produto = produtosData[apelido];
+                if (produto && produto.imagens) {
+                    const img = card.querySelector('.product-image');
+                    if (img) {
+                        img.dataset.gallery = JSON.stringify(produto.imagens);
+                        img.src = produto.imagens[0];
+                        const counter = card.querySelector('.gallery-counter');
+                        if (counter) counter.textContent = '1/' + produto.imagens.length;
+                    }
+                }
                 card.querySelector('.image-wrapper')?.addEventListener('click', function() {
                     abrirPaginaProduto(apelido);
                 });
@@ -4457,8 +4471,10 @@
         const total = carrinho.reduce((s,i) => s + i.preco * i.qtd, 0);
         const qtdTotal = carrinho.reduce((s,i) => s + i.qtd, 0);
         badge.textContent = qtdTotal;
-        floatBadge.textContent = qtdTotal;
-        floatBadge.classList.toggle('hidden', qtdTotal === 0);
+        if (floatBadge) {
+            floatBadge.textContent = qtdTotal;
+            floatBadge.classList.toggle('hidden', qtdTotal === 0);
+        }
         subtotalEl.textContent = 'R$ ' + total.toFixed(2).replace('.',',');
         if (carrinho.length === 0) {
             el.innerHTML = '<div class="cart-drawer-empty"><i class="fas fa-shopping-bag"></i>Seu carrinho está vazio</div>';
@@ -4488,7 +4504,7 @@
         const total = carrinho.reduce((s,i) => s + i.preco * i.qtd, 0);
         localStorage.setItem('carrinhoTotal', total.toFixed(2));
         localStorage.setItem('carrinhoSnapshot', JSON.stringify(carrinho));
-        window.location.href = 'checkout.html';
+        window.open('checkout.html', '_blank');
     }
     // Atualizar badge ao carregar
     document.addEventListener('DOMContentLoaded', function() {

@@ -7,3 +7,16 @@ PROGRESSO.md
 exemplo-abas.html
 mockup-formulario.html
 redirects_301.txt
+
+# Arquivos sensíveis — nunca deployar
+BRIEFING-NOVO-AGENTE.md
+COPIAR-CODIGOS.html
+CONTEXTO-MASTER.md
+carrossel-bezos.html
+
+# Pastas de desenvolvimento — não são do site
+.claude/
+.vscode/
+BONECAS MBR LOJA VIRTUAL/
+CHARMOSINHA JA NA LOJA/
+BO/
